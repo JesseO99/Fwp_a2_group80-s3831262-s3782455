@@ -1,8 +1,37 @@
-.Navbar{
-    padding: 3px;
+.Navbar {
     text-align: left;
     background: #17a362;
     color: white;
     font-size: 15px;
+    display: flex;
 }
 
+.NavbarOption {
+    
+    text-align: center;
+    background:  #1abc9c;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+    color:white;
+    
+
+}
+
+.NavbarOption:hover {
+    
+    text-align: center;
+    background:  #15a328;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+    color:white;  
+}
+
+.alignLeft {
+    justify-content: flex-start;
+}
+
+.alignRight {
+    justify-content: flex-end;
+}
