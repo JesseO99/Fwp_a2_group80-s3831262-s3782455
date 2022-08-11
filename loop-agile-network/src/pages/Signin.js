@@ -18,13 +18,9 @@ function Signin (props) {
     // trigers when submitted currently saves value to local storage in future will need to Check Value First
     function onSubmit (e)
     {
-        // TODO Check if User login Deatils are correct
         e.preventDefault();
-
-        console.log("Email: ", username);   
-        console.log("Password: ", password);
-
         const verifiedUser = verifyUser(username, password);
+        
         if (verifiedUser)
         {
             props.loginUser(username);

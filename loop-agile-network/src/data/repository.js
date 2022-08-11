@@ -78,7 +78,7 @@ function getUserDetails(email){
   const users = getUsers();
   for (const user of users)
   { 
-    if (user.username === email)
+    if (user.email === email)
     {
       return user;
     }
