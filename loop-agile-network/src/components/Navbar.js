@@ -8,38 +8,33 @@ function Navbar(props) {
     {
         props.logoutUser();
     }
-
-    return (
-
-        <nav class="Navbar navbar navbar-expand-sm ">
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto order-0 ">
-                        <li class="nav-item">
-                            <Link className="nav-link" to="/" class="NavbarOption alignLeft"> Home </Link>
+    return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+            {/*Menu button for smaller screens*/}
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul className="navbar-nav">
+                    {props.username !== null && <>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/">Home</a>
                         </li>
-                    </ul>
-                    {props.username == null ?(<ul class="navbar-nav ms-auto order-5">
-                            <li class="nav-item">
-                                <Link className="nav-link" to="/Signin" class="NavbarOption alignRight"> Signin </Link>
-                            </li>
-                            <li class="nav-item">
-                                {/*placeholder  */}
-                                <span class="NavbarOption alignRight">Signup</span>
-                            </li>
-                        </ul>) : (<ul class="navbar-nav ms-auto order-5">
-                            <li class="nav-item">
-                                <Link className="nav-link" to="/Profile" class="NavbarOption alignRight"> Profile </Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link className="nav-link" to="/login" class="NavbarOption alignRight" onClick={props.logoutUser}>Logout</Link>
-                            </li>
-                        </ul>)}
-                        
-                </div>
+                        <li className="nav-item">
+                            <a className="nav-link" href="/Profile">Profile</a>
+                        </li>
+                        <li className="nav-item ">
+                            <a className="nav-link" href="#">Feed</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#">Create Post</a>
+                        </li>
+                    </>}
+                </ul>
             </div>
-        </nav>
-    );
-  }
-  
-  export default Navbar;
+        </div>
+    </nav>);
+}
+
+export default Navbar;

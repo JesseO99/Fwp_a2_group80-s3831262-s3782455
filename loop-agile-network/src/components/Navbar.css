@@ -1,3 +1,43 @@
+
+/*!*Navbar Links Styling*!*/
+.nav-item {
+    margin-left: 10px;
+    display: block;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/*!*Navbar Links Hover Styling*!*/
+.nav-item:hover {
+    background: aquamarine;
+    font-weight: bold;
+}
+
+.nav-item:hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -15px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 0 40px 15px;
+    border-color: transparent transparent aquamarine transparent;
+}
+
+.nav-item:hover:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -15px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 40px 15px 0 0;
+    border-color: aquamarine transparent transparent transparent;
+
+}
+
 .Navbar {
     text-align: left;
     background: #17a362;
@@ -7,25 +47,25 @@
 }
 
 .NavbarOption {
-    
+
     text-align: center;
     background:  #1abc9c;
     padding: 5px;
     margin: 5px;
     border-radius: 8px;
     color:white;
-    
+
 
 }
 
 .NavbarOption:hover {
-    
+
     text-align: center;
     background:  #15a328;
     padding: 5px;
     margin: 5px;
     border-radius: 8px;
-    color:white;  
+    color:white;
 }
 
 .alignLeft {
@@ -35,3 +75,4 @@
 .alignRight {
     justify-content: flex-end;
 }
+

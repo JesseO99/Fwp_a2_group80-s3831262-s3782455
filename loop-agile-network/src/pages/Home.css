@@ -1,0 +1,19 @@
+/*Loop Agile Now Network Image*/
+.img-fluid {
+}
+
+/*Loop Agile Now Heading*/
+#heading {
+    color: #1abc9c;
+    font-weight: bold;
+    font-size: 50px;
+    text-align: left;
+    margin-top: 30px;
+}
+
+/*Slogan Styles*/
+#slogan {
+    color: #231414;
+    font-size: 30px;
+    text-align: left;
+}
