@@ -12,7 +12,8 @@ function initUsers() {
           date_joined: "11-08-2022",
           age: 33,
           email: "user@gmail.com",
-          password: "abc123"
+          password: "abc123",
+          img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
         },
         {
           name: "Darren Eshay",
@@ -80,6 +81,7 @@ function getUserDetails(email){
   { 
     if (user.email === email)
     {
+      console.log("emial: ", email, "\nuser: ", user);
       return user;
     }
   }
