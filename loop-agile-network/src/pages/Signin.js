@@ -1,10 +1,14 @@
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {verifyUser} from "../data/repository";
 
 import "./Signin.css";
-function Signin () {
+
+function Signin (props) {
     // Creates a Variable to track the email
-    const [username, setLoggedInUsername] = useState('');
+    const [username, setLoggedInUsername] = useState();
+    const navigate = useNavigate();
 
     // Sets the email to the value provided
     function onChangeEmail(e){
@@ -16,9 +20,20 @@ function Signin () {
     {
         // TODO Check if User login Deatils are correct
         e.preventDefault();
+
         console.log("Email: ", username);   
         console.log("Password: ", password);
-        localStorage.setItem('email', username);
+
+        const verifiedUser = verifyUser(username, password);
+        if (verifiedUser)
+        {
+            props.loginUser(username);
+            navigate("/Profile");
+        }
+        else
+        {
+            window.alert("Login Failed");
+        };
     };
 
     // Creates a variable to track the password
