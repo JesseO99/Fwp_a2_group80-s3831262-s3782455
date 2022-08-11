@@ -25,7 +25,7 @@ function Navbar(props) {
                             <a className="nav-link" href="/Profile">Profile</a>
                         </li>
                         <li className="nav-item ">
-                            <a className="nav-link" href="#">Feed</a>
+                            <a className="nav-link" href="/Feed">Feed</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Create Post</a>

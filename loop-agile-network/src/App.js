@@ -7,6 +7,7 @@ import {useState} from "react";
 import Footer from "./components/Footer";
 import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
+import Feed from "./pages/Feed";
 import {getUser, removeUser} from "./data/repository";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
                     <Route path="/Profile" element={<Profile/>}/>
+                    <Route path="/Feed" element={<Feed/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
