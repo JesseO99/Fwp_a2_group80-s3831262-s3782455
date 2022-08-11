@@ -20,7 +20,7 @@ function Signin (props) {
     {
         e.preventDefault();
         const verifiedUser = verifyUser(username, password);
-        
+
         if (verifiedUser)
         {
             props.loginUser(username);
@@ -43,8 +43,9 @@ function Signin (props) {
     return (
         <div class="signin-box">
             
-            <h1>Sign In</h1>
+            
             <div class="signin-form">
+                <h1>Sign In</h1>
                 <Form onSubmit={onSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
                         <Form.Label>Email Address</Form.Label>
@@ -57,7 +58,7 @@ function Signin (props) {
                    <input type="submit" value="Submit" class="submit-button"></input>
                 </Form>
             </div>
-        </div>
+        </div>        // TODO Check if User login Deatils are correct
     );
     
 };
