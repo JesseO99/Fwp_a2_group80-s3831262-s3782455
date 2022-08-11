@@ -1,8 +1,29 @@
-
-.Header {
-    padding: 10px;
-    text-align: center;
+/*Heading Bar*/
+.navbar {
+    padding: 5px 20px;
+    text-align: left;
     background: #1abc9c;
+}
+
+/*LAN Heading*/
+.heading {
     color: white;
     font-size: 30px;
-  }
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/*LAN Heading Hover*/
+.heading:hover {
+    color: #462828;
+}
+
+/*Login Logout button container*/
+.login-logout-buttons {
+    alignment: right;
+}
+
+/*All buttons on header*/
+.btn {
+    margin-left: 8px;
+}
