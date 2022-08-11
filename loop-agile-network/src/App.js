@@ -1,7 +1,7 @@
 import './App.css';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
 import {useState} from "react";
 import Footer from "./components/Footer";

@@ -1,5 +1,5 @@
 import "./Navbar.css";
-
+import {Link} from "react-router-dom";
 function Navbar(props) {
 
 
@@ -18,13 +18,13 @@ function Navbar(props) {
                     {props.username !== null && <>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="/Profile">Profile</a>
+                            <Link className="nav-link" to="/Profile">Profile</Link>
                         </li>
                         <li className="nav-item ">
-                            <a className="nav-link" href="/Feed">Feed</a>
+                            <Link className="nav-link" to="/Feed">Feed</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/CreatePost">Create Post</a>
+                            <Link className="nav-link" to="/CreatePost">Create Post</Link>
                         </li>
                     </>}
                 </ul>
