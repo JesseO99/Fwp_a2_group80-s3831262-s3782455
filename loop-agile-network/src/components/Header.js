@@ -20,7 +20,7 @@ function Header(props) {
                         </>
                         :
                         <>
-                            <Button variant="light" className="btn" onClick={props.logoutUser}>Logout</Button>
+                            <a href="/Signin"><Button variant="light" className="btn" onClick={props.logoutUser}>Logout</Button></a>
                         </>
                     }
                 </div>

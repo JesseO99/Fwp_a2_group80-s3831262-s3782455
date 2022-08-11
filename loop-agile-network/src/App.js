@@ -8,10 +8,11 @@ import Footer from "./components/Footer";
 import Signin from "./pages/Signin";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
+import CreatePost from './pages/CreatePost';
 import {getUser, removeUser} from "./data/repository";
 
 function App() {
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState(getUser);
 
     const loginUser = (username) => {
         setUsername(username);
@@ -25,13 +26,14 @@ function App() {
     return (
         <div className="App">
             <BrowserRouter>
-                <Header username={username}/>
-                <Navbar username={"username"} logoutUser={logoutUser}/>
+                <Header username={username} logoutUser={logoutUser}/>
+                <Navbar username={username} logoutUser={logoutUser}/>
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
                     <Route path="/Profile" element={<Profile/>}/>
                     <Route path="/Feed" element={<Feed/>}></Route>
+                    <Route path="/CreatePost" element={<CreatePost/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
