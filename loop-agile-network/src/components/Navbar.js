@@ -1,7 +1,13 @@
 import "./Navbar.css";
-
+import {Link} from "react-router-dom";
+import {isLoggedIn, logout} from "../data/repository"
 
 function Navbar(props) {
+
+    function logout()
+    {
+        props.logoutUser();
+    }
     return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
             {/*Menu button for smaller screens*/}
@@ -16,7 +22,7 @@ function Navbar(props) {
                             <a className="nav-link" href="/">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Profile</a>
+                            <a className="nav-link" href="/Profile">Profile</a>
                         </li>
                         <li className="nav-item ">
                             <a className="nav-link" href="#">Feed</a>

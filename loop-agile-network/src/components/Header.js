@@ -11,12 +11,16 @@ function Header(props) {
                     {/*Show Login Logout buttons based on login status*/}
                     {props.username === null ?
                         <>
-                            <Button variant="primary" className="btn">Login</Button>{''}
-                            <Button variant="light" className="btn">Signup</Button>{''}
+                        <Link to="/Signin">
+                        <Button variant="primary" className="btn" >Signin</Button>
+                        </Link>
+                        <Link to="/Signup">
+                        <Button variant="light" className="btn">Signup</Button>{''}
+                        </Link>
                         </>
                         :
                         <>
-                            <Button variant="light" className="btn">Logout</Button>{' '}
+                            <Button variant="light" className="btn" onClick={props.logoutUser}>Logout</Button>
                         </>
                     }
                 </div>

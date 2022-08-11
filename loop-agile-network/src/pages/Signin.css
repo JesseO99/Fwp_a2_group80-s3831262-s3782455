@@ -1,0 +1,32 @@
+.signin-form {
+    align-items: center;
+    /* width: 700px; */
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: groove;
+    text-align: left;
+    padding: 10px;
+    margin: 1% 25%;
+}
+
+.signin-box {
+    align-items: center;
+}
+
+.submit-button {
+    background-color: #1abc9c;
+    border-style: none;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+    color:white;
+}
+
+.submit-button:hover {
+    background:  #15a328;
+    border-style: none;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+    color:white;
+}
