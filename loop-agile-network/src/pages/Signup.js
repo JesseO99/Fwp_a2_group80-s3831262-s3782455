@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import React, {useState} from "react";
 import "./Signup.css";
-import {Button, Row} from "react-bootstrap";
+import {Button, Modal, Row} from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
 import avatar from '../img/avatar.png';
 import {useFormik} from 'formik';
@@ -24,11 +24,11 @@ const validate = values => {
     //Validate Password
     if (!values.password) {
         errors.password = 'Required';
-    } else if(values.password.length<6){
+    } else if (values.password.length < 6) {
         errors.password = 'Password must have minimum of 6 characters';
-    }else if (!values.rePassword) {
+    } else if (!values.rePassword) {
         errors.rePassword = 'Required';
-    }else if (values.password !== values.rePassword) {
+    } else if (values.password !== values.rePassword) {
         errors.rePassword = 'Password you entered does not match';
     }
 
@@ -38,6 +38,14 @@ const validate = values => {
 function Signup(props) {
 
     const navigate = useNavigate();
+    //useState for DialogBox
+    const [show, setShow] = useState(false);
+
+    //Handle Open/Close DialogBox
+    const handleClose = () =>         {
+        setShow(false);
+        navigate("/Feed");}
+    const handleShow = () => setShow(true);
 
     const formik = useFormik({
         initialValues: {
@@ -46,13 +54,14 @@ function Signup(props) {
             //Register New User, Save Login and Navigate to Feed Page
             registerUser(values);
             props.loginUser(values.email);
-            navigate("/Feed");
+            handleShow();
+            // navigate("/Feed");
         },
     });
 
 
-    return (<div className="container">
-        <div class="Signup">
+    return (<div className="Signup">
+        <div class="signup-form">
             <p id="signup-heading">Signup</p>
             <Form onSubmit={formik.handleSubmit}>
                 <Row className="mb-3">
@@ -129,7 +138,7 @@ function Signup(props) {
                                       id="rePassword"
                                       placeholder="Password"
                                       onChange={formik.handleChange}
-                                      // value={formik.values.rePassword}
+                                      value={formik.values.rePassword}
                                       required
                         />
                         {formik.errors.rePassword ? <div>{formik.errors.rePassword}</div> : null}
@@ -148,6 +157,18 @@ function Signup(props) {
                 </Button>
             </Form>
         </div>
+        {/*DialogBox For Signup*/}
+        <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+                <Modal.Title >Welcome!</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you've Signed Up with Loop Agile Now!</Modal.Body>
+            <Modal.Footer>
+                <Button variant="primary" onClick={handleClose}>
+                    Let's Start!
+                </Button>
+            </Modal.Footer>
+        </Modal>
     </div>)
 }
 

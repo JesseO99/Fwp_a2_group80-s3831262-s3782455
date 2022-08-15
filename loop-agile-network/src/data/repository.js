@@ -22,8 +22,10 @@ function getUsers() {
     return JSON.parse(data);
 }
 
+//Register new user into the system
 function registerUser(newUser) {
     const currentUsers = getUsers();
+    //Create new user
     const user = {
         firstName: newUser.firstName,
         lastName: newUser.lastName,
@@ -32,6 +34,7 @@ function registerUser(newUser) {
         password: newUser.password,
         date_joined: getDateToday()
     }
+    //Add new user to the current list
     if (currentUsers !== null) {
         currentUsers.push(user);
         localStorage.setItem(USERS_KEY, JSON.stringify(currentUsers));
@@ -39,6 +42,7 @@ function registerUser(newUser) {
         let users = [user];
         localStorage.setItem(USERS_KEY, JSON.stringify(users));
     }
+    //Login with registered new user
     setUser(user.email);
 }
 

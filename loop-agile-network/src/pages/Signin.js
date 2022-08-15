@@ -24,7 +24,7 @@ function Signin (props) {
         if (verifiedUser)
         {
             props.loginUser(username);
-            navigate("/Feed");
+            navigate("/Profile");
         }
         else
         {
