@@ -7,13 +7,16 @@ Avatar Image
 <https://pngtree.com/so/User>
 
 Bootstrap
-<https://getbootstrap.com/>
+<https://getbootstrap.com>
 
 React Bootstrap
-<https://react-bootstrap.github.io/>
+<https://react-bootstrap.github.io>
 
 Material Design Bootstrap
-<https://mdbootstrap.com/>
+<https://mdbootstrap.com>
 
 Formik
-<https://formik.org/>
+<https://formik.org>
+
+Images
+<https://www.freepik.com>

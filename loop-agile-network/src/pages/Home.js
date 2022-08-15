@@ -14,6 +14,7 @@ function Home() {
                 </div>
                 {/*Landing Page responsive Image*/}
                 <div className="col-sm">
+                    {/*Content from www.freepik.com */}
                     <img src={socialImage} className="img-fluid" alt="Loop Agile Now Network"></img>
                 </div>
             </div>
