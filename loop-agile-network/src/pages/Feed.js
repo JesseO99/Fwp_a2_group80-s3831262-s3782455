@@ -1,7 +1,7 @@
 
 function Feed() {
     return(
-        <div class="Feed">
+        <div class="container">
             <h1>
                 Feed
             </h1>

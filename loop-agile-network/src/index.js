@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {initUsers} from "./data/repository";
 
 // Initialise local storage data.
-initUsers();
+ initUsers();
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
