@@ -1,9 +1,15 @@
 import "./Profile.css";
 import {getUserDetails, getUser} from "../data/repository"
+import {Navigate} from "react-router-dom";
+import React from "react";
 
 
-function Profile(props) {
+function Profile({ username }) {
 
+    //Authenticate and Redirect if not Logged in
+    if (!username) {
+        return <Navigate to="/" />
+    }
     const user = getUserDetails("user@gmail.com");
     return (
         <div class="profile-body">

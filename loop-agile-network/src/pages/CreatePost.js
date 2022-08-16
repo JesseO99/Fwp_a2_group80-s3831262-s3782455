@@ -1,8 +1,12 @@
+import React from 'react'
+import { Navigate } from 'react-router-dom'
 
+function CreatePost({ username }) {
 
-
-
-function CreatePost() {
+    //Authenticate and Redirect if not Logged in
+    if (!username) {
+        return <Navigate to="/" />
+    }
     return (
         <div class="Create-Post">
             <h1> Create Post</h1>
