@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import {useState} from "react";
 import Footer from "./components/Footer";
 import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import CreatePost from './pages/CreatePost';
@@ -32,6 +33,8 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
                     <Route path="/Profile" element={<Profile email={username} />}/>
+                    <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
+
                     <Route path="/Feed" element={<Feed/>}></Route>
                     <Route path="/CreatePost" element={<CreatePost/>}></Route>
                 </Routes>
