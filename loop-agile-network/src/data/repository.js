@@ -7,11 +7,23 @@ const USER_KEY = "email";
 function initUsers() {
     if (localStorage.getItem(USERS_KEY) !== null) return;
 
-    const users = [{
-        name: "Rue Minmi", date_joined: "11-08-2022", age: 33, email: "user@gmail.com", password: "abc123"
-    }, {
-        name: "Darren Eshay", date_joined: "11-08-2022", age: 23, email: "user@hotmail.com", password: "def456"
-    }];
+    const users = [
+        {
+          name: "Rue Minmi",
+          date_joined: "11-08-2022",
+          age: 33,
+          email: "user@gmail.com",
+          password: "abc123",
+          img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
+        },
+        {
+          name: "Darren Eshay",
+          date_joined: "11-08-2022",
+          age: 23,
+          email: "user@hotmail.com",
+          password: "def456"
+        }
+      ];
 
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
@@ -84,15 +96,16 @@ function removeUser() {
 }
 
 // Using the provided email it returns the users deails.
+
 function getUserDetails(email) {
     const users = getUsers();
     for (const user of users) {
         if (user.email === email) {
+            console.log("emial: ", email, "\nuser: ", user);
             return user;
+            return null;
         }
     }
-
-    return null;
 }
 
 // List of functions which can be imported and used in other pages.

@@ -4,22 +4,28 @@ import {Navigate} from "react-router-dom";
 import React from "react";
 
 
-function Profile({ username }) {
+function Profile(props) {
 
     //Authenticate and Redirect if not Logged in
-    if (!username) {
+    if (!props.username) {
         return <Navigate to="/" />
     }
-    const user = getUserDetails("user@gmail.com");
+    const user = getUserDetails(props.username);
     return (
         <div class="profile-body">
-            <h1>Profile Page</h1>
-            <p>
-                Name: {user.name} <br></br>
-                Age: {user.age}<br></br>
-                date joined: {user.date_joined} <br></br>
-                
-            </p>
+            {user.img === null ? 
+            (<img class="Profile-Pic" src="https://img.icons8.com/ios/100/000000/gender-neutral-user.png" alt="Profile picture"></img>):
+            (<img class="Profile-Pic" src={user.img} alt="Profile picture"></img>)}
+            
+            <div class="text-container">
+                <h1>Profile Page</h1>
+                <p>
+                    Name: {user.name} <br></br>
+                    Age: {user.age}<br></br>
+                    date joined: {user.date_joined} <br></br>
+                    
+                </p>
+            </div>
         </div>
     );
 }
