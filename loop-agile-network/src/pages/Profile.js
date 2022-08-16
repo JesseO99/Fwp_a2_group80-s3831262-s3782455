@@ -1,10 +1,16 @@
 import "./Profile.css";
 import {getUserDetails, getUser} from "../data/repository"
+import {Navigate} from "react-router-dom";
+import React from "react";
 
 
 function Profile(props) {
 
-    const user = getUserDetails(props.email);
+    //Authenticate and Redirect if not Logged in
+    if (!props.username) {
+        return <Navigate to="/" />
+    }
+    const user = getUserDetails(props.username);
     return (
         <div class="profile-body">
             {user.img === null ? 

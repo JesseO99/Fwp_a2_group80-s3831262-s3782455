@@ -97,15 +97,15 @@ function removeUser() {
 
 // Using the provided email it returns the users deails.
 
-function getUserDetails(email){
-  const users = getUsers();
-  for (const user of users)
-  { 
-    if (user.email === email)
-    {
-      console.log("emial: ", email, "\nuser: ", user);
-      return user;
-    return null;
+function getUserDetails(email) {
+    const users = getUsers();
+    for (const user of users) {
+        if (user.email === email) {
+            console.log("emial: ", email, "\nuser: ", user);
+            return user;
+            return null;
+        }
+    }
 }
 
 // List of functions which can be imported and used in other pages.

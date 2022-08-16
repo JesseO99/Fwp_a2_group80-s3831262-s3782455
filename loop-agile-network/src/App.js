@@ -32,11 +32,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
-                    <Route path="/Profile" element={<Profile email={username} />}/>
+                    <Route path="/Profile" element={<Profile username={username}/>}/>
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
-
-                    <Route path="/Feed" element={<Feed/>}></Route>
-                    <Route path="/CreatePost" element={<CreatePost/>}></Route>
+                    <Route path="/Feed" element={<Feed username={username}/>}></Route>
+                    <Route path="/CreatePost" element={<CreatePost username={username}/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>
