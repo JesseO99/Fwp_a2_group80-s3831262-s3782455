@@ -10,21 +10,21 @@ function initUsers() {
 
     const users = [
         {
-          name: "Rue Minmi",
-          date_joined: "11-08-2022",
-          age: 33,
-          email: "user@gmail.com",
-          password: "abc123",
-          img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
+            name: "Rue Minmi",
+            date_joined: "11-08-2022",
+            age: 33,
+            email: "user@gmail.com",
+            password: "abc123",
+            img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
         },
         {
-          name: "Darren Eshay",
-          date_joined: "11-08-2022",
-          age: 23,
-          email: "user@hotmail.com",
-          password: "def456"
+            name: "Darren Eshay",
+            date_joined: "11-08-2022",
+            age: 23,
+            email: "user@hotmail.com",
+            password: "def456"
         }
-      ];
+    ];
 
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
@@ -109,13 +109,14 @@ function getUserDetails(email) {
     }
 }
 
-
-function getPostDetails(){
+//get Posts from local storage
+function getPostDetails() {
     const posts = JSON.parse(localStorage.getItem(POSTS_KEY));
     return posts;
 }
 
-function setPostDetails(posts){
+//save posts to local storage
+function setPostDetails(posts) {
     localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
 }
 

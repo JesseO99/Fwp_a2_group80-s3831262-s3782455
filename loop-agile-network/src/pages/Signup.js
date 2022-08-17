@@ -42,9 +42,10 @@ function Signup(props) {
     const [show, setShow] = useState(false);
 
     //Handle Open/Close DialogBox
-    const handleClose = () =>         {
+    const handleClose = () => {
         setShow(false);
-        navigate("/Feed");}
+        navigate("/Feed");
+    }
     const handleShow = () => setShow(true);
 
     const formik = useFormik({
@@ -160,7 +161,7 @@ function Signup(props) {
         {/*DialogBox For Signup*/}
         <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-                <Modal.Title >Welcome!</Modal.Title>
+                <Modal.Title>Welcome!</Modal.Title>
             </Modal.Header>
             <Modal.Body>Woohoo, you've Signed Up with Loop Agile Now!</Modal.Body>
             <Modal.Footer>

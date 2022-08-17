@@ -11,37 +11,18 @@ import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import CreatePost from './pages/CreatePost';
 import {getUser, removeUser} from "./data/repository";
+import usePost from "./hooks/usePost";
+
 
 function App() {
     const [username, setUsername] = useState(getUser);
-    const [posts, setPosts] = useState([]);
+    //Call usePost custom hook
+    const {
+        addPost,
+        removePost,
+        posts
+    } = usePost();
 
-    //Adds new post to the list
-    const addPost = (post) => {
-        setPosts([...posts, post]);
-    };
-
-    //Remove selected post from the list
-    const removePost = (postToBeDeleted) => {
-        setPosts(posts.filter((post) => postToBeDeleted !== post));
-    };
-
-    //Get saved old posts from initial render
-    useEffect(() => {
-        const posts = JSON.parse(localStorage.getItem('posts'));
-        console.log("read first time "+posts)
-        if (posts) {
-            console.log("setItems "+posts)
-            setPosts(posts);
-        }
-    }, []);
-
-    //Save posts in the local storage
-    useEffect(() => {
-        localStorage.setItem('posts', JSON.stringify(posts));
-        console.log("write into "+posts)
-
-    }, [posts]);
 
     const loginUser = (username) => {
         setUsername(username);
@@ -62,8 +43,9 @@ function App() {
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
                     <Route path="/Profile" element={<Profile username={username}/>}/>
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
-                    <Route path="/Feed" element={<Feed username={username} posts={posts} removePost={removePost}/>}></Route>
-                    <Route path="/CreatePost" element={<CreatePost username={username} addPost={addPost} />}></Route>
+                    <Route path="/Feed"
+                           element={<Feed username={username} posts={posts} removePost={removePost}/>}></Route>
+                    <Route path="/CreatePost" element={<CreatePost username={username} addPost={addPost}/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>

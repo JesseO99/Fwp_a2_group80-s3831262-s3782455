@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Navigate } from 'react-router-dom'
+import {Navigate} from 'react-router-dom'
 import {Button, Stack} from "react-bootstrap";
 import Post from "../components/Post";
 import "./CreatePost.css";
@@ -7,32 +7,28 @@ import Form from 'react-bootstrap/Form';
 import {useFormik} from 'formik';
 
 
-
 //Field Validations Using Formik
 const validate = values => {
     const errors = {};
 
-    //Validate post fild
+    //Validate post field
     if (!values.post) {
         errors.post = 'Post cannot be empty!';
-    } else if (values.post.length>250) {
+    } else if (values.post.length > 250) {
         errors.post = 'Post cannot be more than 250 characters!';
     }
-
-
     return errors;
 };
 
-function CreatePost({ username, addPost }) {
+function CreatePost({username, addPost}) {
 
     const formik = useFormik({
-        initialValues: {
-        }, validate, onSubmit: values => {
+        initialValues: {}, validate, onSubmit: values => {
             //Submit post values
             addPost(values.post);
             //Reset Form After Submit
             formik.resetForm({
-                values: { post: ''},
+                values: {post: ''},
             });
 
         },
@@ -40,12 +36,11 @@ function CreatePost({ username, addPost }) {
 
     //Authenticate and Redirect if not Logged in
     if (!username) {
-        return <Navigate to="/" />
+        return <Navigate to="/"/>
     }
 
 
-    return (
-    <div className="create-post-form ">
+    return (<div className="create-post-form ">
         <Stack gap={3}>
             <p id="create-post-heading">Create Post</p>
             <div className="posts-container">
@@ -62,16 +57,15 @@ function CreatePost({ username, addPost }) {
                         {formik.errors.post ? <div>{formik.errors.post}</div> : null}
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Button id="publish-button" variant='primary' type="submit">Publish</Button>
+                        <Button id="publish-button" variant='primary' type="submit">Publish</Button>
                     </Form.Group>
 
                 </Form>
             </div>
         </Stack>
 
-    </div>
-    )
-};
+    </div>)
+}
 
 export default CreatePost;
 

@@ -1,19 +1,22 @@
-
+/*Post List Styling*/
 ul {
     list-style-type: none;
 }
 
-.posts-container{
+/*Post Container Styling*/
+.posts-container {
     padding-bottom: 70px;
 }
 
-#feed-heading{
+/*Feed Heading Style*/
+#feed-heading {
     font-size: 40px;
     font-weight: bold;
     margin: 1% 0% 0% 7%;
 }
 
-#empty-feed{
+/*Empty Feed Message*/
+#empty-feed {
     font-size: 30px;
     color: #8f9091;
     margin: 1% 0% 0% 10%;

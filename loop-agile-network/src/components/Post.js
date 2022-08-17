@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import {Button, Row, Stack} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 
-// Item component will display the item
+// Post component for individual post
 const Post = ({post, removePost}) => {
     return (
         <div className="post-form">

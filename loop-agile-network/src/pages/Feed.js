@@ -11,27 +11,23 @@ function Feed({username, posts, removePost}) {
         return <Navigate to="/"/>
     }
 
-    return (
-        <div class="container">
+    return (<div class="container">
             <Stack gap={3}>
                 <p id="feed-heading">Feed</p>
                 <div className="posts-container">
                     <ul className="feed-list">
-                        {posts.map((post) => (
-                            <li>
+                        {/*Create a list of posts*/}
+                        {posts.map((post) => (<li>
                                 <Post key={post} post={post} removePost={removePost}/>
-                            </li>
-                        ))}
+                            </li>))}
                     </ul>
 
                     {posts.length === 0 &&
-                        <p id="empty-feed">Wow! It's Nothing Yet. <br/> Create your first post now!</p>
-                    }
+                        <p id="empty-feed">Wow! It's Nothing Yet. <br/> Create your first post now!</p>}
                 </div>
             </Stack>
 
-        </div>
-    )
+        </div>)
 }
 
 export default Feed;
