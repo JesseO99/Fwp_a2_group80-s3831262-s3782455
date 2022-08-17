@@ -2,6 +2,7 @@ import {getDateToday} from "../util/Util";
 
 const USERS_KEY = "users";
 const USER_KEY = "email";
+const POSTS_KEY = "posts";
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -108,6 +109,16 @@ function getUserDetails(email) {
     }
 }
 
+
+function getPostDetails(){
+    const posts = JSON.parse(localStorage.getItem(POSTS_KEY));
+    return posts;
+}
+
+function setPostDetails(posts){
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+}
+
 // List of functions which can be imported and used in other pages.
 export {
     initUsers,
@@ -116,5 +127,7 @@ export {
     isLoggedIn,
     removeUser,
     getUserDetails,
-    registerUser
+    registerUser,
+    getPostDetails,
+    setPostDetails
 }
