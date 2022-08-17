@@ -20,8 +20,8 @@ function Profile(props) {
             <div class="text-container">
                 <h1>Profile Page</h1>
                 <p>
-                    Name: {user.name} <br></br>
-                    Age: {user.age}<br></br>
+                    Name: {user.firstName} {user.lastName} <br></br>
+                    Date of Birth: {user.dob}<br></br>
                     date joined: {user.date_joined} <br></br>
                     
                 </p>
