@@ -2,6 +2,7 @@ import "./Profile.css";
 import {getUserDetails, getUser} from "../data/repository"
 import {Navigate} from "react-router-dom";
 import React from "react";
+import {Link} from "react-router-dom";
 
 
 function Profile(props) {
@@ -25,7 +26,13 @@ function Profile(props) {
                     date joined: {user.date_joined} <br></br>
                     
                 </p>
+                <div class="link-container">
+                    <Link  to="/Profile-Edit">Edit</Link>
+                    <span> Delete </span>
+                </div>
             </div>
+                
+            
         </div>
     );
 }

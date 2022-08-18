@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import CreatePost from './pages/CreatePost';
 import {getUser, removeUser} from "./data/repository";
+import ProfileEdit from './pages/ProfileEdit';
 
 function App() {
     const [username, setUsername] = useState(getUser);
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
                     <Route path="/Feed" element={<Feed username={username}/>}></Route>
                     <Route path="/CreatePost" element={<CreatePost username={username}/>}></Route>
+                    <Route path="Profile-Edit" element={<ProfileEdit username={username}/>}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>

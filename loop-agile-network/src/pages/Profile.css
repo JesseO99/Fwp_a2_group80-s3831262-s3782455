@@ -22,3 +22,11 @@
     font-size: 40px;
     text-align: left;
 }
+
+.profile-body .text-container{
+    width:100%;
+}
+.link-container {
+    text-align: right;
+    width: 100%;
+}
