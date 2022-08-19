@@ -4,7 +4,7 @@ import Post from "../components/Post";
 import "./Feed.css";
 import {Stack} from "react-bootstrap";
 
-function Feed({username, posts, removePost}) {
+function Feed({username, posts, removePost, addComment}) {
 
     //Authenticate and Redirect if not Logged in
     if (!username) {
@@ -18,7 +18,7 @@ function Feed({username, posts, removePost}) {
                     <ul className="feed-list">
                         {/*Create a list of posts*/}
                         {posts.map((post) => (<li>
-                                <Post key={post} post={post} removePost={removePost}/>
+                                <Post username={username} post={post} removePost={removePost} addComment={addComment}/>
                             </li>))}
                     </ul>
 

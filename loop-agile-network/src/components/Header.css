@@ -3,6 +3,7 @@
     padding: 5px 20px;
     text-align: left;
     background: #1abc9c;
+    height: 65px;
 }
 
 /*LAN Heading*/
@@ -17,6 +18,14 @@
 .heading:hover {
     color: #462828;
 }
+
+/*Loggedin User*/
+#loggedin-user {
+    color: white;
+    margin-top: 15px;
+    font-family: "Bellota";
+}
+
 
 /*Login Logout button container*/
 .login-logout-buttons {

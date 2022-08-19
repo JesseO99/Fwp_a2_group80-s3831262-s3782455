@@ -120,6 +120,15 @@ function setPostDetails(posts) {
     localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
 }
 
+function getNameByEmail(email){
+    const users = getUsers();
+    for (const user of users) {
+        if (user.email === email) {
+            return user.firstName+" "+user.lastName;
+        }
+    }
+}
+
 // List of functions which can be imported and used in other pages.
 export {
     initUsers,
@@ -130,5 +139,6 @@ export {
     getUserDetails,
     registerUser,
     getPostDetails,
-    setPostDetails
+    setPostDetails,
+    getNameByEmail
 }

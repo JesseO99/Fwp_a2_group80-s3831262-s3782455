@@ -16,6 +16,14 @@ const usePost = () => {
         setPosts(posts.filter((post) => postToBeDeleted !== post));
     };
 
+
+    //Add New Comment to the post
+    const addComment = (currentPost,comment) => {
+        const newPosts = posts.filter(item => item !== currentPost);
+        currentPost.comments.push(comment);
+        setPosts([...newPosts, currentPost]);
+    };
+
     //Get old posts from the local storage
     useEffect(() => {
         const posts = getPostDetails();
@@ -32,7 +40,8 @@ const usePost = () => {
     return {
         addPost,
         removePost,
-        posts
+        posts,
+        addComment
     }
 };
 
