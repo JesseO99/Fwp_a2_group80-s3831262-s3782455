@@ -24,6 +24,15 @@ const usePost = () => {
         setPosts([...newPosts, currentPost]);
     };
 
+    //Add Sub Comment to a comment
+    const addSubComment = (currentPost,comment, subComment) => {
+        const newPosts = posts.filter(item => item !== currentPost);
+        currentPost.comments = currentPost.comments.filter(item => item !== comment);
+        comment.subComments.push(subComment);
+        currentPost.comments.push(comment);
+        setPosts([...newPosts, currentPost]);
+    };
+
     //Get old posts from the local storage
     useEffect(() => {
         const posts = getPostDetails();
@@ -41,7 +50,8 @@ const usePost = () => {
         addPost,
         removePost,
         posts,
-        addComment
+        addComment,
+        addSubComment
     }
 };
 

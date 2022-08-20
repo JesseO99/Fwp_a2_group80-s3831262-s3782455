@@ -9,7 +9,7 @@ import Comment from "./Comment";
 
 
 // Post component for individual post
-const Post = ({username, post, removePost, addComment}) => {
+const Post = ({username, post, removePost, addComment, addSubComment}) => {
 
     const [comment, setComment] = useState('');
 
@@ -20,13 +20,12 @@ const Post = ({username, post, removePost, addComment}) => {
 
             const newComment = {
                 user: username,
-                text: comment
+                text: comment,
+                subComments:[]
             }
             addComment(post, newComment);
         }
-
         setComment("");
-
 
     };
 
@@ -68,15 +67,18 @@ const Post = ({username, post, removePost, addComment}) => {
 
                     <p id="post-text">{post.post}</p>
                     <hr data-content="AND" className="hr-text"/>
-                    {post.comments && <p className="small" style={{marginLeft: "10px"}}>Comments</p>}
+                    {post.comments && <p className="comment-heading" >Comments</p>}
 
                     {/*Create a list of comments*/}
+                    <ul className="reverse-list">
                     {post.comments.map((comment) => (
                         <>
                             <li>
-                                <Comment username={username} comment={comment}/>
+                                <Comment username={username} comment={comment} post={post} addSubComment={addSubComment}/>
                             </li>
                         </>))}
+                    </ul>
+
                     <Form onSubmit={sendComment}>
                         <InputGroup className="mb-3">
                             <Form.Control
@@ -95,7 +97,6 @@ const Post = ({username, post, removePost, addComment}) => {
                 </div>
 
             </Stack>
-
 
         </div>
     );

@@ -21,7 +21,8 @@ function App() {
         addPost,
         removePost,
         posts,
-        addComment
+        addComment,
+        addSubComment
     } = usePost();
 
 
@@ -45,7 +46,7 @@ function App() {
                     <Route path="/Profile" element={<Profile username={username}/>}/>
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
                     <Route path="/Feed"
-                           element={<Feed username={username} posts={posts} removePost={removePost} addComment={addComment}/>}></Route>
+                           element={<Feed username={username} posts={posts} removePost={removePost} addComment={addComment} addSubComment={addSubComment}/>}></Route>
                     <Route path="/CreatePost" element={<CreatePost username={username} addPost={addPost}/>}></Route>
                 </Routes>
                 <Footer/>
