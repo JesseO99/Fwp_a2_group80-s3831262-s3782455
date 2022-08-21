@@ -19,9 +19,16 @@
 
 .Previous-Details {
     background-color: red;
-    margin: 10%;
+    margin: 5%;
     color: white;
     padding: 2% 10%;
     border-radius:  20px;
     font-weight: bold;
+}
+
+.Image-Button {
+    background-color: white;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin: 1%;
 }

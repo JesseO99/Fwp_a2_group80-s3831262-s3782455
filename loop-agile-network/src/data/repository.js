@@ -109,7 +109,7 @@ function getUserDetails(email) {
     }
 }
 
-function updateUser(previousEmail, email, firstName, lastName) {
+function updateUser(previousEmail, email, firstName, lastName, src) {
     const users = getUsers();
     for (const user of users)
     {
@@ -118,6 +118,7 @@ function updateUser(previousEmail, email, firstName, lastName) {
             user.firstName = firstName;
             user.lastName = lastName;
             user.email = email;
+            user.img = src;
             setUser(email);
         }
     }

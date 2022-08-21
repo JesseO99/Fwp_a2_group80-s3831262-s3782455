@@ -1,5 +1,5 @@
 import "./Profile.css";
-import {getUserDetails, getUser} from "../data/repository"
+import {getUserDetails} from "../data/repository"
 import {Navigate} from "react-router-dom";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -14,9 +14,7 @@ function Profile(props) {
     const user = getUserDetails(props.username);
     return (
         <div className="profile-body">
-            {user.img === null ? 
-            (<img className="Profile-Pic" src="https://img.icons8.com/ios/100/000000/gender-neutral-user.png" alt="Profile picture"></img>):
-            (<img className="Profile-Pic" src={user.img} alt="Profile picture"></img>)}
+            <img className="Profile-Pic" src= {user.img === null ? "https://img.icons8.com/ios/100/000000/gender-neutral-user.png": user.img} alt="Profile"></img>
             
             <div className="text-container">
                 <h1>Profile Page</h1>

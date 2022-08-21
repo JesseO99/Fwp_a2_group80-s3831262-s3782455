@@ -11,6 +11,7 @@ function ProfileEdit(props) {
     const [firstName, setFirstName] = useState(user.firstName);
     const [email, setEmail] = useState(user.email);
     const [lastName, setLastName] = useState(user.lastName);
+    const [image, setImage] = useState(user.img);
     const navigate = useNavigate();
 
     //Authenticate and Redirect if not Logged in
@@ -37,12 +38,20 @@ function ProfileEdit(props) {
     }
 
 
-
+    function onChangeImage(e)
+    {
+        
+        const uploadFileEle = document.getElementById("file");
+        console.log(uploadFileEle);
+        console.log(uploadFileEle[0]);
+        setImage(e.target.value);
+    }
 
     function onSubmit ()
     {
         props.loginUser(email);
-        updateUser(user.email, email, firstName, lastName);
+        updateUser(user.email, email, firstName, lastName, user.img);
+        // TODO modify method to also supply img-src
         navigate("/Profile");
     }
 
@@ -53,9 +62,11 @@ function ProfileEdit(props) {
 
     return (
         <div className="Profile-Edit-Container">
-            {user.img === null ? 
-            (<img className="Profile-Pic" src="https://img.icons8.com/ios/100/000000/gender-neutral-user.png" alt="Profile picture"></img>):
-            (<img className="Profile-Pic" src={user.img} alt="Profile picture"></img>)}
+            
+            
+            <img className="Profile-Pic" src= {image === null ? "https://img.icons8.com/ios/100/000000/gender-neutral-user.png": image} alt="Profile"></img>
+            
+            
 
             <div className="Input Fields">
                 <h1>
@@ -75,15 +86,11 @@ function ProfileEdit(props) {
                         <Form.Label>Email Address</Form.Label> <br></br>
                         <Form.Control type="email" placeholder="Enter email" value={email} />
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="file" id="file" onChange={onChangeImage}>
+                        <Form.Label>Profile Picture</Form.Label> <br></br>
+                        <Form.Control type="file"></Form.Control>
 
-
-
-
-
-                    {/* <Form.Group className="mb-3" controlId="formBasicPassword" onChange={onChangePassword}>
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group> */}
+                    </Form.Group>
                    <Button variant="primary" type="submit">Submit</Button>
                 </Form>
             </div>
@@ -96,7 +103,8 @@ function ProfileEdit(props) {
                     lastName: {user.lastName} <br></br>
                     date joined: {user.date_joined}<br></br>
                     dob: {user.dob} <br></br>
-                    password: {user.password}
+                    password: {user.password} <br></br>
+                    img-src: {user.img}
                 </p>
 
 
