@@ -13,12 +13,12 @@ function Profile(props) {
     }
     const user = getUserDetails(props.username);
     return (
-        <div class="profile-body">
+        <div className="profile-body">
             {user.img === null ? 
-            (<img class="Profile-Pic" src="https://img.icons8.com/ios/100/000000/gender-neutral-user.png" alt="Profile picture"></img>):
-            (<img class="Profile-Pic" src={user.img} alt="Profile picture"></img>)}
+            (<img className="Profile-Pic" src="https://img.icons8.com/ios/100/000000/gender-neutral-user.png" alt="Profile picture"></img>):
+            (<img className="Profile-Pic" src={user.img} alt="Profile picture"></img>)}
             
-            <div class="text-container">
+            <div className="text-container">
                 <h1>Profile Page</h1>
                 <p>
                     Name: {user.firstName} {user.lastName} <br></br>
@@ -26,7 +26,7 @@ function Profile(props) {
                     date joined: {user.date_joined} <br></br>
                     
                 </p>
-                <div class="link-container">
+                <div className="link-container">
                     <Link  to="/Profile-Edit">Edit</Link>
                     <span> Delete </span>
                 </div>

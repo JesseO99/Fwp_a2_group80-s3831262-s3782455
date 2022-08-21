@@ -42,10 +42,10 @@ function Signin (props) {
     };
 
     return (
-        <div class="signin-box">
+        <div className="signin-box">
             
             
-            <div class="signin-form">
+            <div className="signin-form">
                 <h1>Sign In</h1>
                 <Form onSubmit={onSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
@@ -56,11 +56,10 @@ function Signin (props) {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
                     </Form.Group>
-                   {/* <input type="submit" value="Submit" class="submit-button"></input> */}
                    <Button variant="primary" type="submit">Submit</Button>
                 </Form>
             </div>
-        </div>        // TODO Check if User login Deatils are correct
+        </div>       
     );
     
 };

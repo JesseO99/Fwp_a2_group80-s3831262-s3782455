@@ -37,7 +37,7 @@ function App() {
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
                     <Route path="/Feed" element={<Feed username={username}/>}></Route>
                     <Route path="/CreatePost" element={<CreatePost username={username}/>}></Route>
-                    <Route path="Profile-Edit" element={<ProfileEdit username={username}/>}></Route>
+                    <Route path="Profile-Edit" element={<ProfileEdit username={username} loginUser={loginUser} />}></Route>
                 </Routes>
                 <Footer/>
             </BrowserRouter>

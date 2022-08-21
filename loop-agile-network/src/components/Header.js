@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 function Header(props) {
     return (
-        <div class="navbar">
+        <div className="navbar">
             <div className="container">
                 <Link className="heading" to="/">LAN</Link>
                 <div className="login-logout-buttons">

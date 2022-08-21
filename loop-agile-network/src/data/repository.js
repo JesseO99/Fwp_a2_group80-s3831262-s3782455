@@ -81,7 +81,6 @@ function setUser(email) {
 // Gets the logged in user by accessing the data in local storage
 function getUser() {
     const user = localStorage.getItem(USER_KEY);
-    console.log("User: ", user);
     return user;
 }
 
@@ -105,10 +104,25 @@ function getUserDetails(email) {
     const users = getUsers();
     for (const user of users) {
         if (user.email === email) {
-            console.log("emial: ", email, "\nuser: ", user);
             return user; 
         }
     }
+}
+
+function updateUser(previousEmail, email, firstName, lastName) {
+    const users = getUsers();
+    for (const user of users)
+    {
+        if (user.email === previousEmail)
+        {
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.email = email;
+            setUser(email);
+        }
+    }
+
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
 // List of functions which can be imported and used in other pages.
@@ -119,5 +133,6 @@ export {
     isLoggedIn,
     removeUser,
     getUserDetails,
-    registerUser
+    registerUser,
+    updateUser
 }
