@@ -91,7 +91,7 @@ function ProfileEdit(props) {
                 </Form>
             </div>
             
-            <div className="Previous-Details">
+            {/* <div className="Previous-Details">
                 <h3>Temporary Testing box</h3>
                 <p>
                     Email: {user.email}<br></br>
@@ -104,7 +104,7 @@ function ProfileEdit(props) {
                 </p>
 
 
-            </div>
+            </div> */}
 
             
         </div>
