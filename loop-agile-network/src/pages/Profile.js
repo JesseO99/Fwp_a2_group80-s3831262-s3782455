@@ -20,7 +20,7 @@ function Profile(props) {
         // Step 2 Delete User
         
         deleteUser(email);
-        props.logoutUser()
+        props.logoutUser();
         navigate("/Home");
     }
     
@@ -37,8 +37,8 @@ function Profile(props) {
                     
                 </p>
                 <div className="link-container">
-                    <Link  to="/Profile-Edit">Edit</Link>
-                    <span type="button" className="material-icons" onClick={removeUser}>delete</span>
+                    <Link  to="/Profile-Edit"><span className="material-icons" >edit_square</span></Link>
+                    <Link to="/"><span type="button" className="material-icons" onClick={removeUser}>delete</span></Link>
                 </div>
             </div>
                 

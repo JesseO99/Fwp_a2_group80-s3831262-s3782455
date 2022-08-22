@@ -23,7 +23,8 @@ function initUsers() {
           date_joined: "11/08/2022",
           dob: "2001-08-12",
           email: "darren@hotmail.com",
-          password: "def456"
+          password: "def456",
+          img: ''
         }
       ];
 
