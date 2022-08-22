@@ -9,12 +9,23 @@
 /*Create Post Styling*/
 .create-post-form {
     padding: 2.5% 3% 3% 3%;
-    margin: 2% 17%;
+    margin: 5% 12% 8% 12%;
     border-radius: 20px;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
 
 }
 
+/*Publish button styles*/
 #publish-button {
     float: right;
+}
+
+/*Image Preview*/
+#create-post-image{
+    margin-top: 1%;
+    max-width: 40%;
+    max-height: 400px;
+    margin-bottom: 2%;
+    box-shadow: 0px 3px 3px 1px rgba(0, 0, 0, 0.2);
+
 }

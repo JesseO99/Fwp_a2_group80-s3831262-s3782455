@@ -9,15 +9,14 @@ import SubComment from "./SubComment";
 
 const Comment = ({username, comment, post, addSubComment}) => {
 
-
     const [subComment, setSubComment] = useState('');
     const [accordionStatus, setAccordionStatus] = useState("1");
 
     const sendSubComment = (event) => {
         event.preventDefault();
 
+        // Post the sub-comment if there's a value
         if (subComment !== "") {
-
             const newSubComment = {
                 user: username,
                 text: subComment,
@@ -31,7 +30,7 @@ const Comment = ({username, comment, post, addSubComment}) => {
 
     };
 
-
+    //Accordion for Sub-comment fields
     function updateAccordion() {
         if (accordionStatus === "1") {
             setAccordionStatus("0");
@@ -67,15 +66,15 @@ const Comment = ({username, comment, post, addSubComment}) => {
                         </div>
                     </>))}
 
-
+                {/*Reply for comment section*/}
                 <Accordion defaultActiveKey="0">
-                    <button class="reply-button"  onClick={updateAccordion}> Reply</button>
+                    <button class="reply-button" onClick={updateAccordion}> Reply</button>
                     <Accordion.Collapse eventKey={accordionStatus}>
                         <Form onSubmit={sendSubComment}>
                             <InputGroup className="mb-3" id="sub-comment-field">
                                 <Form.Control
-                                    placeholder=  {"Reply " +getNameByEmail(comment.user)}
-                                    aria-label= {"Reply " +getNameByEmail(comment.user)}
+                                    placeholder={"Reply " + getNameByEmail(comment.user)}
+                                    aria-label={"Reply " + getNameByEmail(comment.user)}
                                     aria-describedby="basic-addon2"
                                     value={subComment}
                                     onChange={(e) => setSubComment(e.target.value)}

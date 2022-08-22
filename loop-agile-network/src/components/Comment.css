@@ -1,6 +1,5 @@
 
 .comment-form {
-    /*padding: 0.5% 1% 0.1% 1%;*/
     width: fit-content;
     height: 29px;
     padding: 12px 15px 0px 5px;
@@ -15,7 +14,6 @@
 #comment-avatar {
     width: 25px;
     margin-top: -11px;
-    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.19);*/
 }
 
 /*Name of the comment author*/
@@ -28,23 +26,23 @@
 }
 
 /*Dividing line of comment*/
-#comment-vr{
+#comment-vr {
     margin-top: -5px;
     height: 20px;
 }
 
-#comment{
+#comment {
     padding-top: 2px;
     font-size: 15px;
 }
 
 /*Sub Comment Container Styling*/
-.sub-comment-container{
+.sub-comment-container {
     margin-left: 22px;
 }
 
 /*Reply Comment Button*/
-.reply-button{
+.reply-button {
     border: none;
     background-color: inherit;
     text-align: start;
@@ -62,7 +60,7 @@
     font-style: italic;
 }
 
-#sub-comment-field{
+#sub-comment-field {
     width: fit-content;
     min-width: 50%;
     max-width: 100%;

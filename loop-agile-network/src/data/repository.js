@@ -97,7 +97,6 @@ function removeUser() {
 }
 
 // Using the provided email it returns the users deails.
-
 function getUserDetails(email) {
     const users = getUsers();
     for (const user of users) {
@@ -120,11 +119,12 @@ function setPostDetails(posts) {
     localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
 }
 
-function getNameByEmail(email){
+//Get name from given email
+function getNameByEmail(email) {
     const users = getUsers();
     for (const user of users) {
         if (user.email === email) {
-            return user.firstName+" "+user.lastName;
+            return user.firstName + " " + user.lastName;
         }
     }
 }

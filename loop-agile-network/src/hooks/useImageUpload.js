@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 
-const UPLOAD_PRESET ="ek7vmpyj";
-const CLOUD_NAME ="loopagilenow";
-const UPLOAD_URL ="https://api.cloudinary.com/v1_1/loopagilenow/image/upload";
+const UPLOAD_PRESET = "ek7vmpyj";
+const CLOUD_NAME = "loopagilenow";
+const UPLOAD_URL = "https://api.cloudinary.com/v1_1/loopagilenow/image/upload";
 
 //Custom Hook for Image Upload
-const useImageUpload = (callback,uploadError) => {
+const useImageUpload = (callback, uploadError) => {
     const [image, setImage] = useState("");
 
     //Make a promise to make an API call to Image upload

@@ -18,14 +18,14 @@ const usePost = () => {
 
 
     //Add New Comment to the post
-    const addComment = (currentPost,comment) => {
+    const addComment = (currentPost, comment) => {
         const newPosts = posts.filter(item => item !== currentPost);
         currentPost.comments.push(comment);
         setPosts([...newPosts, currentPost]);
     };
 
-    //Add Sub Comment to a comment
-    const addSubComment = (currentPost,comment, subComment) => {
+    //Add Sub-Comment to a comment
+    const addSubComment = (currentPost, comment, subComment) => {
         const newPosts = posts.filter(item => item !== currentPost);
         currentPost.comments = currentPost.comments.filter(item => item !== comment);
         comment.subComments.push(subComment);

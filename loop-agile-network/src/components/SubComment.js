@@ -10,14 +10,13 @@ const SubComment = ({subComment}) => {
 
 
     return(
+        //Individual Sub-comment
         <div>
             <div >
                 <Stack direction="horizontal" gap={2} className="subcomment-form ">
                     <p id="subcomment-author">{getNameByEmail(subComment.user)}</p>
                     <div id="subcomment-vr" className="vr"></div>
-
                     <p id="subcomment">{subComment.text}</p>
-
                 </Stack>
 
             </div>

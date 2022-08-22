@@ -69,15 +69,26 @@ function CreatePost({username, addPost}) {
         formik.resetForm({
             values: {post: ''},
         });
+
+        //Scroll Window to top
+        window.scrollTo(0,0);
         setShow(true);
         setToast({
             title:"New Post Created!",
             message:"Woohoo, Your post has been published!",
             img:check
         })
+
+        //Clear Images from the Form
+        setImage("")
+        document.getElementById('image-field').value = "";
+
     }
 
     function uploadError(){
+        //Scroll Window to top
+        window.scrollTo(0,0);
+
         setShow(true);
         setToast({
             title:"Post Not Created!",
@@ -92,8 +103,23 @@ function CreatePost({username, addPost}) {
                 <Stack gap={3}>
                     <p id="create-post-heading">Create Post</p>
                     <div className="posts-container">
-                        <Form onSubmit={formik.handleSubmit}>
+                        <Form className="create-form" onSubmit={formik.handleSubmit}>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                {/*Preview Image*/}
+                                {image !== "" && <>
+                                    <div>
+
+                                        <Stack className="align-items-center">
+                                            <p style={{fontWeight:"bold"}}>Preview</p>
+
+                                            <img src={(URL.createObjectURL(image))}
+                                             className="rounded img-fluid "
+                                             id="create-post-image"
+                                        />
+                                        </Stack>
+                                    </div>
+                                </>
+                                }
                                 <Form.Control as="textarea"
                                               size="lg"
                                               id="post"
@@ -109,7 +135,9 @@ function CreatePost({username, addPost}) {
                                      style={{marginRight: "8px"}}
                                 />
                                 <Form.Label>Image Upload</Form.Label>
-                                <Form.Control type="file"
+                                <Form.Control
+                                    id="image-field"
+                                    type="file"
                                               size="sm"
                                               onChange={(e) => setImage(e.target.files[0])}/>
                             </Form.Group>
@@ -124,7 +152,7 @@ function CreatePost({username, addPost}) {
                     </div>
                 </Stack>
             </div>
-            {/*Toast Message for Success Post Creation*/}
+            {/*Toast Message for Success/Error Post Creation*/}
             <ToastContainer className="p-3" position="top-end">
                 <Toast onClose={() =>
                     setShow(false)}

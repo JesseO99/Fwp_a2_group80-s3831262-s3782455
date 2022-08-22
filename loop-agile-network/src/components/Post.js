@@ -16,8 +16,8 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
     const sendComment = (event) => {
         event.preventDefault();
 
+        // Post the comment if there's a value
         if (comment !== "") {
-
             const newComment = {
                 user: username,
                 text: comment,
@@ -40,6 +40,7 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
                              src={avatar}
                         />
                         <p id="post-author">{getNameByEmail(post.email)}</p>
+                        {/*Show delete button only for the posts user posted*/}
                         {username === post.email &&
                             <>
                                 <div className="ms-auto"/>
@@ -67,7 +68,7 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
 
                     <p id="post-text">{post.post}</p>
                     <hr data-content="AND" className="hr-text"/>
-                    {post.comments && <p className="comment-heading" >Comments</p>}
+                    {post.comments.length>0 && <p className="comment-heading" >Comments</p>}
 
                     {/*Create a list of comments*/}
                     <ul className="reverse-list">
@@ -78,7 +79,7 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
                             </li>
                         </>))}
                     </ul>
-
+                    {/*Comment Section*/}
                     <Form onSubmit={sendComment}>
                         <InputGroup className="mb-3">
                             <Form.Control

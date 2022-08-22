@@ -48,3 +48,6 @@ Cloud Storage for Images
 
 How to Upload Images to Cloudinary With a React App
 <https://medium.com/geekculture/how-to-upload-images-to-cloudinary-with-a-react-app-f0dcc357999c>
+
+Google Fonts - Bellota 
+<https://fonts.googleapis.com/css?family=Bellota>

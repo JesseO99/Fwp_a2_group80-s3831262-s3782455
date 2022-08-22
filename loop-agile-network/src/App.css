@@ -7,7 +7,7 @@
 @import url('https://fonts.googleapis.com/css?family=Bellota');
 
 
-
+/*Show the most recent posts and comments*/
 .reverse-list{
   display: flex;
   flex-direction: column-reverse;}
