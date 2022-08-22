@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import "./Signup.css";
 import {Button, Modal, Row} from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
-import avatar from '../img/avatar.png';
+// import avatar from '../img/avatar.png';
 import {useFormik} from 'formik';
 import {useNavigate} from "react-router-dom";
 import {isFutureDate} from "../util/Util";

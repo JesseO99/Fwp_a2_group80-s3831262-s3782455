@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import {Button} from "react-bootstrap";
 import {useState} from "react";
 
-
 function ProfileEdit(props) {
     const user = getUserDetails(props.username);
     const [firstName, setFirstName] = useState(user.firstName);
@@ -37,14 +36,11 @@ function ProfileEdit(props) {
         setEmail(e.target.value);
     }
 
-
+    // eslint-disable-next-line
     function onChangeImage(e)
     {
-        
-        const uploadFileEle = document.getElementById("file");
-        console.log(uploadFileEle);
-        console.log(uploadFileEle[0]);
-        setImage(e.target.value);
+        console.log("File: ", e.target.files);
+        setImage(e.target.files[0]);
     }
 
     function onSubmit ()
@@ -64,7 +60,7 @@ function ProfileEdit(props) {
         <div className="Profile-Edit-Container">
             
             
-            <img className="Profile-Pic" src= {image === null ? "https://img.icons8.com/ios/100/000000/gender-neutral-user.png": image} alt="Profile"></img>
+            <img className="Profile-Pic" src= {image === null ? "../img/avatar.png" : image} alt="Profile"></img>
             
             
 
@@ -86,11 +82,11 @@ function ProfileEdit(props) {
                         <Form.Label>Email Address</Form.Label> <br></br>
                         <Form.Control type="email" placeholder="Enter email" value={email} />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="file" id="file" onChange={onChangeImage}>
+                    {/* <Form.Group className="mb-3" controlId="file" id="file" onChange={onChangeImage}>
                         <Form.Label>Profile Picture</Form.Label> <br></br>
                         <Form.Control type="file"></Form.Control>
 
-                    </Form.Group>
+                    </Form.Group> */}
                    <Button variant="primary" type="submit">Submit</Button>
                 </Form>
             </div>
