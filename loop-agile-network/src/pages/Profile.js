@@ -1,21 +1,33 @@
 import "./Profile.css";
-import {getUserDetails} from "../data/repository"
-import {Navigate} from "react-router-dom";
+import {getUserDetails, deleteUser} from "../data/repository"
+import {Navigate, useNavigate} from "react-router-dom";
 import React from "react";
 import {Link} from "react-router-dom";
+import avatar from "../img/avatar.png";
 
 
 function Profile(props) {
-
+    const navigate = useNavigate();
     //Authenticate and Redirect if not Logged in
     if (!props.username) {
         return <Navigate to="/" />
     }
     const user = getUserDetails(props.username);
+    function removeUser()
+    {
+        const email = user.email;
+        // Step 1 Logout User
+        // Step 2 Delete User
+        
+        deleteUser(email);
+        props.logoutUser()
+        navigate("/Home");
+    }
+    
     return (
         <div className="profile-body">
-            <img className="Profile-Pic" src= {user.img === null ? "https://img.icons8.com/ios/100/000000/gender-neutral-user.png": user.img} alt="Profile"></img>
-            
+             
+            <img className="Profile-Pic" src=  {user.img.length === 0 ? avatar : user.img } alt="Profile"></img>
             <div className="text-container">
                 <h1>Profile Page</h1>
                 <p>
@@ -26,7 +38,7 @@ function Profile(props) {
                 </p>
                 <div className="link-container">
                     <Link  to="/Profile-Edit">Edit</Link>
-                    <span> Delete </span>
+                    <span type="button" className="material-icons" onClick={removeUser}>delete</span>
                 </div>
             </div>
                 

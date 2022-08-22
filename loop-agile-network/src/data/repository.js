@@ -46,7 +46,8 @@ function registerUser(newUser) {
         email: newUser.email,
         dob: newUser.dob,
         password: newUser.password,
-        date_joined: getDateToday()
+        date_joined: getDateToday(),
+        img: ''
     }
     //Add new user to the current list
     if (currentUsers !== null) {
@@ -109,6 +110,7 @@ function getUserDetails(email) {
     }
 }
 
+// Updates the users details
 function updateUser(previousEmail, email, firstName, lastName, src) {
     const users = getUsers();
     for (const user of users)
@@ -126,6 +128,24 @@ function updateUser(previousEmail, email, firstName, lastName, src) {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+// Deletes the user from local storage
+function deleteUser(email) {
+    localStorage.removeItem(USER_KEY);
+    const users = getUsers();
+    const newUsers = [];
+    let count = 0;
+    for (const user of users)
+    {
+        if (user.email !== email)
+        {
+            newUsers[count] = user;
+            count += 1;
+        }
+    }
+    // TODO when Posts are Implemented intergrate deletion of Posts here.
+    localStorage.setItem(USERS_KEY, JSON.stringify(newUsers));
+}
+
 // List of functions which can be imported and used in other pages.
 export {
     initUsers,
@@ -135,5 +155,6 @@ export {
     removeUser,
     getUserDetails,
     registerUser,
-    updateUser
+    updateUser,
+    deleteUser
 }

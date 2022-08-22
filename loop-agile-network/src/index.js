@@ -13,6 +13,8 @@ import {initUsers} from "./data/repository";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></link>
+                                                        
         <App/>
     </React.StrictMode>
 );
