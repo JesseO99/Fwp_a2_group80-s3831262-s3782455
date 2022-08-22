@@ -2,6 +2,7 @@ import {getDateToday} from "../util/Util";
 
 const USERS_KEY = "users";
 const USER_KEY = "email";
+const POSTS_KEY = "posts";
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -25,7 +26,7 @@ function initUsers() {
           email: "darren@hotmail.com",
           password: "def456"
         }
-      ];
+    ];
 
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
@@ -100,13 +101,33 @@ function removeUser() {
 }
 
 // Using the provided email it returns the users deails.
-
 function getUserDetails(email) {
     const users = getUsers();
     for (const user of users) {
         if (user.email === email) {
             console.log("emial: ", email, "\nuser: ", user);
             return user; 
+        }
+    }
+}
+
+//get Posts from local storage
+function getPostDetails() {
+    const posts = JSON.parse(localStorage.getItem(POSTS_KEY));
+    return posts;
+}
+
+//save posts to local storage
+function setPostDetails(posts) {
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+}
+
+//Get name from given email
+function getNameByEmail(email) {
+    const users = getUsers();
+    for (const user of users) {
+        if (user.email === email) {
+            return user.firstName + " " + user.lastName;
         }
     }
 }
@@ -119,5 +140,8 @@ export {
     isLoggedIn,
     removeUser,
     getUserDetails,
-    registerUser
+    registerUser,
+    getPostDetails,
+    setPostDetails,
+    getNameByEmail
 }
