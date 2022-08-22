@@ -1,12 +1,10 @@
 .signin-form {
     align-items: center;
-    /* width: 700px; */
-    border-width: 2px;
-    border-radius: 5px;
-    border-style: groove;
     text-align: left;
-    padding: 10px;
-    margin: 1% 25%;
+    padding: 2.5% 3% 3% 3%;
+    margin: 2% 10%;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
 .signin-box {
@@ -29,4 +27,11 @@
     margin: 5px;
     border-radius: 8px;
     color:white;
+}
+
+.signin-form h1 {
+    color: #000000;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: left;
 }

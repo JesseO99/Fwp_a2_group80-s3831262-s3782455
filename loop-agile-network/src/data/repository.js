@@ -10,19 +10,21 @@ function initUsers() {
 
     const users = [
         {
-            name: "Rue Minmi",
-            date_joined: "11-08-2022",
-            age: 33,
-            email: "user@gmail.com",
-            password: "abc123",
-            img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
+          firstName: "Rue",
+          lastName: "Minmi",
+          date_joined: "11/08/2022",
+          dob: "1999-08-06",
+          email: "rue@gmail.com",
+          password: "abc123",
+          img: "https://img.icons8.com/ios-filled/100/000000/gender-neutral-user.png"
         },
         {
-            name: "Darren Eshay",
-            date_joined: "11-08-2022",
-            age: 23,
-            email: "user@hotmail.com",
-            password: "def456"
+          firstName: "Darren",
+          lastName: "Eshay",
+          date_joined: "11/08/2022",
+          dob: "2001-08-12",
+          email: "darren@hotmail.com",
+          password: "def456"
         }
     ];
 
@@ -79,7 +81,9 @@ function setUser(email) {
 
 // Gets the logged in user by accessing the data in local storage
 function getUser() {
-    return localStorage.getItem(USER_KEY);
+    const user = localStorage.getItem(USER_KEY);
+    console.log("User: ", user);
+    return user;
 }
 
 // returns if the user is logged in.
@@ -102,8 +106,7 @@ function getUserDetails(email) {
     for (const user of users) {
         if (user.email === email) {
             console.log("emial: ", email, "\nuser: ", user);
-            return user;
-            return null;
+            return user; 
         }
     }
 }

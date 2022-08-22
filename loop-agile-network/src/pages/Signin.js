@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {verifyUser} from "../data/repository";
+import {Button} from "react-bootstrap";
 
 import "./Signin.css";
 
@@ -55,7 +56,8 @@ function Signin (props) {
                         <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password" />
                     </Form.Group>
-                   <input type="submit" value="Submit" class="submit-button"></input>
+                   {/* <input type="submit" value="Submit" class="submit-button"></input> */}
+                   <Button variant="primary" type="submit">Submit</Button>
                 </Form>
             </div>
         </div>        // TODO Check if User login Deatils are correct
