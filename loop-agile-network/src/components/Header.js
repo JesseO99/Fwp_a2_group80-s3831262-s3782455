@@ -1,6 +1,9 @@
 import "./Header.css";
-import {Button} from "react-bootstrap";
+import {Button, Stack} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {getNameByEmail} from "../data/repository";
+import React from "react";
+
 
 function Header(props) {
     return (
@@ -20,7 +23,10 @@ function Header(props) {
                         </>
                         :
                         <>
+                            <Stack direction="horizontal" gap={2}>
+                            <p id="loggedin-user">{getNameByEmail(props.username)}</p>
                             <Link to="/"><Button variant="light" className="btn" onClick={props.logoutUser}>Logout</Button></Link>
+                            </Stack>
                         </>
                     }
                 </div>

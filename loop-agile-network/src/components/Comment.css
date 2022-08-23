@@ -1,0 +1,67 @@
+
+.comment-form {
+    width: fit-content;
+    height: 29px;
+    padding: 12px 15px 0px 5px;
+    margin: 1.5% 1%;
+    border-radius: 10px;
+    box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.1);
+
+}
+
+
+/*Comment Avatar Image*/
+#comment-avatar {
+    width: 25px;
+    margin-top: -11px;
+}
+
+/*Name of the comment author*/
+#comment-author {
+    padding-top: 3px;
+    margin-right: 5px;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+/*Dividing line of comment*/
+#comment-vr {
+    margin-top: -5px;
+    height: 20px;
+}
+
+#comment {
+    padding-top: 2px;
+    font-size: 15px;
+}
+
+/*Sub Comment Container Styling*/
+.sub-comment-container {
+    margin-left: 22px;
+}
+
+/*Reply Comment Button*/
+.reply-button {
+    border: none;
+    background-color: inherit;
+    text-align: start;
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-left: 29px;
+    font-weight: bold;
+
+}
+
+
+/* On mouse-over */
+.reply-button:hover {
+    /*background: aquamarine;*/
+    font-style: italic;
+}
+
+#sub-comment-field {
+    width: fit-content;
+    min-width: 50%;
+    max-width: 100%;
+}
