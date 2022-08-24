@@ -17,6 +17,7 @@ function Profile(props) {
     }
     const user = getUserDetails(props.username);
     
+    // Controls whether popup is vissible or invisible
     const  togglePopup = () => {
         setIsOpen(!isOpen);
     }
@@ -28,9 +29,8 @@ function Profile(props) {
         // // Step 2 Delete User
         
         deleteUser(email);
+        props.removeUserPosts(email);
         props.logoutUser();
-        // navigate("/Home");
-        // return (<Popup username={props.username} logoutUser={props.logoutUser}/>);
 
     }
     
@@ -59,6 +59,7 @@ function Profile(props) {
                     
                 
             </div>
+            {/* HTML for Popup */}
             {isOpen && <Popup close={togglePopup} confirm={removeUser} content = {"Are you sure you want to delete this account? This will also delete all posts made by this account."} />}
         </div>
         

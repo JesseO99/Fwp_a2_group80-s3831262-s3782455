@@ -71,12 +71,7 @@ function ProfileEdit(props) {
 
         navigate("/Profile");
     }
-
-   
     
-
-    
-
     return (
 
         <div>
@@ -116,6 +111,7 @@ function ProfileEdit(props) {
 
                 
             </div>
+            {/* HTML for popup */}
             {isOpen && <Popup close={togglePopup} confirm={onSubmit} content = {"Will you confirm these changes?"} />}
         </div>
         

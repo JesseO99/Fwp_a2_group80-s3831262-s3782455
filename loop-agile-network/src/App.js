@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Footer from "./components/Footer";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -23,7 +23,8 @@ function App() {
         removePost,
         posts,
         addComment,
-        addSubComment
+        addSubComment,
+        removeUserPosts
     } = usePost();
 
 
@@ -44,7 +45,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
-                    <Route path="/Profile" element={<Profile username={username} logoutUser={logoutUser}/>}/>
+                    <Route path="/Profile" element={<Profile username={username} logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
                     <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
                     <Route path="Profile-Edit" element={<ProfileEdit username={username} loginUser={loginUser} />}></Route>
                     <Route path="/Feed"

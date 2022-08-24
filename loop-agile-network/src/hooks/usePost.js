@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import {getPostDetails, setPostDetails} from "../data/repository";
+import {getPostDetails, setPostDetails, initPosts} from "../data/repository";
 
 //Custom Hook for Posting
 const usePost = () => {
 
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState(initPosts());
 
     //Add New post to the list
     const addPost = (post) => {
@@ -16,6 +16,10 @@ const usePost = () => {
         setPosts(posts.filter((post) => postToBeDeleted !== post));
     };
 
+    //Remove Users Posts
+    const removeUserPosts = (user) => {
+        setPosts(posts.filter((post) => user !== post.email));
+    };
 
     //Add New Comment to the post
     const addComment = (currentPost, comment) => {
@@ -51,7 +55,8 @@ const usePost = () => {
         removePost,
         posts,
         addComment,
-        addSubComment
+        addSubComment,
+        removeUserPosts
     }
 };
 

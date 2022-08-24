@@ -32,6 +32,106 @@ function initUsers() {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
+function initPosts() {
+    if (localStorage.getItem(POSTS_KEY !== null)) return;
+    
+    const posts = [
+            {
+                email:"darren@hotmail.com",
+                post:"A Darren Post\n",
+                img:"",
+                comments:[]
+            },
+            {
+                email:"darren@hotmail.com",
+                post:"A Darren Third Post",
+                img:"","comments":[
+                    {
+                        user:"darren@hotmail.com",
+                        text:"A comment","subComments":[]
+                    }
+                ]
+            },
+            {
+                email:"darren@hotmail.com",
+                post:"A Darren second Post",
+                img:"",
+                comments:[
+                    {
+                        user:"darren@hotmail.com",
+                        text:"A Comment",
+                        subComments:[]
+                    }
+                ]
+            },
+            {
+                email:"rue@gmail.com",
+                post:"A Third Post",
+                img:"",
+                comments:
+                [
+                    {
+                        user:"darren@hotmail.com",
+                        text:"A Comment",
+                        subComments:[]
+                    }
+                ]
+            },
+            {
+                email:"rue@gmail.com",
+                post:"A Second Post",
+                img:"",
+                comments:[
+                    {
+                        user:"rue@gmail.com",
+                        text:"A Self second comment",
+                        subComments:[]
+                    },
+                    {
+                        user:"darren@hotmail.com",
+                        text:"A Comment",
+                        subComments:[]
+                    },
+                    {
+                        user:"rue@gmail.com",
+                        text:"Another Comment",
+                        subComments:[
+                            {
+                                user:"rue@gmail.com",
+                                text:"A sub comment"
+                            },
+                            {
+                                user:"darren@hotmail.com",
+                                text:"A Darren Sub Comment"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                email:"rue@gmail.com",
+                post:"A Post",
+                img:"",
+                comments:[
+                {
+                    user:"darren@hotmail.com",text:"A Comment","subComments":[]
+                },
+                {
+                    user:"rue@gmail.com",
+                    text:"A self comment",
+                    subComments:[
+                        {
+                            user:"darren@hotmail.com",
+                            text:"A Darren Sub Comment"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+    
+    return posts
+}
 // Returns a list of users stored in local storage
 function getUsers() {
     const data = localStorage.getItem(USERS_KEY);
@@ -151,6 +251,65 @@ function getNameByEmail(email) {
     }
 } 
 
+// Function for deleting all posts and comments from the user's supplied email
+// Function currently not in use but could be used in future
+ // eslint-disable-next-line
+function deletePostsfromUser(email) {
+    const posts = getPostDetails();
+    const newPosts = [];
+    let count = 0;
+
+    // Remove Posts with Email
+    for (const post of posts)
+    {   
+        
+        if (post.email !== email)
+        {
+            
+            let commentCount = 0;
+            const newpost =
+            {
+                email: post.email,
+                post: post.post,
+                img: post.img,
+                comments: []
+            }
+            // Remove Comments with user
+            for (const comment of post.comments)
+            {
+                if (comment.user !== email )
+                {
+                    const newComment = {
+                        user: comment.user,
+                        text: comment.text,
+                        subComments: []
+                    }
+                    let subCommentCount = 0;
+
+                    // Remove Subcomments with user
+                    for (const subComment of comment.subComments)
+                    {
+
+                        if (subComment.user !== email)
+                        {
+                            newComment.subComments[subCommentCount] = subComment;
+                            subCommentCount += 1;
+                        }
+                    }
+                    newpost.comments[commentCount] = newComment;
+                    commentCount +=1;
+                }
+            }
+
+            newPosts[count] = newpost;
+            count +=1;
+        }
+    }
+
+    localStorage.setItem(POSTS_KEY, JSON.stringify(newPosts));
+}
+
+
 // Deletes the user from local storage
 function deleteUser(email) {
     localStorage.removeItem(USER_KEY);
@@ -165,10 +324,11 @@ function deleteUser(email) {
             count += 1;
         }
     }
-    // TODO when Posts are Implemented intergrate deletion of Posts here.
+
     localStorage.setItem(USERS_KEY, JSON.stringify(newUsers));
 
 }
+
 
 // List of functions which can be imported and used in other pages.
 export {
@@ -180,7 +340,7 @@ export {
     getUserDetails,
     registerUser,
     updateUser,
-
+    initPosts,
     getPostDetails,
     setPostDetails,
     getNameByEmail,
