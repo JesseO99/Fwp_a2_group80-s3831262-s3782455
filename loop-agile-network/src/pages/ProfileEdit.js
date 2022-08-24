@@ -8,52 +8,15 @@ import avatar from "../img/avatar.png";
 import Popup from "../components/Popup"
 
 function ProfileEdit(props) {
-
-    const FIRST_NAME_KEY = "firstNameEdit";
-    const LAST_NAME_KEY = "lastNameEdit";
-    const EMAIL_KEY = "emailEdit";
-    
-    function getFirstName(user) {
-
-        if(localStorage.getItem(FIRST_NAME_KEY) !== null)
-        {
-            return localStorage.getItem(FIRST_NAME_KEY);
-        }
-  
-        return user.firstName;
-        
-    }
-
-    function getLastName(user)
-    {
-        if(localStorage.getItem(LAST_NAME_KEY) !== null)
-        {
-            return localStorage.getItem(LAST_NAME_KEY);
-        }
-
-        return user.lastName;
-        
-    }
-
-    function getEmail(user)
-    {
-        if(localStorage.getItem(EMAIL_KEY) !== null)
-        {
-            return localStorage.getItem(EMAIL_KEY);
-        }
-
-        
-        return user.email;
-        
-    }
-
     const user = getUserDetails(props.username);
-    const [firstName, setFirstName] = useState(getFirstName(user));
-    const [email, setEmail] = useState(getEmail(user));
-    const [lastName, setLastName] = useState(getLastName(user));
-    const [image, setImage] = useState(user.img); // Redundant code for now will prove necesarry if image upload is implemented for Profile Picture
-    const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
+    const [firstName, setFirstName] = useState(user.firstName);
+    const [email, setEmail] = useState(user.email);
+    const [lastName, setLastName] = useState(user.lastName);
+    const [image, setImage] = useState(user.img); // Redundant code for now will prove necesarry if image upload is implemented for Profile Picture
+    
+    
+    const navigate = useNavigate();
 
     //Authenticate and Redirect if not Logged in
     if (!props.username) {
@@ -62,7 +25,10 @@ function ProfileEdit(props) {
 
     // Controls Edit Confirmation Cue
     const  togglePopup = () => {
+        console.log("Pre-Trigger: ", isOpen);
+        localStorage.setItem("Popup", !isOpen);
         setIsOpen(!isOpen);
+        console.log("Post-Trigger: ", isOpen);
     }
 
     
@@ -102,9 +68,7 @@ function ProfileEdit(props) {
         props.loginUser(email);
         // Update user details
         updateUser(user.email, email, firstName, lastName, user.img);
-        localStorage.removeItem(FIRST_NAME_KEY);
-        localStorage.removeItem(LAST_NAME_KEY);
-        localStorage.removeItem(EMAIL_KEY);
+
         navigate("/Profile");
     }
 
@@ -126,7 +90,6 @@ function ProfileEdit(props) {
                         Edit Profile
                     </h1>
 
-                    <Form onSubmit={onSubmit}>
                         <Form.Group className="mb-3" controlId="firstName" onChange={onChangeFirstName} >
                             <Form.Label>First Name</Form.Label> <br></br>
                             <Form.Control type="text" placeholder="Enter FirstName" value={firstName} />
@@ -146,8 +109,8 @@ function ProfileEdit(props) {
                             <Form.Control type="file"></Form.Control>
 
                         </Form.Group> */}
-                    <Button variant="primary" type="submit">Submit</Button>
-                    </Form>
+                        <Button variant="primary" type="submit" onClick={togglePopup}>Submit</Button>
+
                 </div>
                 
 

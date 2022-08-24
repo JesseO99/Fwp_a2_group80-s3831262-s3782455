@@ -1,6 +1,10 @@
 import {Button} from "react-bootstrap";
 import "./Popup.css";
 
+// Popup Component is a generic popup component which takes: 
+// a message under content parameter 
+// a cancel action under the close parameter and 
+// a confirmation action under the confirm parameter
 function Popup (props) {
 
     return (
