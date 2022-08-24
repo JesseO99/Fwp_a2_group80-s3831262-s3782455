@@ -30,3 +30,11 @@
     text-align: right;
     width: 100%;
 }
+
+.delete-button {
+    color:red;
+}
+
+.edit-button:link {
+    color: black;
+}
