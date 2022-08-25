@@ -3,6 +3,7 @@ import {getDateToday} from "../util/Util";
 const USERS_KEY = "users";
 const USER_KEY = "email";
 const POSTS_KEY = "posts";
+const AUTH_DATA_KEY = 'MFA';
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -329,7 +330,23 @@ function deleteUser(email) {
 
 }
 
+function setAuthentificationRequestData(email)
+{
+    const code = parseInt(Math.random()*899999) + 100000;
+    const object = {to_email: email, code: code};
 
+    localStorage.setItem(AUTH_DATA_KEY, JSON.stringify(object));
+    return object;
+}
+
+function getAuthentificationRequestData()
+{
+    return JSON.parse(localStorage.getItem(AUTH_DATA_KEY))
+}
+
+function removeAuthentificationRequestData(){
+    localStorage.removeItem(AUTH_DATA_KEY);
+}
 // List of functions which can be imported and used in other pages.
 export {
     initUsers,
@@ -344,6 +361,9 @@ export {
     getPostDetails,
     setPostDetails,
     getNameByEmail,
-    deleteUser
+    deleteUser,
+    setAuthentificationRequestData,
+    getAuthentificationRequestData,
+    removeAuthentificationRequestData
 
 }
