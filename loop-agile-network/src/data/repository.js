@@ -130,7 +130,7 @@ function initPosts() {
             ]
         }
     ]
-    
+
     return posts
 }
 // Returns a list of users stored in local storage
@@ -169,7 +169,6 @@ function verifyUser(email, password) {
     const users = getUsers();
     for (const user of users) {
         if (email === user.email && password === user.password) {
-            setUser(email);
             return true;
         }
     }
@@ -350,6 +349,7 @@ function removeAuthentificationRequestData(){
 // List of functions which can be imported and used in other pages.
 export {
     initUsers,
+    setUser,
     verifyUser,
     getUser,
     isLoggedIn,

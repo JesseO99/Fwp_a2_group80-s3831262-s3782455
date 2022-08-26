@@ -15,6 +15,9 @@
 * Install Formik <br>
   `npm install formik --save
   `
+* Install Emailjs <br>
+  `npm install @emailjs/browser --save
+  `
 
 ### **Reference**
 
@@ -32,6 +35,9 @@ Material Design Bootstrap
 
 Formik
 <https://formik.org>
+
+Emailjs
+<https://www.emailjs.com/>
 
 Images
 <https://www.freepik.com>

@@ -1,7 +1,13 @@
 import Form from 'react-bootstrap/Form';
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getAuthentificationRequestData, removeAuthentificationRequestData, setAuthentificationRequestData, verifyUser} from "../data/repository";
+import {
+    getAuthentificationRequestData,
+    removeAuthentificationRequestData,
+    setAuthentificationRequestData,
+    setUser,
+    verifyUser
+} from "../data/repository";
 import {Button} from "react-bootstrap";
 import OneTimeCodeAuthentification, {sendEmail} from '../components/OneTimeCodeAuthentification';
 import "./Signin.css";
@@ -58,6 +64,7 @@ function Signin (props) {
         {
             
             props.loginUser(username);
+            setUser(username);
             removeAuthentificationRequestData();
             navigate("/Profile");
         }

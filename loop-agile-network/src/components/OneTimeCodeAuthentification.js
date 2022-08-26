@@ -13,7 +13,7 @@ function sendEmail(e)
     const TEMPLATE_ID = 'template_i4d4on8';
     // Bellow line is disabled due to not sending emails every time uncomment line for email functionality. 
     // You can check local storage under MFA key to get the necesarry login code
-    // emailjs.send(SERVICE_ID,TEMPLATE_ID, e, API_KEY);
+    emailjs.send(SERVICE_ID,TEMPLATE_ID, e, API_KEY);
 }
 
 function OneTimeCodeAuthentification (props)
@@ -52,7 +52,7 @@ function OneTimeCodeAuthentification (props)
             <div className = "MFA-Content">
                 <h3>Email Verfication</h3>
                 <p>An email has been sent to the linked account with a verification code</p>
-                {error && <p className = "error">Error: this is not the correct code. The code is a 6 digit number conected to the email</p>}
+                {error && <p className = "error">Error: this is not the correct code. The code is a 6 digit number connected to the email</p>}
                     <Form.Label>Verfication Code: </Form.Label>
                 <div className='form-box'>
                     <Form.Control className= "Code-Box" type="text" onChange={onChangeCodeEntry} />

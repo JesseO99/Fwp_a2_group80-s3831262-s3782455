@@ -104,7 +104,7 @@ function CreatePost({username, addPost}) {
                     <p id="create-post-heading">Create Post</p>
                     <div className="posts-container">
                         <Form className="create-form" onSubmit={formik.handleSubmit}>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-3" >
                                 {/*Preview Image*/}
                                 {image !== "" && <>
                                     <div>
@@ -130,7 +130,7 @@ function CreatePost({username, addPost}) {
                                 />
                                 {formik.errors.post ? <div>{formik.errors.post}</div> : null}
                             </Form.Group>
-                            <Form.Group controlId="formFileSm" className="mb-3">
+                            <Form.Group  className="mb-3">
                                 <img src={camera}
                                      style={{marginRight: "8px"}}
                                 />
@@ -141,7 +141,7 @@ function CreatePost({username, addPost}) {
                                               size="sm"
                                               onChange={(e) => setImage(e.target.files[0])}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Group className="mb-3" >
                                 <Button id="publish-button"
                                         variant='primary'
                                         type="submit">

@@ -45,7 +45,7 @@ function Profile(props) {
                     <p>
                         Name: {user.firstName} {user.lastName} <br></br>
                         Date of Birth: {user.dob}<br></br>
-                        date joined: {user.date_joined} <br></br>
+                        Date Joined: {user.date_joined} <br></br>
                         
                     </p>
 
