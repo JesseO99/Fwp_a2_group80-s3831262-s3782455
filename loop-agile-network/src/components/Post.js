@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./Post.css";
 import Form from "react-bootstrap/Form";
 import {Button, InputGroup, Row, Stack} from "react-bootstrap";
@@ -6,11 +6,13 @@ import Col from "react-bootstrap/Col";
 import {getNameByEmail} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
+import {UsernameContext} from "../App";
 
 
 // Post component for individual post
-const Post = ({username, post, removePost, addComment, addSubComment}) => {
+const Post = ({post, removePost, addComment, addSubComment}) => {
 
+    const username = useContext(UsernameContext);
     const [comment, setComment] = useState('');
 
     const sendComment = (event) => {
@@ -21,7 +23,7 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
             const newComment = {
                 user: username,
                 text: comment,
-                subComments:[]
+                subComments: []
             }
             addComment(post, newComment);
         }
@@ -68,16 +70,16 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
 
                     <p id="post-text">{post.post}</p>
                     <hr data-content="AND" className="hr-text"/>
-                    {post.comments.length>0 && <p className="comment-heading" >Comments</p>}
+                    {post.comments.length > 0 && <p className="comment-heading">Comments</p>}
 
                     {/*Create a list of comments*/}
                     <ul className="reverse-list">
-                    {post.comments.map((comment) => (
-                        <>
-                            <li>
-                                <Comment username={username} comment={comment} post={post} addSubComment={addSubComment}/>
-                            </li>
-                        </>))}
+                        {post.comments.map((comment) => (
+                            <>
+                                <li>
+                                    <Comment comment={comment} post={post} addSubComment={addSubComment}/>
+                                </li>
+                            </>))}
                     </ul>
                     {/*Comment Section*/}
                     <Form onSubmit={sendComment}>

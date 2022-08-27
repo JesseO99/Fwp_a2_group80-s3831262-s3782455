@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home";
-import {useState} from "react";
+import {createContext, useState} from "react";
 import Footer from "./components/Footer";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
@@ -14,6 +14,9 @@ import {getUser, removeUser} from "./data/repository";
 import ProfileEdit from './pages/ProfileEdit';
 import usePost from "./hooks/usePost";
 
+//Create and pass contexts for multiple usage instances
+export const UsernameContext = createContext();
+export const LoginUserContext = createContext();
 
 function App() {
     const [username, setUsername] = useState(getUser);
@@ -24,7 +27,8 @@ function App() {
         posts,
         addComment,
         addSubComment,
-        removeUserPosts
+        removeUserPosts,
+        updateAllUserEntryEmails
     } = usePost();
 
 
@@ -37,24 +41,32 @@ function App() {
         setUsername(null);
     }
 
+
     return (
-        <div className="App">
-            <BrowserRouter>
-                <Header username={username} logoutUser={logoutUser}/>
-                <Navbar username={username} logoutUser={logoutUser}/>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/Signin" element={<Signin loginUser={loginUser}/>}/>
-                    <Route path="/Profile" element={<Profile username={username} logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
-                    <Route path="/Signup" element={<Signup loginUser={loginUser}/>}/>
-                    <Route path="Profile-Edit" element={<ProfileEdit username={username} loginUser={loginUser} />}></Route>
-                    <Route path="/Feed"
-                           element={<Feed username={username} posts={posts} removePost={removePost} addComment={addComment} addSubComment={addSubComment}/>}></Route>
-                    <Route path="/CreatePost" element={<CreatePost username={username} addPost={addPost}/>}></Route>
-                </Routes>
-                <Footer/>
-            </BrowserRouter>
-        </div>
+        <UsernameContext.Provider value={username}>
+            <LoginUserContext.Provider value={loginUser}>
+                <div className="App">
+                    <BrowserRouter>
+                        <Header logoutUser={logoutUser}/>
+                        <Navbar logoutUser={logoutUser}/>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/Signin" element={<Signin/>}/>
+                            <Route path="/Profile"
+                                   element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
+                            <Route path="/Signup" element={<Signup/>}/>
+                            <Route path="Profile-Edit"
+                                   element={<ProfileEdit updateAllUserEntryEmails={updateAllUserEntryEmails}/>}></Route>
+                            <Route path="/Feed"
+                                   element={<Feed posts={posts} removePost={removePost} addComment={addComment}
+                                                  addSubComment={addSubComment}/>}></Route>
+                            <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
+                        </Routes>
+                        <Footer/>
+                    </BrowserRouter>
+                </div>
+            </LoginUserContext.Provider>
+        </UsernameContext.Provider>
     );
 }
 

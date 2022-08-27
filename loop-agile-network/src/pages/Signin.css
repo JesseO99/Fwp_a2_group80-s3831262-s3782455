@@ -7,9 +7,6 @@
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
-.signin-box {
-    align-items: center;
-}
 
 .submit-button {
     background-color: #1abc9c;
@@ -36,8 +33,10 @@
     text-align: left;
 }
 
+/*Sign In Error Message*/
 .Error-Message {
-    color: black;
+    margin-top: 12px;
+    color: white;
     background-color: crimson;
     width: 100%;
     border-color:brown;

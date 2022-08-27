@@ -1,13 +1,13 @@
 import Form from 'react-bootstrap/Form';
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import "./Signup.css";
 import {Button, Modal, Row} from "react-bootstrap";
 import Col from 'react-bootstrap/Col';
-// import avatar from '../img/avatar.png';
 import {useFormik} from 'formik';
 import {useNavigate} from "react-router-dom";
 import {isFutureDate} from "../util/Util";
 import {registerUser} from "../data/repository";
+import {LoginUserContext} from "../App";
 
 
 //Field Validations Using Formik
@@ -35,8 +35,9 @@ const validate = values => {
     return errors;
 };
 
-function Signup(props) {
+function Signup() {
 
+    const loginUser = useContext(LoginUserContext);
     const navigate = useNavigate();
     //useState for DialogBox
     const [show, setShow] = useState(false);
@@ -54,7 +55,7 @@ function Signup(props) {
         }, validate, onSubmit: values => {
             //Register New User, Save Login and Navigate to Feed Page
             registerUser(values);
-            props.loginUser(values.email);
+            loginUser(values.email);
             handleShow();
             // navigate("/Feed");
         },

@@ -1,17 +1,19 @@
-footer{
+footer {
     background-color: #1abc9c;
     position: fixed;
     bottom: 0px;
     width: 100%;
 }
+
 /*Footer Text*/
-#footer-title{
+#footer-title {
     color: #464952;
     padding: 10px;
     text-align: center;
 }
+
 /*Extra Row on Footer*/
-#footer-row{
+#footer-row {
     padding: 10px;
 }
 

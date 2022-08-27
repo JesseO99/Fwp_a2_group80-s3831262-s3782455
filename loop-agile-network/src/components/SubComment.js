@@ -9,10 +9,10 @@ import Form from "react-bootstrap/Form";
 const SubComment = ({subComment}) => {
 
 
-    return(
+    return (
         //Individual Sub-comment
         <div>
-            <div >
+            <div>
                 <Stack direction="horizontal" gap={2} className="subcomment-form ">
                     <p id="subcomment-author">{getNameByEmail(subComment.user)}</p>
                     <div id="subcomment-vr" className="vr"></div>

@@ -5,7 +5,7 @@
     text-align: left;
     align-items: center;
     padding: 2.5% 3% 3% 3%;
-    margin: 2% 10%;
+    margin: 1.5% 6%;
     border-radius: 20px;
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2);
     display:flex;
@@ -31,10 +31,18 @@
     width: 100%;
 }
 
+/*Delete button styling*/
 .delete-button {
     color:red;
 }
+/*Edit button styling*/
+.edit-button {
+    color: blue;
+}
 
-.edit-button:link {
-    color: black;
+/*Profile Heading Style*/
+#profile-heading {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 1% 0% 0% 7%;
 }
