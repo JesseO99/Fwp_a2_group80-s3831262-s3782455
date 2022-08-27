@@ -25,7 +25,7 @@ const validate = values => {
     return errors;
 };
 
-function CreatePost({ addPost}) {
+function CreatePost({addPost}) {
 
     const username = useContext(UsernameContext);
     const [show, setShow] = useState(false);
@@ -36,7 +36,7 @@ function CreatePost({ addPost}) {
         uploadImage,
         setImage,
         image,
-    } = useImageUpload(submit,uploadError);
+    } = useImageUpload(submit, uploadError);
 
     const formik = useFormik({
         initialValues: {}, validate, onSubmit: values => {
@@ -74,12 +74,12 @@ function CreatePost({ addPost}) {
         });
 
         //Scroll Window to top
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
         setShow(true);
         setToast({
-            title:"New Post Created!",
-            message:"Woohoo, Your post has been published!",
-            img:check
+            title: "New Post Created!",
+            message: "Woohoo, Your post has been published!",
+            img: check
         })
 
         //Clear Images from the Form
@@ -88,15 +88,15 @@ function CreatePost({ addPost}) {
 
     }
 
-    function uploadError(){
+    function uploadError() {
         //Scroll Window to top
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
 
         setShow(true);
         setToast({
-            title:"Post Not Created!",
-            message:"There was an error of publishing your post. Please try again later!",
-            img:warning
+            title: "Post Not Created!",
+            message: "There was an error of publishing your post. Please try again later!",
+            img: warning
         })
     }
 
@@ -107,18 +107,18 @@ function CreatePost({ addPost}) {
                     <p id="create-post-heading">Create Post</p>
                     <div className="posts-container">
                         <Form className="create-form" onSubmit={formik.handleSubmit}>
-                            <Form.Group className="mb-3" >
+                            <Form.Group className="mb-3">
                                 {/*Preview Image*/}
                                 {image !== "" && <>
                                     <div>
 
                                         <Stack className="align-items-center">
-                                            <p style={{fontWeight:"bold"}}>Preview</p>
+                                            <p style={{fontWeight: "bold"}}>Preview</p>
 
                                             <img src={(URL.createObjectURL(image))}
-                                             className="rounded img-fluid "
-                                             id="create-post-image"
-                                        />
+                                                 className="rounded img-fluid "
+                                                 id="create-post-image"
+                                            />
                                         </Stack>
                                     </div>
                                 </>
@@ -133,7 +133,7 @@ function CreatePost({ addPost}) {
                                 />
                                 {formik.errors.post ? <div>{formik.errors.post}</div> : null}
                             </Form.Group>
-                            <Form.Group  className="mb-3">
+                            <Form.Group className="mb-3">
                                 <img src={camera}
                                      style={{marginRight: "8px"}}
                                 />
@@ -141,10 +141,10 @@ function CreatePost({ addPost}) {
                                 <Form.Control
                                     id="image-field"
                                     type="file"
-                                              size="sm"
-                                              onChange={(e) => setImage(e.target.files[0])}/>
+                                    size="sm"
+                                    onChange={(e) => setImage(e.target.files[0])}/>
                             </Form.Group>
-                            <Form.Group className="mb-3" >
+                            <Form.Group className="mb-3">
                                 <Button id="publish-button"
                                         variant='primary'
                                         type="submit">

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getPostDetails, setPostDetails, initPosts} from "../data/repository";
+import {getPostDetails, setPostDetails} from "../data/repository";
 
 //Custom Hook for Posting and Commenting
 const usePost = () => {

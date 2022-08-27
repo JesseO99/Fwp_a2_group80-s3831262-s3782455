@@ -5,7 +5,7 @@ import "./Feed.css";
 import {Stack} from "react-bootstrap";
 import {UsernameContext} from "../App";
 
-function Feed({ posts, removePost, addComment, addSubComment}) {
+function Feed({posts, removePost, addComment, addSubComment}) {
 
     const username = useContext(UsernameContext);
 
@@ -15,24 +15,25 @@ function Feed({ posts, removePost, addComment, addSubComment}) {
     }
 
     return (<div class="container">
-            <Stack gap={3}>
-                <p id="feed-heading">Feed</p>
-                <div className="posts-container">
-                    <ul className="reverse-list">
-                        {/*Create a list of posts*/}
-                        {posts.map((post) => (
-                            <li >
-                                <Post post={post} removePost={removePost} addComment={addComment} addSubComment={addSubComment}/>
-                        </li> ))}
+        <Stack gap={3}>
+            <p id="feed-heading">Feed</p>
+            <div className="posts-container">
+                <ul className="reverse-list">
+                    {/*Create a list of posts*/}
+                    {posts.map((post) => (
+                        <li>
+                            <Post post={post} removePost={removePost} addComment={addComment}
+                                  addSubComment={addSubComment}/>
+                        </li>))}
 
-                    </ul>
+                </ul>
 
-                    {posts.length === 0 &&
-                        <p id="empty-feed">Wow! It's Nothing Yet. <br/> Create your first post now!</p>}
-                </div>
-            </Stack>
+                {posts.length === 0 &&
+                    <p id="empty-feed">Wow! It's Nothing Yet. <br/> Create your first post now!</p>}
+            </div>
+        </Stack>
 
-        </div>)
+    </div>)
 }
 
 export default Feed;

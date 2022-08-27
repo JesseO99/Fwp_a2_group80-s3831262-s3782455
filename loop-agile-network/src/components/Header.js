@@ -6,7 +6,6 @@ import React, {useContext} from "react";
 import {UsernameContext} from "../App";
 
 
-
 function Header(props) {
     const username = useContext(UsernameContext);
 
@@ -18,18 +17,19 @@ function Header(props) {
                     {/*Show Login Logout buttons based on login status*/}
                     {username === null ?
                         <>
-                        <Link to="/Signin">
-                        <Button variant="primary" className="btn" >Signin</Button>
-                        </Link>
-                        <Link to="/Signup">
-                        <Button variant="light" className="btn">Signup</Button>{''}
-                        </Link>
+                            <Link to="/Signin">
+                                <Button variant="primary" className="btn">Signin</Button>
+                            </Link>
+                            <Link to="/Signup">
+                                <Button variant="light" className="btn">Signup</Button>{''}
+                            </Link>
                         </>
                         :
                         <>
                             <Stack direction="horizontal" gap={2}>
-                            <p id="loggedin-user">{getNameByEmail(username)}</p>
-                            <Link to="/"><Button variant="light" className="btn" onClick={props.logoutUser}>Logout</Button></Link>
+                                <p id="loggedin-user">{getNameByEmail(username)}</p>
+                                <Link to="/"><Button variant="light" className="btn"
+                                                     onClick={props.logoutUser}>Logout</Button></Link>
                             </Stack>
                         </>
                     }

@@ -10,7 +10,7 @@ import {UsernameContext} from "../App";
 
 
 // Post component for individual post
-const Post = ({ post, removePost, addComment, addSubComment}) => {
+const Post = ({post, removePost, addComment, addSubComment}) => {
 
     const username = useContext(UsernameContext);
     const [comment, setComment] = useState('');
@@ -23,7 +23,7 @@ const Post = ({ post, removePost, addComment, addSubComment}) => {
             const newComment = {
                 user: username,
                 text: comment,
-                subComments:[]
+                subComments: []
             }
             addComment(post, newComment);
         }
@@ -70,16 +70,16 @@ const Post = ({ post, removePost, addComment, addSubComment}) => {
 
                     <p id="post-text">{post.post}</p>
                     <hr data-content="AND" className="hr-text"/>
-                    {post.comments.length>0 && <p className="comment-heading" >Comments</p>}
+                    {post.comments.length > 0 && <p className="comment-heading">Comments</p>}
 
                     {/*Create a list of comments*/}
                     <ul className="reverse-list">
-                    {post.comments.map((comment) => (
-                        <>
-                            <li>
-                                <Comment  comment={comment} post={post} addSubComment={addSubComment}/>
-                            </li>
-                        </>))}
+                        {post.comments.map((comment) => (
+                            <>
+                                <li>
+                                    <Comment comment={comment} post={post} addSubComment={addSubComment}/>
+                                </li>
+                            </>))}
                     </ul>
                     {/*Comment Section*/}
                     <Form onSubmit={sendComment}>
