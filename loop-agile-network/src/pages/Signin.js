@@ -85,10 +85,10 @@ function Signin (props) {
 
     return (
         <div>
-            <div className="signin-box">
+            <div className="container">
                 <div className="signin-form">
                     <h1>Sign In</h1>
-                    {failedAttempt && <p className="Error-Message"> Username/Password was incorrect please try again</p>}
+                    {failedAttempt && <p className="Error-Message"> Email/Password was incorrect please try again</p>}
                     <Form onSubmit={onSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
                             <Form.Label>Email Address</Form.Label>
