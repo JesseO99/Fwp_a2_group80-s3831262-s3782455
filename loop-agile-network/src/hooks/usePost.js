@@ -18,8 +18,9 @@ const usePost = () => {
 
     //Remove User's Posts
     const removeUserPosts = (user) => {
-        setPosts(posts.filter((post) => user !== post.email));
         removeComments(user);
+        setPosts(posts.filter((post) => user !== post.email));
+        
     };
 
     //Remove all Comments by User

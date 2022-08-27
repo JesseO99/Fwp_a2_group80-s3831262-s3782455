@@ -131,7 +131,8 @@ function initPosts() {
         }
     ]
 
-    return posts
+    // localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+    return posts;
 }
 
 // Returns a list of users stored in local storage
