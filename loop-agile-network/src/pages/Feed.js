@@ -1,10 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Navigate} from 'react-router-dom'
 import Post from "../components/Post";
 import "./Feed.css";
 import {Stack} from "react-bootstrap";
+import {UsernameContext} from "../App";
 
-function Feed({username, posts, removePost, addComment, addSubComment}) {
+function Feed({ posts, removePost, addComment, addSubComment}) {
+
+    const username = useContext(UsernameContext);
 
     //Authenticate and Redirect if not Logged in
     if (!username) {
@@ -19,7 +22,7 @@ function Feed({username, posts, removePost, addComment, addSubComment}) {
                         {/*Create a list of posts*/}
                         {posts.map((post) => (
                             <li >
-                                <Post username={username} post={post} removePost={removePost} addComment={addComment} addSubComment={addSubComment}/>
+                                <Post post={post} removePost={removePost} addComment={addComment} addSubComment={addSubComment}/>
                         </li> ))}
 
                     </ul>

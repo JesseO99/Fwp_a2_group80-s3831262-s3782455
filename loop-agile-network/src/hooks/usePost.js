@@ -38,6 +38,27 @@ const usePost = () => {
         setPosts(postList);
     };
 
+    //Update the email of  All Comments and Posts with a new email
+    const updateAllUserEntryEmails = (previousEmail, newEmail) => {
+        const postList = posts.slice();
+        for (let i = 0; i < postList.length; i++) {
+            for (let k = 0; k < postList[i].comments.length; k++) {
+                for (let j = 0; j < postList[i].comments[k].subComments.length; j++) {
+                    if (postList[i].comments[k].subComments[j].user === previousEmail) {
+                        postList[i].comments[k].subComments[j].user = newEmail;
+                    }
+                }
+                if (postList[i].comments[k].user === previousEmail) {
+                    postList[i].comments[k].user = newEmail;
+                }
+            }
+            if (postList[i].email === previousEmail) {
+                postList[i].email = newEmail;
+            }
+        }
+        setPosts(postList);
+    }
+
     //Add New Comment to the post
     const addComment = (currentPost, comment) => {
         const newPosts = posts.filter(item => item !== currentPost);
@@ -73,7 +94,8 @@ const usePost = () => {
         posts,
         addComment,
         addSubComment,
-        removeUserPosts
+        removeUserPosts,
+        updateAllUserEntryEmails
     }
 };
 

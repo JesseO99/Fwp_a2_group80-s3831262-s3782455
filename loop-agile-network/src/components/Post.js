@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import "./Post.css";
 import Form from "react-bootstrap/Form";
 import {Button, InputGroup, Row, Stack} from "react-bootstrap";
@@ -6,11 +6,13 @@ import Col from "react-bootstrap/Col";
 import {getNameByEmail} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
+import {UsernameContext} from "../App";
 
 
 // Post component for individual post
-const Post = ({username, post, removePost, addComment, addSubComment}) => {
+const Post = ({ post, removePost, addComment, addSubComment}) => {
 
+    const username = useContext(UsernameContext);
     const [comment, setComment] = useState('');
 
     const sendComment = (event) => {
@@ -75,7 +77,7 @@ const Post = ({username, post, removePost, addComment, addSubComment}) => {
                     {post.comments.map((comment) => (
                         <>
                             <li>
-                                <Comment username={username} comment={comment} post={post} addSubComment={addSubComment}/>
+                                <Comment  comment={comment} post={post} addSubComment={addSubComment}/>
                             </li>
                         </>))}
                     </ul>

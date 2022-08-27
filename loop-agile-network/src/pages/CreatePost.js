@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {Navigate} from 'react-router-dom'
 import {Button, Stack, ToastContainer} from "react-bootstrap";
 import "./CreatePost.css";
@@ -9,6 +9,7 @@ import Toast from 'react-bootstrap/Toast';
 import check from '../img/check.png'
 import warning from '../img/warning.png'
 import camera from "../img/camera.png";
+import {UsernameContext} from "../App";
 
 
 //Field Validations Using Formik
@@ -24,7 +25,9 @@ const validate = values => {
     return errors;
 };
 
-function CreatePost({username, addPost}) {
+function CreatePost({ addPost}) {
+
+    const username = useContext(UsernameContext);
     const [show, setShow] = useState(false);
     const [toast, setToast] = useState('');
 

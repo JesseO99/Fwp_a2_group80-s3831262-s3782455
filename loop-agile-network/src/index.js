@@ -8,7 +8,7 @@ import {initUsers, initPosts} from "./data/repository";
 
 // Initialise local storage data.
 initUsers();
-// initPosts();
+initPosts();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

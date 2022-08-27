@@ -1,22 +1,25 @@
 import "./Profile.css";
 import {getUserDetails, deleteUser} from "../data/repository"
 import {Navigate} from "react-router-dom";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import avatar from "../img/avatar.png";
 import Popup from "../components/Popup";
 import {Button, Container, Row, Stack} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
+import {UsernameContext} from "../App";
 
 
 function Profile(props) {
+    const username = useContext(UsernameContext);
+
     const [isOpen, setIsOpen] = useState(false);
 
     //Authenticate and Redirect if not Logged in
-    if (!props.username) {
+    if (!username) {
         return <Navigate to="/"/>
     }
-    const user = getUserDetails(props.username);
+    const user = getUserDetails(username);
 
     // Controls whether popup is vissible or invisible
     const togglePopup = () => {
@@ -66,7 +69,7 @@ function Profile(props) {
                             <Button onClick={togglePopup} variant="light">
                                 <Stack direction="horizontal" gap="2" style={{marginBottom: "-15px"}}>
                                     <p className="material-icons delete-button">delete</p>
-                                    <p>Delete Profile</p>
+                                    <p>Delete Account</p>
                                 </Stack>
                             </Button>
                         </div>

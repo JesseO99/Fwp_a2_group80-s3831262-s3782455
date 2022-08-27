@@ -2,13 +2,15 @@ import "./Comment.css";
 import {Accordion, Button, InputGroup, Stack} from "react-bootstrap";
 import avatar from "../img/avatar.png";
 import {getNameByEmail} from "../data/repository";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Form from "react-bootstrap/Form";
 import SubComment from "./SubComment";
+import {UsernameContext} from "../App";
 
 
-const Comment = ({username, comment, post, addSubComment}) => {
+const Comment = ({comment, post, addSubComment}) => {
 
+    const username = useContext(UsernameContext);
     const [subComment, setSubComment] = useState('');
     const [accordionStatus, setAccordionStatus] = useState("1");
 

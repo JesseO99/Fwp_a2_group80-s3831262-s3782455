@@ -3,12 +3,15 @@ import {Navigate, useNavigate} from "react-router-dom";
 import {getUserDetails, updateUser} from "../data/repository";
 import Form from 'react-bootstrap/Form';
 import {Button} from "react-bootstrap";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import avatar from "../img/avatar.png";
 import Popup from "../components/Popup"
+import {LoginUserContext, UsernameContext} from "../App";
 
-function ProfileEdit(props) {
-    const user = getUserDetails(props.username);
+function ProfileEdit({updateAllUserEntryEmails}) {
+    const username = useContext(UsernameContext);
+    const loginUser = useContext(LoginUserContext);
+    const user = getUserDetails(username);
     const [isOpen, setIsOpen] = useState(false);
     const [firstName, setFirstName] = useState(user.firstName);
     const [email, setEmail] = useState(user.email);
@@ -19,7 +22,7 @@ function ProfileEdit(props) {
     const navigate = useNavigate();
 
     //Authenticate and Redirect if not Logged in
-    if (!props.username) {
+    if (!username) {
         return <Navigate to="/" />
     }
 
@@ -65,10 +68,11 @@ function ProfileEdit(props) {
     function onSubmit ()
     {
         // Update email to new email
-        props.loginUser(email);
+        loginUser(email);
         // Update user details
         updateUser(user.email, email, firstName, lastName, user.img);
-
+        //Update all posts and comments with new email
+        updateAllUserEntryEmails(user.email, email);
         navigate("/Profile");
     }
     

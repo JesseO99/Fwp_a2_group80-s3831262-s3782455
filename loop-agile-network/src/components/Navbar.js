@@ -1,7 +1,10 @@
 import "./Navbar.css";
 import {Link} from "react-router-dom";
-function Navbar(props) {
+import {useContext} from "react";
+import {UsernameContext} from "../App";
 
+function Navbar(props) {
+    const username = useContext(UsernameContext);
 
     return (<nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
@@ -12,7 +15,7 @@ function Navbar(props) {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul className="navbar-nav">
-                    {props.username !== null && <>
+                    {username !== null && <>
                         <li className="nav-item">
                             <a className="nav-link" href="/">Home</a>
                         </li>

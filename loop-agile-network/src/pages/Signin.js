@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {
     getAuthentificationRequestData,
@@ -11,12 +11,16 @@ import {
 import {Button} from "react-bootstrap";
 import OneTimeCodeAuthentification, {sendEmail} from '../components/OneTimeCodeAuthentification';
 import "./Signin.css";
+import {LoginUserContext, UsernameContext} from "../App";
 
 
 
 
 
-function Signin (props) {
+function Signin () {
+
+    const loginUser = useContext(LoginUserContext);
+
     // Creates a Variable to track the email
     const [username, setLoggedInUsername] = useState();
     const navigate = useNavigate();
@@ -63,7 +67,7 @@ function Signin (props) {
         if (data.to_email === username && data.code === code)
         {
             
-            props.loginUser(username);
+            loginUser(username);
             setUser(username);
             removeAuthentificationRequestData();
             navigate("/Profile");
