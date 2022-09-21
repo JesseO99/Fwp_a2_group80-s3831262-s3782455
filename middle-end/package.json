@@ -1,0 +1,27 @@
+{
+  "name": "middle-end",
+  "version": "1.0.0",
+  "description": "This is a Node.js REST APIS using Express, Sequelize and Connecting to a Cloud MySQL.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "sequelize",
+    "mysql",
+    "rest",
+    "api"
+  ],
+  "author": "Jesse Osrecak and Kemila Sathsara Illankoon S Nawarathna Illankoon Wasala",
+  "license": "ISC",
+  "dependencies": {
+    "argon2": "^0.29.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.23.0"
+  }
+}

@@ -57,3 +57,5 @@ How to Upload Images to Cloudinary With a React App
 
 Google Fonts - Bellota 
 <https://fonts.googleapis.com/css?family=Bellota>
+
+Week8 - Activty1 for creating the middle-end
