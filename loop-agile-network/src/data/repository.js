@@ -1,5 +1,7 @@
 import {getDateToday} from "../util/Util";
-
+import axios from "axios";
+// --- Constants ----------------------------------------------------------------------------------
+const API_HOST = "http://localhost:4000";
 const USERS_KEY = "users";
 const USER_KEY = "email";
 const POSTS_KEY = "posts";
@@ -167,12 +169,14 @@ function registerUser(newUser) {
 }
 
 // Verifies User's email address and password matches what is stored in loal storage
-function verifyUser(email, password) {
-    const users = getUsers();
-    for (const user of users) {
-        if (email === user.email && password === user.password) {
-            return true;
-        }
+async function verifyUser(email, password) {
+    const response = await axios.get(API_HOST + "/api/users/login", {params: {email, password}})
+    const user = response.data;
+
+    if(user !== null)
+    {
+
+        return true;
     }
 
     return false;

@@ -14,6 +14,7 @@ import "./Signin.css";
 import {LoginUserContext} from "../App";
 
 
+
 function Signin() {
 
     const loginUser = useContext(LoginUserContext);
@@ -36,9 +37,9 @@ function Signin() {
     }
 
     // trigers when submitted currently saves value to local storage in future will need to Check Value First
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
-        const verifiedUser = verifyUser(username, password);
+        const verifiedUser = await verifyUser(username, password);
 
 
         if (verifiedUser) {

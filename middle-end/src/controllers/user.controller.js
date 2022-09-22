@@ -25,12 +25,16 @@ exports.login = async (req, res) => {
     },
     limit: 1
 })
-    user = user[0];
-
-    if(user === null || await argon2.verify(user.password, req.query.password) === false)
+    if(user.length === 0)
     {
         res.json(null);
-        console.log("LOGIN Failed");
+        return;
+    }
+    user = user[0];
+
+    if( await argon2.verify(user.password, req.query.password) === false)
+    {
+        res.json(null);
     }
     else
     {
