@@ -6,14 +6,12 @@ import Col from 'react-bootstrap/Col';
 import {useFormik} from 'formik';
 import {useNavigate} from "react-router-dom";
 import {isFutureDate} from "../util/Util";
-import {registerUser, setUser} from "../data/repository";
+import {getUserDetails, registerUser, setUser} from "../data/repository";
 import {LoginUserContext} from "../App";
-// import * as Console from "console";
-
 
 
 //Field Validations Using Formik
-const validate = values => {
+const validate =  async values => {
     const errors = {};
 
     //Validate Password
@@ -36,6 +34,8 @@ function Signup() {
     const navigate = useNavigate();
     //useState for DialogBox
     const [show, setShow] = useState(false);
+    const [showExistEmailError, setShowExistEmailError] = useState('none');
+
 
     //Handle Open/Close DialogBox
     const handleClose = () => {
@@ -48,18 +48,26 @@ function Signup() {
         initialValues: {
             firstName: '', lastName: '', email: '',
         }, validate, onSubmit: async values => {
-            //Register New User, Save Login and Navigate to Feed Page
-            const user = await registerUser(values);
 
-            if(user!=null){
-                setUser(user);
-                loginUser(user);
-                handleShow();
-            }else{
-                alert("Connection Error!");
+            //Email validation for existing emails
+            let validateEmail = await getUserDetails(values.email);
+            if (validateEmail.length > 0) {
+                setShowExistEmailError('block');
+            } else {
+                setShowExistEmailError('none');
+
+                //Register New User, Save Login and Navigate to Feed Page
+                const user = await registerUser(values);
+
+                if (user != null) {
+                    setUser(user);
+                    loginUser(user);
+                    handleShow();
+                } else {
+                    alert("Connection Error!");
+                }
+
             }
-
-            // navigate("/Feed");
         },
     });
 
@@ -133,6 +141,9 @@ function Signup() {
                                           value={formik.values.email}
                                           required
                             />
+                            <div className="alert alert-danger" role="alert" style={{display: showExistEmailError ,marginTop:"5px"}}>
+                                Email you entered is already registered!
+                            </div>
                         </Form.Group>
                     </Col>
                     <Col>

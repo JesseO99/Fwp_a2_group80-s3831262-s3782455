@@ -209,13 +209,12 @@ function removeUser() {
 }
 
 // Using the provided email it returns the users deails.
-function getUserDetails(email) {
-    const users = getUsers();
-    for (const user of users) {
-        if (user.email === email) {
-            return user;
-        }
-    }
+async function getUserDetails(email) {
+    const response = await axios.get(API_HOST + `/api/users/search/${email}`);
+    console.dir(response.data);
+    //Returns as an array
+    return response.data;
+
 }
 
 // Updates the users details

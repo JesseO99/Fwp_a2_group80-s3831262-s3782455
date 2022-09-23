@@ -1,3 +1,4 @@
+const controller = require("../controllers/user.controller");
 module.exports = (express, app) => {
     const controller = require("../controllers/user.controller.js");
     const router = express.Router();
@@ -13,6 +14,9 @@ module.exports = (express, app) => {
 
     // Create a new user.
     router.post("/", controller.create);
+
+    // Select a user by email.
+    router.get("/search/:email", controller.findUser);
 
     // Add routes to server.
     app.use("/api/users", router);
