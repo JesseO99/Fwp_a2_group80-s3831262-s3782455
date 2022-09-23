@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) =>
           allowNull: false  
         },
         post_content: {
-            type: DataTypes.STRING(600),
+            type: DataTypes.TEXT,
             allowNull: false
         }
+    },{
+        timestamps: false
     })

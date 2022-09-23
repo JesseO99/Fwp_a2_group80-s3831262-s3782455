@@ -26,5 +26,7 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.DATEONLY,
             defaultValue: DataTypes.NOW
         }
+    },{
+        timestamps: false
     })
 

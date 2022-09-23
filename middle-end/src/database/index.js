@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const config = require("./config.js");
+const argon2 = require("argon2");
 
 const db = {
     Op: Sequelize.Op
@@ -20,8 +21,8 @@ db.comment = require("./models/comment.js")(db.sequelize, DataTypes);
 db.sub_comment = require("./models/sub_comment.js")(db.sequelize, DataTypes);
 db.follow = require("./models/follow.js")(db.sequelize, DataTypes);
 db.user_reaction = require("./models/user_reaction.js")(db.sequelize, DataTypes);
-db.reaction_info = require("./models/reaction_info.js")(db.sequelize, DataTypes);
-db.content_type_info = require("./models/content_type_info.js")(db.sequelize, DataTypes);
+// db.reaction_info = require("./models/reaction_info.js")(db.sequelize, DataTypes);
+// db.content_type_info = require("./models/content_type_info.js")(db.sequelize, DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "user_id"} });
@@ -29,12 +30,39 @@ db.comment.belongsTo(db.post, {foreignKey: {name: "post_id"}});
 db.comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
 db.sub_comment.belongsTo(db.comment, {foreignKey: {name:"comment_id"}});
 db.sub_comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
-db.user_reaction.belongsTo(db.reaction_info , {foreignKey: "reaction_type_id"});
-db.user_reaction.belongsTo(db.content_type_info, {foreignKey: "content_type_id"});
+// db.user_reaction.belongsTo(db.reaction_info , {foreignKey: "reaction_type_id"});
+// db.user_reaction.belongsTo(db.content_type_info, {foreignKey: "content_type_id"});
 // Not Sure how to do the conent_id <-> user_reaction relationship as it is a collection of 3 different FK
 db.user_reaction.belongsTo(db.user, { foreignKey: { name: "user_id"} });
 db.follow.belongsTo(db.user, { foreignKey: { name: "follower_id"} });
 db.follow.belongsTo(db.user, { foreignKey: { name: "followed_id"} });
+
+//Polymorphic Associations
+db.post.hasMany(db.user_reaction, {
+    foreignKey: 'content_id',
+    constraints: false,
+    scope: {
+        content_type: 'p' //post
+    }
+});
+db.comment.hasMany(db.user_reaction, {
+    foreignKey: 'content_id',
+    constraints: false,
+    scope: {
+        content_type: 'c' //comment
+    }
+});
+db.sub_comment.hasMany(db.user_reaction, {
+    foreignKey: 'content_id',
+    constraints: false,
+    scope: {
+        content_type: 'sc' //sub comment
+    }
+});
+db.user_reaction.belongsTo(db.post, { foreignKey: 'content_id', constraints: false });
+db.user_reaction.belongsTo(db.comment, { foreignKey: 'content_id', constraints: false });
+db.user_reaction.belongsTo(db.sub_comment, { foreignKey: 'content_id', constraints: false });
+
 
 
 
@@ -66,6 +94,19 @@ async function seedData() {
 
     let hash = await argon2.hash("abc123", { type: argon2.argon2id });
     await db.user.create({ email: "rue@gmail.com", password: hash, first_name: "Rue", last_name : "Minmi" });
+
+    let hash2 = await argon2.hash("abc123", { type: argon2.argon2id });
+    await db.user.create({ email: "kat.kemi@gmail.com", password: hash, first_name: "Kemila", last_name : "Illankoon" });
+
+    //Example of Post and Reaction (Polymorphic Association - manually)
+    const post = await db.post.create({ user_id: 1, post_content:"Hello" });
+    const reaction = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:0, // 0 = Like, 1 = Dislike
+        content_id:post.post_id,
+        content_type:"p" // p= post, c = comment, sc = sub comment
+
+    });
 
     // hash = await argon2.hash("def456", { type: argon2.argon2id });
     // await db.user.create({ username: "shekhar", password_hash: hash, first_name: "Shekhar", last_name : "Kalra" });

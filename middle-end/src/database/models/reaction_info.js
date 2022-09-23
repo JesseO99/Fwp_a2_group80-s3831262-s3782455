@@ -9,4 +9,6 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(32),
             allowNull: false
         }
+    },{
+        timestamps: false
     })
