@@ -2,7 +2,7 @@ import {getDateToday} from "../util/Util";
 import axios from "axios";
 import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
-
+const USER_ID_KEY = "user_id";
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -174,7 +174,8 @@ async function registerUser(user) {
 
 // Verifies User's email address and password matches what is stored in loal storage
 async function verifyUser(email, password) {
-    console.log(email, " ", password);
+    console.log(API_HOST + "/users/login", email, " ", password);
+
     const response = await axios.get(API_HOST + "/users/login", {params: {email, password}})
     const user = response.data;
 

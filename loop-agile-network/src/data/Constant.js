@@ -1,7 +1,6 @@
-const API_HOST = "http://localhost:4000";
-const USER_KEY = "email";
+const API_HOST = "http://localhost:4000/api";
 const USERS_KEY = "users";
-
+const USER_KEY = "user";
 const POSTS_KEY = "posts";
 const AUTH_DATA_KEY = 'MFA';
 
