@@ -20,6 +20,7 @@ export const LoginUserContext = createContext();
 
 function App() {
     const [user, setUser] = useState(getUser); //We save current user locally instead of username now to avoid
+
     //Call usePost custom hook
     const {
         addPost,

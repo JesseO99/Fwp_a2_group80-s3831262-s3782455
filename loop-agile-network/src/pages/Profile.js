@@ -13,13 +13,14 @@ import {UserContext} from "../App";
 function Profile(props) {
     const user = useContext(UserContext);
 
+
     const [isOpen, setIsOpen] = useState(false);
 
     //Authenticate and Redirect if not Logged in
     if (!user) {
         return <Navigate to="/"/>
     }
-    // const user = getUserDetails(username);
+
 
     // Controls whether popup is vissible or invisible
     const togglePopup = () => {
@@ -43,7 +44,7 @@ function Profile(props) {
             <p id="profile-heading">Profile</p>
 
             <div className="profile-body">
-                {/*<img className="Profile-Pic" src={user.img.length === 0 ? avatar : user.img} alt="Profile"></img>*/}
+                {/* <img className="Profile-Pic" src={user.img.length === 0 ? avatar : user.img} alt="Profile"></img> */}
                 <img className="Profile-Pic" src={avatar} alt="Profile"></img>
                 <div className="text-container">
                     <br/>
@@ -51,7 +52,6 @@ function Profile(props) {
                     <br/>
                     <h5>About Me</h5>
                     <p>
-                        {/*Date of Birth: {user.dob}<br></br>*/}
                         Joined: {user.date_joined} <br></br>
                         Email: {user.email} <br></br>
 

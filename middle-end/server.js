@@ -13,10 +13,8 @@ app.use(express.json());
 // Add CORS suport.
 app.use(cors());
 
-// Simple Hello World route.
-app.get("/", (req, res) => {
-    res.json({ message: "Hello World!" });
-  });
+// Routes
+require("./src/routes/user.routes.js")(express, app);
 
 // Add user routes.
 require("./src/routes/user.routes.js")(express,app);

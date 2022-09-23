@@ -3,6 +3,7 @@ import axios from "axios";
 import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
 
+
 // Initialises user data, if no user data create user data
 function initUsers() {
     if (localStorage.getItem(USERS_KEY) !== null) return;
@@ -172,12 +173,14 @@ async function registerUser(user) {
 }
 
 // Verifies User's email address and password matches what is stored in loal storage
-function verifyUser(email, password) {
-    const users = getUsers();
-    for (const user of users) {
-        if (email === user.email && password === user.password) {
-            return true;
-        }
+async function verifyUser(email, password) {
+    console.log(email, " ", password);
+    const response = await axios.get(API_HOST + "/users/login", {params: {email, password}})
+    const user = response.data;
+
+    if(user !== null)
+    {
+        return true;
     }
 
     return false;
@@ -188,27 +191,54 @@ function setUser(user) {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
+// Sets the logged in user by saving the user's id in local storage
+function setUserId(user) {
+    localStorage.setItem(USER_KEY, user);
+}
+
+// Snends a get request to middle-end returning the user from the DBMS
+async function getUserByEmail(email) {
+    const response = await axios.get(API_HOST + "/users/user_email", {params: {email}});
+    const user = response.data
+    return user;
+}
+
+
 // Gets the logged in user by accessing the data in local storage
 function getUser() {
+
     const user = JSON.parse(localStorage.getItem(USER_KEY));
+    return user;
+}
+
+
+async function getUserById(user_id)
+{
+    const response = await axios.get(API_HOST + "/users/user", {params: {user_id}});
+    const user = response.data
     return user;
 }
 
 // returns if the user is logged in.
 function isLoggedIn() {
-    if (localStorage.getItem(USER_KEY) !== null) {
+    if (localStorage.getItem(USER_ID_KEY) !== null) {
         return true;
     } else {
         return false;
     }
 }
 
+
 // Removes the user from local storage essenitally logging them out of the system
 function removeUser() {
-    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(USER_ID_KEY);
 }
 
 // Using the provided email it returns the users deails.
+/**
+ * 
+ * @Deprecated This is for local storage implementation use getUserByEmail(email) instead
+ */
 function getUserDetails(email) {
     const users = getUsers();
     for (const user of users) {
@@ -308,6 +338,9 @@ export {
     deleteUser,
     setAuthentificationRequestData,
     getAuthentificationRequestData,
-    removeAuthentificationRequestData
+    removeAuthentificationRequestData,
+    setUserId,
+    getUserByEmail,
+    getUserById
 
 }

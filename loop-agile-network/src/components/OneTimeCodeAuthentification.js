@@ -12,7 +12,7 @@ function sendEmail(e) {
     const TEMPLATE_ID = 'template_i4d4on8';
     // Bellow line is disabled due to not sending emails every time uncomment line for email functionality. 
     // You can check local storage under MFA key to get the necesarry login code
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, e, API_KEY);
+    // emailjs.send(SERVICE_ID, TEMPLATE_ID, e, API_KEY);
 }
 
 function OneTimeCodeAuthentification(props) {
