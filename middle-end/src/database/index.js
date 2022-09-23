@@ -1,6 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const config = require("./config.js");
 const argon2 = require("argon2");
+const Console = require("console");
 
 const db = {
     Op: Sequelize.Op
@@ -12,7 +13,6 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
     dialect: config.DIALECT
   });
   
-
 // Include models. (Models = Tables you are instansiating in the DB)
 // EG:
 db.user = require("./models/user.js")(db.sequelize, DataTypes);

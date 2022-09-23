@@ -2,10 +2,10 @@ const db = require("../database");
 const argon2 = require("argon2");
 
 
-
 // Select all users from the database.
 exports.all = async (req, res) => {
     const users = await db.user.findAll();
+    console.log(req);
 
     res.json(users);
 };
@@ -41,6 +41,19 @@ exports.create = async (req, res) => {
     });
 
     res.json(user);
+};
+
+
+exports.findUser = async (req,res) =>{
+    console.log(req.params.email);
+    const user = await db.user.findAll({
+        where: {
+            email: req.params.email
+        }
+    });
+
+    res.json(user);
+
 };
 
 // Returns a user with a matching email

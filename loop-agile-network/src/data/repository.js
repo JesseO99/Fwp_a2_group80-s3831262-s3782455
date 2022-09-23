@@ -140,34 +140,9 @@ function getUsers() {
     return JSON.parse(data);
 }
 
-//Register new user into the system
-// function registerUser(newUser) {
-//     const currentUsers = getUsers();
-//     //Create new user
-//     const user = {
-//         firstName: newUser.firstName,
-//         lastName: newUser.lastName,
-//         email: newUser.email,
-//         dob: newUser.dob,
-//         password: newUser.password,
-//         date_joined: getDateToday(),
-//         img: ''
-//     }
-//     //Add new user to the current list
-//     if (currentUsers !== null) {
-//         currentUsers.push(user);
-//         localStorage.setItem(USERS_KEY, JSON.stringify(currentUsers));
-//     } else {
-//         let users = [user];
-//         localStorage.setItem(USERS_KEY, JSON.stringify(users));
-//     }
-//     //Login with registered new user
-//     setUser(user.email);
-// }
-
 
 async function registerUser(user) {
-    const response = await axios.post(API_HOST + "/api/users", user);
+    const response = await axios.post(API_HOST + "/users", user);
 
     return response.data;
 }
@@ -236,18 +211,27 @@ function removeUser() {
 }
 
 // Using the provided email it returns the users deails.
+
+async function getUserDetails(email)
+{
+    const response = await axios.get(API_HOST + `/users/search/${email}`);
+    console.dir(response.data);
+    //Returns as an array
+    return response.data;
+
+}
 /**
  * 
  * @Deprecated This is for local storage implementation use getUserByEmail(email) instead
  */
-function getUserDetails(email) {
-    const users = getUsers();
-    for (const user of users) {
-        if (user.email === email) {
-            return user;
-        }
-    }
-}
+// function getUserDetails(email) {
+//     const users = getUsers();
+//     for (const user of users) {
+//         if (user.email === email) {
+//             return user;
+//         }
+//     }
+// }
 
 // Updates the users details
 function updateUser(previousEmail, email, firstName, lastName, src) {

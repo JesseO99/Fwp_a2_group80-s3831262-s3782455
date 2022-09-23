@@ -1,3 +1,4 @@
+const controller = require("../controllers/user.controller");
 module.exports = (express, app) => {
 
   const controller = require("../controllers/user.controller.js");
@@ -16,7 +17,6 @@ module.exports = (express, app) => {
   router.post("/", controller.create);
 
 
-
   // Returns the user with the corresponding email
   router.get("/user_email", controller.one_email);
 
@@ -24,7 +24,10 @@ module.exports = (express, app) => {
   router.get("/user", controller.one_key);
 
 
-  // // Add routes to server.
-  app.use("/api/users", router);
+    // Select a user by email.
+    router.get("/search/:email", controller.findUser);
+
+    // Add routes to server.
+    app.use("/api/users", router);
 
 };

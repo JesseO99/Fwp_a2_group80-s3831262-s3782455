@@ -13,9 +13,6 @@ app.use(express.json());
 // Add CORS suport.
 app.use(cors());
 
-// Routes
-require("./src/routes/user.routes.js")(express, app);
-
 // Add user routes.
 require("./src/routes/user.routes.js")(express,app);
 // require("./src/routes/post.routes.js")(express, app);
