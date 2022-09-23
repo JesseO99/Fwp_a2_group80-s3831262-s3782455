@@ -6,6 +6,7 @@ import {
     removeAuthentificationRequestData,
     setAuthentificationRequestData,
     setUser,
+    getUserByEmail,
     verifyUser
 } from "../data/repository";
 import {Button} from "react-bootstrap";
@@ -54,13 +55,13 @@ function Signin() {
 
 
     // Authenticates MFA request
-    function authenticate(code) {
+    async function authenticate(code) {
         const data = getAuthentificationRequestData();
 
         if (data.to_email === username && data.code === code) {
-
-            loginUser(username);
-            setUser(username);
+            const user = await getUserByEmail(username);
+            loginUser(user);
+            setUser(user);
             removeAuthentificationRequestData();
             navigate("/Profile");
         } else {

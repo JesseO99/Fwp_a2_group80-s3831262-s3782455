@@ -19,7 +19,7 @@ export const UsernameContext = createContext();
 export const LoginUserContext = createContext();
 
 function App() {
-    const [username, setUsername] = useState(getUser);
+    const [username, setUser] = useState(getUser);
     //Call usePost custom hook
     const {
         addPost,
@@ -32,13 +32,13 @@ function App() {
     } = usePost();
 
 
-    const loginUser = (username) => {
-        setUsername(username);
+    const loginUser = (user) => {
+        setUser(user);
     }
 
     const logoutUser = () => {
         removeUser();
-        setUsername(null);
+        setUser(null);
     }
 
 
