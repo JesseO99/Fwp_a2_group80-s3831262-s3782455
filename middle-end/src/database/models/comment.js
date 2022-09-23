@@ -19,4 +19,6 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(600),
             allowNull: false
         }
+    },{
+        timestamps: false
     })

@@ -9,16 +9,21 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        post_id: {
+
+        // 0 - Like, 1 - Dislike
+        reaction_type: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        reaction_type_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        content_type_id: {
+        content_id: {
             type: DataTypes.INTEGER,
             allowNullL: false
+        },
+        content_type: {
+            type: DataTypes.STRING,
+            allowNullL: false
         }
+
+    },{
+        timestamps: false
     })
