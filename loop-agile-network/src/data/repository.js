@@ -2,6 +2,7 @@ import {getDateToday} from "../util/Util";
 import axios from "axios";
 import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
+const USER_ID_KEY = "user_id";
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -139,45 +140,23 @@ function getUsers() {
     return JSON.parse(data);
 }
 
-//Register new user into the system
-// function registerUser(newUser) {
-//     const currentUsers = getUsers();
-//     //Create new user
-//     const user = {
-//         firstName: newUser.firstName,
-//         lastName: newUser.lastName,
-//         email: newUser.email,
-//         dob: newUser.dob,
-//         password: newUser.password,
-//         date_joined: getDateToday(),
-//         img: ''
-//     }
-//     //Add new user to the current list
-//     if (currentUsers !== null) {
-//         currentUsers.push(user);
-//         localStorage.setItem(USERS_KEY, JSON.stringify(currentUsers));
-//     } else {
-//         let users = [user];
-//         localStorage.setItem(USERS_KEY, JSON.stringify(users));
-//     }
-//     //Login with registered new user
-//     setUser(user.email);
-// }
-
 
 async function registerUser(user) {
-    const response = await axios.post(API_HOST + "/api/users", user);
+    const response = await axios.post(API_HOST + "/users", user);
 
     return response.data;
 }
 
 // Verifies User's email address and password matches what is stored in loal storage
-function verifyUser(email, password) {
-    const users = getUsers();
-    for (const user of users) {
-        if (email === user.email && password === user.password) {
-            return true;
-        }
+async function verifyUser(email, password) {
+    console.log(API_HOST + "/users/login", email, " ", password);
+
+    const response = await axios.get(API_HOST + "/users/login", {params: {email, password}})
+    const user = response.data;
+
+    if(user !== null)
+    {
+        return true;
     }
 
     return false;
@@ -188,34 +167,71 @@ function setUser(user) {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
+// Sets the logged in user by saving the user's id in local storage
+function setUserId(user) {
+    localStorage.setItem(USER_KEY, user);
+}
+
+// Snends a get request to middle-end returning the user from the DBMS
+async function getUserByEmail(email) {
+    const response = await axios.get(API_HOST + "/users/user_email", {params: {email}});
+    const user = response.data
+    return user;
+}
+
+
 // Gets the logged in user by accessing the data in local storage
 function getUser() {
+
     const user = JSON.parse(localStorage.getItem(USER_KEY));
+    return user;
+}
+
+
+async function getUserById(user_id)
+{
+    const response = await axios.get(API_HOST + "/users/user", {params: {user_id}});
+    const user = response.data
     return user;
 }
 
 // returns if the user is logged in.
 function isLoggedIn() {
-    if (localStorage.getItem(USER_KEY) !== null) {
+    if (localStorage.getItem(USER_ID_KEY) !== null) {
         return true;
     } else {
         return false;
     }
 }
 
+
 // Removes the user from local storage essenitally logging them out of the system
 function removeUser() {
-    localStorage.removeItem(USER_KEY);
+    localStorage.removeItem(USER_ID_KEY);
 }
 
 // Using the provided email it returns the users deails.
-async function getUserDetails(email) {
-    const response = await axios.get(API_HOST + `/api/users/search/${email}`);
+
+async function getUserDetails(email)
+{
+    const response = await axios.get(API_HOST + `/users/search/${email}`);
     console.dir(response.data);
     //Returns as an array
     return response.data;
 
 }
+/**
+ * 
+ * @Deprecated This is for local storage implementation use getUserByEmail(email) instead
+ */
+// function getUserDetails(email) {
+//     const users = getUsers();
+//     for (const user of users) {
+//         if (user.email === email) {
+//             return user;
+//         }
+//     }
+// }
 
 // Updates the users details
 function updateUser(previousEmail, email, firstName, lastName, src) {
@@ -307,6 +323,9 @@ export {
     deleteUser,
     setAuthentificationRequestData,
     getAuthentificationRequestData,
-    removeAuthentificationRequestData
+    removeAuthentificationRequestData,
+    setUserId,
+    getUserByEmail,
+    getUserById
 
 }

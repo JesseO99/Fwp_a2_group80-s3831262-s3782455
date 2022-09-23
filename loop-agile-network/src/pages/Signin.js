@@ -6,12 +6,14 @@ import {
     removeAuthentificationRequestData,
     setAuthentificationRequestData,
     setUser,
+    getUserByEmail,
     verifyUser
 } from "../data/repository";
 import {Button} from "react-bootstrap";
 import OneTimeCodeAuthentification, {sendEmail} from '../components/OneTimeCodeAuthentification';
 import "./Signin.css";
 import {LoginUserContext} from "../App";
+
 
 
 function Signin() {
@@ -36,9 +38,9 @@ function Signin() {
     }
 
     // trigers when submitted currently saves value to local storage in future will need to Check Value First
-    function onSubmit(e) {
+    async function onSubmit(e) {
         e.preventDefault();
-        const verifiedUser = verifyUser(username, password);
+        const verifiedUser = await verifyUser(username, password);
 
 
         if (verifiedUser) {
@@ -53,13 +55,13 @@ function Signin() {
 
 
     // Authenticates MFA request
-    function authenticate(code) {
+    async function authenticate(code) {
         const data = getAuthentificationRequestData();
 
         if (data.to_email === username && data.code === code) {
-
-            loginUser(username);
-            setUser(username);
+            const user = await getUserByEmail(username);
+            loginUser(user);
+            setUser(user);
             removeAuthentificationRequestData();
             navigate("/Profile");
         } else {
