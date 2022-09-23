@@ -9,7 +9,7 @@ import Toast from 'react-bootstrap/Toast';
 import check from '../img/check.png'
 import warning from '../img/warning.png'
 import camera from "../img/camera.png";
-import {UsernameContext} from "../App";
+import {UserContext} from "../App";
 
 
 //Field Validations Using Formik
@@ -27,7 +27,7 @@ const validate = values => {
 
 function CreatePost({addPost}) {
 
-    const username = useContext(UsernameContext);
+    const username = useContext(UserContext);
     const [show, setShow] = useState(false);
     const [toast, setToast] = useState('');
 

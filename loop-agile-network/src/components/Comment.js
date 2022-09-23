@@ -5,12 +5,12 @@ import {getNameByEmail} from "../data/repository";
 import React, {useContext, useState} from "react";
 import Form from "react-bootstrap/Form";
 import SubComment from "./SubComment";
-import {UsernameContext} from "../App";
+import {UserContext} from "../App";
 
 
 const Comment = ({comment, post, addSubComment}) => {
 
-    const username = useContext(UsernameContext);
+    const username = useContext(UserContext);
     const [subComment, setSubComment] = useState('');
     const [accordionStatus, setAccordionStatus] = useState("1");
 

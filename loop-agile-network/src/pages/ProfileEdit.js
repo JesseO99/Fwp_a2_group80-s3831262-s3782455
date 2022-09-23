@@ -6,10 +6,10 @@ import {Button} from "react-bootstrap";
 import {useContext, useState} from "react";
 import avatar from "../img/avatar.png";
 import Popup from "../components/Popup"
-import {LoginUserContext, UsernameContext} from "../App";
+import {LoginUserContext, UserContext} from "../App";
 
 function ProfileEdit({updateAllUserEntryEmails}) {
-    const username = useContext(UsernameContext);
+    const username = useContext(UserContext);
     const loginUser = useContext(LoginUserContext);
     const user = getUserDetails(username);
     const [isOpen, setIsOpen] = useState(false);

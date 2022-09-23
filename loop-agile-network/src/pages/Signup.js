@@ -6,20 +6,15 @@ import Col from 'react-bootstrap/Col';
 import {useFormik} from 'formik';
 import {useNavigate} from "react-router-dom";
 import {isFutureDate} from "../util/Util";
-import {registerUser} from "../data/repository";
+import {registerUser, setUser} from "../data/repository";
 import {LoginUserContext} from "../App";
+// import * as Console from "console";
+
 
 
 //Field Validations Using Formik
 const validate = values => {
     const errors = {};
-
-    //Validate Date of Birth
-    if (!values.dob) {
-        errors.dob = 'Required';
-    } else if (isFutureDate(values.dob)) {
-        errors.dob = 'Date of Birth cannot be a future date';
-    }
 
     //Validate Password
     if (!values.password) {
@@ -52,11 +47,18 @@ function Signup() {
     const formik = useFormik({
         initialValues: {
             firstName: '', lastName: '', email: '',
-        }, validate, onSubmit: values => {
+        }, validate, onSubmit: async values => {
             //Register New User, Save Login and Navigate to Feed Page
-            registerUser(values);
-            loginUser(values.email);
-            handleShow();
+            const user = await registerUser(values);
+
+            if(user!=null){
+                setUser(user);
+                loginUser(user);
+                handleShow();
+            }else{
+                alert("Connection Error!");
+            }
+
             // navigate("/Feed");
         },
     });
@@ -96,32 +98,6 @@ function Signup() {
                     </Col>
                 </Row>
                 <Row className="mb-3">
-                    <Col>
-                        <Form.Group as={Col} controlId="formGridEmail">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email"
-                                          placeholder="Enter email"
-                                          id="email"
-                                          onChange={formik.handleChange}
-                                          value={formik.values.email}
-                                          required
-                            />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group as={Col} controlId="formGridDOB">
-                            <Form.Label>Date of Birth</Form.Label>
-                            <Form.Control type="date"
-                                          id='dob'
-                                          onChange={formik.handleChange}
-                                          value={formik.values.dob}
-                                          required
-                            />
-                            {formik.errors.dob ? <div>{formik.errors.dob}</div> : null}
-                        </Form.Group>
-                    </Col>
-                </Row>
-                <Row className="mb-3">
 
                     <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>Password</Form.Label>
@@ -146,7 +122,23 @@ function Signup() {
                         {formik.errors.rePassword ? <div>{formik.errors.rePassword}</div> : null}
                     </Form.Group>
                 </Row>
+                <Row className="mb-3">
+                    <Col>
+                        <Form.Group as={Col} controlId="formGridEmail">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email"
+                                          placeholder="Enter email"
+                                          id="email"
+                                          onChange={formik.handleChange}
+                                          value={formik.values.email}
+                                          required
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col>
 
+                    </Col>
+                </Row>
                 <Form.Group className="mb-3" id="formGridCheckbox">
                     <Form.Check type="checkbox"
                                 label=" Confirm that you agree to our Terms & Privacy Policy."

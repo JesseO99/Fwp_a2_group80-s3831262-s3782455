@@ -6,13 +6,13 @@ import Col from "react-bootstrap/Col";
 import {getNameByEmail} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
-import {UsernameContext} from "../App";
+import {UserContext} from "../App";
 
 
 // Post component for individual post
 const Post = ({post, removePost, addComment, addSubComment}) => {
 
-    const username = useContext(UsernameContext);
+    const username = useContext(UserContext);
     const [comment, setComment] = useState('');
 
     const sendComment = (event) => {

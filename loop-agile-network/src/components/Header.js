@@ -3,11 +3,11 @@ import {Button, Stack} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {getNameByEmail} from "../data/repository";
 import React, {useContext} from "react";
-import {UsernameContext} from "../App";
+import {UserContext} from "../App";
 
 
 function Header(props) {
-    const username = useContext(UsernameContext);
+    const user = useContext(UserContext);
 
     return (
         <div className="navbar">
@@ -15,7 +15,7 @@ function Header(props) {
                 <Link className="heading" to="/">LAN</Link>
                 <div className="login-logout-buttons">
                     {/*Show Login Logout buttons based on login status*/}
-                    {username === null ?
+                    {user === null ?
                         <>
                             <Link to="/Signin">
                                 <Button variant="primary" className="btn">Signin</Button>
@@ -27,7 +27,7 @@ function Header(props) {
                         :
                         <>
                             <Stack direction="horizontal" gap={2}>
-                                <p id="loggedin-user">{getNameByEmail(username)}</p>
+                                <p id="loggedin-user">{user.first_name}</p>
                                 <Link to="/"><Button variant="light" className="btn"
                                                      onClick={props.logoutUser}>Logout</Button></Link>
                             </Stack>

@@ -15,11 +15,11 @@ import ProfileEdit from './pages/ProfileEdit';
 import usePost from "./hooks/usePost";
 
 //Create and pass contexts for multiple usage instances
-export const UsernameContext = createContext();
+export const UserContext = createContext();
 export const LoginUserContext = createContext();
 
 function App() {
-    const [username, setUsername] = useState(getUser);
+    const [user, setUser] = useState(getUser); //We save current user locally instead of username now to avoid
     //Call usePost custom hook
     const {
         addPost,
@@ -32,18 +32,18 @@ function App() {
     } = usePost();
 
 
-    const loginUser = (username) => {
-        setUsername(username);
+    const loginUser = (user) => {
+        setUser(user);
     }
 
     const logoutUser = () => {
         removeUser();
-        setUsername(null);
+        setUser(null);
     }
 
 
     return (
-        <UsernameContext.Provider value={username}>
+        <UserContext.Provider value={user}>
             <LoginUserContext.Provider value={loginUser}>
                 <div className="App">
                     <BrowserRouter>
@@ -66,7 +66,7 @@ function App() {
                     </BrowserRouter>
                 </div>
             </LoginUserContext.Provider>
-        </UsernameContext.Provider>
+        </UserContext.Provider>
     );
 }
 
