@@ -3,11 +3,11 @@ import {Navigate} from 'react-router-dom'
 import Post from "../components/Post";
 import "./Feed.css";
 import {Stack} from "react-bootstrap";
-import {UsernameContext} from "../App";
+import {UserContext} from "../App";
 
 function Feed({posts, removePost, addComment, addSubComment}) {
 
-    const username = useContext(UsernameContext);
+    const username = useContext(UserContext);
 
     //Authenticate and Redirect if not Logged in
     if (!username) {

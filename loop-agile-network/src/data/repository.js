@@ -1,9 +1,7 @@
 import {getDateToday} from "../util/Util";
+import axios from "axios";
+import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
-const USERS_KEY = "users";
-const USER_KEY = "email";
-const POSTS_KEY = "posts";
-const AUTH_DATA_KEY = 'MFA';
 
 // Initialises user data, if no user data create user data
 function initUsers() {
@@ -142,28 +140,35 @@ function getUsers() {
 }
 
 //Register new user into the system
-function registerUser(newUser) {
-    const currentUsers = getUsers();
-    //Create new user
-    const user = {
-        firstName: newUser.firstName,
-        lastName: newUser.lastName,
-        email: newUser.email,
-        dob: newUser.dob,
-        password: newUser.password,
-        date_joined: getDateToday(),
-        img: ''
-    }
-    //Add new user to the current list
-    if (currentUsers !== null) {
-        currentUsers.push(user);
-        localStorage.setItem(USERS_KEY, JSON.stringify(currentUsers));
-    } else {
-        let users = [user];
-        localStorage.setItem(USERS_KEY, JSON.stringify(users));
-    }
-    //Login with registered new user
-    setUser(user.email);
+// function registerUser(newUser) {
+//     const currentUsers = getUsers();
+//     //Create new user
+//     const user = {
+//         firstName: newUser.firstName,
+//         lastName: newUser.lastName,
+//         email: newUser.email,
+//         dob: newUser.dob,
+//         password: newUser.password,
+//         date_joined: getDateToday(),
+//         img: ''
+//     }
+//     //Add new user to the current list
+//     if (currentUsers !== null) {
+//         currentUsers.push(user);
+//         localStorage.setItem(USERS_KEY, JSON.stringify(currentUsers));
+//     } else {
+//         let users = [user];
+//         localStorage.setItem(USERS_KEY, JSON.stringify(users));
+//     }
+//     //Login with registered new user
+//     setUser(user.email);
+// }
+
+
+async function registerUser(user) {
+    const response = await axios.post(API_HOST + "/api/users", user);
+
+    return response.data;
 }
 
 // Verifies User's email address and password matches what is stored in loal storage
@@ -179,13 +184,13 @@ function verifyUser(email, password) {
 }
 
 // Sets the logged in user by saving the user's email in local storage
-function setUser(email) {
-    localStorage.setItem(USER_KEY, email);
+function setUser(user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
 }
 
 // Gets the logged in user by accessing the data in local storage
 function getUser() {
-    const user = localStorage.getItem(USER_KEY);
+    const user = JSON.parse(localStorage.getItem(USER_KEY));
     return user;
 }
 
