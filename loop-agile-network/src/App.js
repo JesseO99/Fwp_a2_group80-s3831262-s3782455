@@ -29,7 +29,6 @@ function App() {
         addComment,
         addSubComment,
         removeUserPosts,
-        updateAllUserEntryEmails
     } = usePost();
 
 
@@ -54,10 +53,10 @@ function App() {
                             <Route path="/" element={<Home/>}/>
                             <Route path="/Signin" element={<Signin/>}/>
                             <Route path="/Profile"
-                                   element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
+                                   element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts} />}/>
                             <Route path="/Signup" element={<Signup/>}/>
                             <Route path="Profile-Edit"
-                                   element={<ProfileEdit updateAllUserEntryEmails={updateAllUserEntryEmails}/>}></Route>
+                                   element={<ProfileEdit loginUser={loginUser}/>}></Route>
                             <Route path="/Feed"
                                    element={<Feed posts={posts} removePost={removePost} addComment={addComment}
                                                   addSubComment={addSubComment}/>}></Route>

@@ -1,11 +1,11 @@
 const db = require("../database");
 const argon2 = require("argon2");
+const { user } = require("../database");
 
 
 // Select all users from the database.
 exports.all = async (req, res) => {
     const users = await db.user.findAll();
-    console.log(req);
 
     res.json(users);
 };
@@ -45,7 +45,6 @@ exports.create = async (req, res) => {
 
 
 exports.findUser = async (req,res) =>{
-    console.log(req.params.email);
     const user = await db.user.findAll({
         where: {
             email: req.params.email
@@ -100,5 +99,29 @@ exports.login = async (req, res) => {
     }
         
 };
-    
 
+
+
+exports.delete = async (req, res) => {
+    console.log("Deleting User by user_id: ", req.query.user_id);
+    const user = await db.user.findAll({where: {user_id: req.query.user_id}} );
+    const count = await db.user.destroy({where: {user_id: req.query.user_id},force: true});
+
+    console.log(count, " Rows were deleted from the USER table");
+
+    res.json(null);
+}
+
+exports.update = async (req, res) => {
+
+    // console.log("user_id: ", req.body.params.user_id, "\nfirst_name: ", req.query.first_name, "\nlast_name: ", req.query.last_name, "\nemail: ", req.query.email);
+    // console.log("Request: ", req);
+    const updated_user = await db.user.update({
+        first_name: req.body.params.first_name,
+        last_name: req.body.params.last_name,
+        email: req.body.params.email
+    }, {where: {user_id: req.body.params.user_id}});
+
+    res.json(updated_user)
+    // console.log(res);
+}

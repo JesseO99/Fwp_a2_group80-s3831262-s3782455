@@ -1,6 +1,6 @@
 import "./ProfileEdit.css";
 import {Navigate, useNavigate} from "react-router-dom";
-import {getUserDetails, updateUser} from "../data/repository";
+import {setUser, updateUser} from "../data/repository";
 import Form from 'react-bootstrap/Form';
 import {Button} from "react-bootstrap";
 import {useContext, useState} from "react";
@@ -8,30 +8,29 @@ import avatar from "../img/avatar.png";
 import Popup from "../components/Popup"
 import {LoginUserContext, UserContext} from "../App";
 
-function ProfileEdit({updateAllUserEntryEmails}) {
-    const username = useContext(UserContext);
+function ProfileEdit(props) {
+    const user = useContext(UserContext);
     const loginUser = useContext(LoginUserContext);
-    const user = getUserDetails(username);
+    // const user = getUserDetails(username);
     const [isOpen, setIsOpen] = useState(false);
-    const [firstName, setFirstName] = useState(user.firstName);
+    const [firstName, setFirstName] = useState(user.first_name);
     const [email, setEmail] = useState(user.email);
-    const [lastName, setLastName] = useState(user.lastName);
+    const [lastName, setLastName] = useState(user.last_name);
     const [image, setImage] = useState(user.img); // Redundant code for now will prove necesarry if image upload is implemented for Profile Picture
 
 
     const navigate = useNavigate();
 
     //Authenticate and Redirect if not Logged in
-    if (!username) {
+    if (!user) {
         return <Navigate to="/"/>
     }
 
     // Controls Edit Confirmation Cue
     const togglePopup = () => {
-        console.log("Pre-Trigger: ", isOpen);
         localStorage.setItem("Popup", !isOpen);
         setIsOpen(!isOpen);
-        console.log("Post-Trigger: ", isOpen);
+
     }
 
 
@@ -61,13 +60,18 @@ function ProfileEdit({updateAllUserEntryEmails}) {
     }
 
 
-    function onSubmit() {
-        // Update email to new email
-        loginUser(email);
+    async function onSubmit() {
+
         // Update user details
-        updateUser(user.email, email, firstName, lastName, user.img);
-        //Update all posts and comments with new email
-        updateAllUserEntryEmails(user.email, email);
+        user.first_name = firstName;
+        user.last_name = lastName;
+        user.email = email;
+        
+        loginUser(user);
+        setUser(user);
+        // props.loginUser(user);
+
+        const response = await updateUser(user.user_id, email, firstName, lastName);
         navigate("/Profile");
     }
 
@@ -76,8 +80,8 @@ function ProfileEdit({updateAllUserEntryEmails}) {
         <div>
             <div className="Profile-Edit-Container">
 
-                <img className="Profile-Pic" src={user.img.length === 0 ? avatar : image} alt="Profile"></img>
-
+                {/* <img className="Profile-Pic" src={user.img.length === 0 ? avatar : image} alt="Profile"></img> */}
+                <img className="Profile-Pic" src={avatar} alt="Profile"></img>
 
                 <div className="Input Fields">
                     <h1>
