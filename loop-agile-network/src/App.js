@@ -41,7 +41,7 @@ function App() {
         setUser(null);
     }
 
-
+    
     return (
         <UserContext.Provider value={user}>
             <LoginUserContext.Provider value={loginUser}>
