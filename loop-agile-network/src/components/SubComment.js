@@ -14,9 +14,9 @@ const SubComment = ({subComment}) => {
         <div>
             <div>
                 <Stack direction="horizontal" gap={2} className="subcomment-form ">
-                    <p id="subcomment-author">{getNameByEmail(subComment.user)}</p>
+                    <p id="subcomment-author">{subComment.user.first_name+" "+subComment.user.last_name}</p>
                     <div id="subcomment-vr" className="vr"></div>
-                    <p id="subcomment">{subComment.text}</p>
+                    <p id="subcomment">{subComment.sub_comment_content}</p>
                 </Stack>
 
             </div>

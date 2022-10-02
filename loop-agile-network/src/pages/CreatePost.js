@@ -9,7 +9,8 @@ import Toast from 'react-bootstrap/Toast';
 import check from '../img/check.png'
 import warning from '../img/warning.png'
 import camera from "../img/camera.png";
-import {UserContext} from "../App";
+import {ToastContext, UserContext} from "../App";
+import {Result} from "../data/Constant";
 
 
 //Field Validations Using Formik
@@ -27,77 +28,55 @@ const validate = values => {
 
 function CreatePost({addPost}) {
 
-    const username = useContext(UserContext);
-    const [show, setShow] = useState(false);
-    const [toast, setToast] = useState('');
+    const user = useContext(UserContext);
+    const toastMessage = useContext(ToastContext);
 
     //Call useImageUpload custom hook
     const {
         uploadImage,
         setImage,
         image,
-    } = useImageUpload(submit, uploadError);
+    } = useImageUpload(submit, toastMessage);
 
     const formik = useFormik({
         initialValues: {}, validate, onSubmit: values => {
             //If there is an image upload the image or else submit just the comment
             if (image) {
-                console.log("upload image")
                 uploadImage();
             } else {
-                console.log("normal Submit")
                 submit("");
             }
         },
     });
 
-
     //Authenticate and Redirect if not Logged in
-    if (!username) {
+    if (!user) {
         return <Navigate to="/"/>
     }
 
     //Common Submit function
     function submit(url) {
         const newPost = {
-            email: username,
+            userId:user.user_id,
             post: formik.values.post,
             img: url,
             comments: []
         }
 
-        //Submit post values
-        addPost(newPost);
-        //Reset Form After Submit
-        formik.resetForm({
-            values: {post: ''},
-        });
+        //Submit post
+       addPost(newPost,toastMessage).then(status=>{
+           if(status ==Result.SUCCESS){
+               //Reset Form After Submit
+               formik.resetForm({
+                   values: {post: ''},
+               });
 
-        //Scroll Window to top
-        window.scrollTo(0, 0);
-        setShow(true);
-        setToast({
-            title: "New Post Created!",
-            message: "Woohoo, Your post has been published!",
-            img: check
-        })
+               //Clear Images from the Form
+               setImage("")
+               document.getElementById('image-field').value = "";
+           }
+       });
 
-        //Clear Images from the Form
-        setImage("")
-        document.getElementById('image-field').value = "";
-
-    }
-
-    function uploadError() {
-        //Scroll Window to top
-        window.scrollTo(0, 0);
-
-        setShow(true);
-        setToast({
-            title: "Post Not Created!",
-            message: "There was an error of publishing your post. Please try again later!",
-            img: warning
-        })
     }
 
     return (
@@ -150,31 +129,10 @@ function CreatePost({addPost}) {
                                         type="submit">
                                     Publish </Button>
                             </Form.Group>
-
                         </Form>
                     </div>
                 </Stack>
             </div>
-            {/*Toast Message for Success/Error Post Creation*/}
-            <ToastContainer className="p-3" position="top-end">
-                <Toast onClose={() =>
-                    setShow(false)}
-                       show={show}
-                       delay={6000}
-                       autohide>
-                    <Toast.Header>
-                        <img
-                            src={toast.img}
-                            className="rounded me-2"
-                            alt=""
-                            style={{height: "20px"}}
-                        />
-                        <strong className="me-auto">{toast.title}</strong>
-                        <small>0 mins ago</small>
-                    </Toast.Header>
-                    <Toast.Body>{toast.message}</Toast.Body>
-                </Toast>
-            </ToastContainer>
         </div>)
 }
 

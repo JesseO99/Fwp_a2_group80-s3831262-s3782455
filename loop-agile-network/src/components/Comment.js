@@ -5,12 +5,13 @@ import {getNameByEmail} from "../data/repository";
 import React, {useContext, useState} from "react";
 import Form from "react-bootstrap/Form";
 import SubComment from "./SubComment";
-import {UserContext} from "../App";
+import {ToastContext, UserContext} from "../App";
 
 
 const Comment = ({comment, post, addSubComment}) => {
 
-    const username = useContext(UserContext);
+    const user = useContext(UserContext);
+    const toastMessage = useContext(ToastContext);
     const [subComment, setSubComment] = useState('');
     const [accordionStatus, setAccordionStatus] = useState("1");
 
@@ -20,10 +21,11 @@ const Comment = ({comment, post, addSubComment}) => {
         // Post the sub-comment if there's a value
         if (subComment !== "") {
             const newSubComment = {
-                user: username,
-                text: subComment,
+                commentId: comment.comment_id,
+                userId: user.user_id,
+                subComment: subComment,
             }
-            addSubComment(post, comment, newSubComment);
+            addSubComment(newSubComment,toastMessage);
         }
 
         setSubComment("");
@@ -51,15 +53,15 @@ const Comment = ({comment, post, addSubComment}) => {
                          id="comment-avatar"
                          src={avatar}
                     />
-                    <p id="comment-author">{getNameByEmail(comment.user)}</p>
+                    <p id="comment-author">{comment.user.first_name+" "+comment.user.last_name}</p>
                     <div id="comment-vr" className="vr"></div>
 
-                    <p id="comment">{comment.text}</p>
+                    <p id="comment">{comment.comment_content}</p>
 
                 </Stack>
 
                 {/*Create a list of SubComments*/}
-                {comment.subComments.map((subComment) => (
+                {comment.sub_comments.map((subComment) => (
                     <>
                         <div className="sub-comment-container">
                             <li>

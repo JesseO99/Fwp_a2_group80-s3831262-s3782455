@@ -4,18 +4,46 @@ const argon2 = require("argon2");
 
 // Select all users from the database.
 exports.all = async (req, res) => {
-    const users = await db.user.findAll();
-    console.log(req);
+    let users;
+    try {
+        users = await db.user.findAll();
+    }catch (err){
+        //Api request validation
+        res.json({
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        });
+        return;
+    }
 
-    res.json(users);
+    res.json({
+        "status": "100",
+        "message": "Success",
+        "data": users
+    });
 };
 
 
 // Select one user from the database.
 exports.one = async (req, res) => {
-    const user = await db.user.findByPk(req.params.id);
-
-    res.json(user);
+    let user;
+    try{
+        user = await db.user.findByPk(req.params.id);
+    }catch (err){
+        //Api request validation
+        res.json({
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        });
+        return;
+    }
+    res.json({
+        "status": "100",
+        "message": "Success",
+        "data": user
+    });
 };
 
 // Select one user from the database if username and password are a match.
@@ -45,14 +73,26 @@ exports.create = async (req, res) => {
 
 
 exports.findUser = async (req,res) =>{
-    console.log(req.params.email);
-    const user = await db.user.findAll({
+
+    let user;
+    try{user = await db.user.findAll({
         where: {
             email: req.params.email
         }
+    });}catch (err){
+        //Api request validation
+        res.json({
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        });
+        return;
+    }
+    res.json({
+        "status": "100",
+        "message": "Success",
+        "data": user
     });
-
-    res.json(user);
 
 };
 

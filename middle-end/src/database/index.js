@@ -2,6 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const config = require("./config.js");
 const argon2 = require("argon2");
 const Console = require("console");
+const {COMMENT, POST, SUB_COMMENT} = require("../Constant");
 
 const db = {
     Op: Sequelize.Op
@@ -26,9 +27,11 @@ db.user_reaction = require("./models/user_reaction.js")(db.sequelize, DataTypes)
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "user_id"} });
-db.comment.belongsTo(db.post, {foreignKey: {name: "post_id"}});
+db.comment.belongsTo(db.post, {foreignKey: {name: "post_id"},onDelete:'CASCADE'});
+db.post.hasMany(db.comment,{foreignKey: {name: "post_id"}, onDelete:'CASCADE'});
 db.comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
-db.sub_comment.belongsTo(db.comment, {foreignKey: {name:"comment_id"}});
+db.sub_comment.belongsTo(db.comment, {foreignKey: {name:"comment_id"},onDelete:'CASCADE'});
+db.comment.hasMany(db.sub_comment,{foreignKey: {name: "comment_id"}, onDelete:'CASCADE'});
 db.sub_comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
 // db.user_reaction.belongsTo(db.reaction_info , {foreignKey: "reaction_type_id"});
 // db.user_reaction.belongsTo(db.content_type_info, {foreignKey: "content_type_id"});
@@ -73,10 +76,10 @@ db.user_reaction.belongsTo(db.sub_comment, { foreignKey: 'content_id', constrain
 // Include a sync option with seed data logic included.
 db.sync = async () => {
     // Sync schema.
-    await db.sequelize.sync();
+    // await db.sequelize.sync();
   
     // Can sync with force if the schema has become out of date - note that syncing with force is a destructive operation.
-    // await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: true });
     
     await seedData();
   };
@@ -104,7 +107,33 @@ async function seedData() {
         user_id:1,
         reaction_type:0, // 0 = Like, 1 = Dislike
         content_id:post.post_id,
-        content_type:"p" // p= post, c = comment, sc = sub comment
+        content_type:POST // p= post, c = comment, sc = sub comment
+
+    });
+    const comment = await db.comment.create({
+        user_id:1,
+        post_id:1,
+        comment_content:"Test comment"
+
+    });
+    const subcomment = await db.sub_comment.create({
+        user_id:1,
+        comment_id:1,
+        sub_comment_content:"Test sub comment"
+
+    });
+    const reaction2 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:1, // 0 = Like, 1 = Dislike
+        content_id:comment.comment_id,
+        content_type:COMMENT // p= post, c = comment, sc = sub comment
+
+    });
+    const reaction3 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:0, // 0 = Like, 1 = Dislike
+        content_id:subcomment.sub_comment_id,
+        content_type:SUB_COMMENT // p= post, c = comment, sc = sub comment
 
     });
 

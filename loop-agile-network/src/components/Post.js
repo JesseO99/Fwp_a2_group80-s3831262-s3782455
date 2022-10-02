@@ -1,19 +1,30 @@
 import React, {useContext, useState} from 'react';
 import "./Post.css";
 import Form from "react-bootstrap/Form";
-import {Button, InputGroup, Row, Stack} from "react-bootstrap";
+import {Button, InputGroup, Row, Stack, ToastContainer} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
-import {getNameByEmail} from "../data/repository";
+import {getNameByEmail, getPosts} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
-import {UserContext} from "../App";
+import {ToastContext, UserContext} from "../App";
+import {Result} from "../data/Constant";
+import check from "../img/check.png";
+import Toast from "react-bootstrap/Toast";
+import warning from "../img/warning.png";
 
 
 // Post component for individual post
 const Post = ({post, removePost, addComment, addSubComment}) => {
 
-    const username = useContext(UserContext);
+    const user = useContext(UserContext);
+    const toastMessage = useContext(ToastContext);
     const [comment, setComment] = useState('');
+
+    //Call the delete post method in usePost
+    const deletePost = async (id) => {
+        let status = await removePost(id,toastMessage);
+    }
+
 
     const sendComment = (event) => {
         event.preventDefault();
@@ -21,11 +32,11 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
         // Post the comment if there's a value
         if (comment !== "") {
             const newComment = {
-                user: username,
-                text: comment,
-                subComments: []
+                postId: post.post_id,
+                userId: user.user_id,
+                comment: comment,
             }
-            addComment(post, newComment);
+            addComment(newComment,toastMessage);
         }
         setComment("");
 
@@ -41,16 +52,16 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
                              id="post-avatar"
                              src={avatar}
                         />
-                        <p id="post-author">{getNameByEmail(post.email)}</p>
+                        <p id="post-author">{post.user.first_name + " " +post.user.last_name}</p>
                         {/*Show delete button only for the posts user posted*/}
-                        {username === post.email &&
+                        {user.user_id === post.user_id &&
                             <>
                                 <div className="ms-auto"/>
                                 <div>
                                     <Button
                                         className="delete-button"
                                         variant="danger"
-                                        onClick={() => removePost(post)}>
+                                        onClick={() => deletePost(post.post_id)}>
                                         Delete
                                     </Button>
                                 </div>
@@ -60,7 +71,7 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
 
                     {post.img !== "" && <>
                         <div>
-                            <img src={post.img}
+                            <img src={post.image_url}
                                  className="rounded img-fluid "
                                  id="post-image"
                             />
@@ -68,7 +79,7 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
                     </>
                     }
 
-                    <p id="post-text">{post.post}</p>
+                    <p id="post-text">{post.post_content}</p>
                     <hr data-content="AND" className="hr-text"/>
                     {post.comments.length > 0 && <p className="comment-heading">Comments</p>}
 
@@ -100,7 +111,6 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
                 </div>
 
             </Stack>
-
         </div>
     );
 };

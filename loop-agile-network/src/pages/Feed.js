@@ -1,13 +1,19 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Navigate} from 'react-router-dom'
 import Post from "../components/Post";
 import "./Feed.css";
-import {Stack} from "react-bootstrap";
+import {Stack, ToastContainer} from "react-bootstrap";
 import {UserContext} from "../App";
+import Toast from "react-bootstrap/Toast";
 
-function Feed({posts, removePost, addComment, addSubComment}) {
+
+function Feed({posts, removePost, addComment, addSubComment, getAllPosts}) {
 
     const username = useContext(UserContext);
+
+    useEffect(() => {
+        getAllPosts();
+    }, []);
 
     //Authenticate and Redirect if not Logged in
     if (!username) {
@@ -32,7 +38,6 @@ function Feed({posts, removePost, addComment, addSubComment}) {
                     <p id="empty-feed">Wow! It's Nothing Yet. <br/> Create your first post now!</p>}
             </div>
         </Stack>
-
     </div>)
 }
 
