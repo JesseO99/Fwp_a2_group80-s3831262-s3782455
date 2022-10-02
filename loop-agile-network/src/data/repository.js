@@ -32,107 +32,6 @@ function initUsers() {
     localStorage.setItem(USERS_KEY, JSON.stringify(users));
 }
 
-function initPosts() {
-    if (localStorage.getItem(POSTS_KEY) !== null) return;
-
-    const posts = [
-        {
-            email: "darren@hotmail.com",
-            post: "A Darren Post\n",
-            img: "",
-            comments: []
-        },
-        {
-            email: "darren@hotmail.com",
-            post: "A Darren Third Post",
-            img: "", "comments": [
-                {
-                    user: "darren@hotmail.com",
-                    text: "A comment", "subComments": []
-                }
-            ]
-        },
-        {
-            email: "darren@hotmail.com",
-            post: "A Darren second Post",
-            img: "",
-            comments: [
-                {
-                    user: "darren@hotmail.com",
-                    text: "A Comment",
-                    subComments: []
-                }
-            ]
-        },
-        {
-            email: "rue@gmail.com",
-            post: "A Third Post",
-            img: "",
-            comments:
-                [
-                    {
-                        user: "darren@hotmail.com",
-                        text: "A Comment",
-                        subComments: []
-                    }
-                ]
-        },
-        {
-            email: "rue@gmail.com",
-            post: "A Second Post",
-            img: "",
-            comments: [
-                {
-                    user: "rue@gmail.com",
-                    text: "A Self second comment",
-                    subComments: []
-                },
-                {
-                    user: "darren@hotmail.com",
-                    text: "A Comment",
-                    subComments: []
-                },
-                {
-                    user: "rue@gmail.com",
-                    text: "Another Comment",
-                    subComments: [
-                        {
-                            user: "rue@gmail.com",
-                            text: "A sub comment"
-                        },
-                        {
-                            user: "darren@hotmail.com",
-                            text: "A Darren Sub Comment"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            email: "rue@gmail.com",
-            post: "A Post",
-            img: "",
-            comments: [
-                {
-                    user: "darren@hotmail.com", text: "A Comment", "subComments": []
-                },
-                {
-                    user: "rue@gmail.com",
-                    text: "A self comment",
-                    subComments: [
-                        {
-                            user: "darren@hotmail.com",
-                            text: "A Darren Sub Comment"
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-
-    // localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
-    return posts;
-}
 
 // Returns a list of users stored in local storage
 function getUsers() {
@@ -140,14 +39,50 @@ function getUsers() {
     return JSON.parse(data);
 }
 
-
+//Register user API call
 async function registerUser(user) {
     const response = await axios.post(API_HOST + "/users", user);
-
     return response.data;
 }
 
-// Verifies User's email address and password matches what is stored in loal storage
+//Create post API call
+async function createPost(post) {
+    return await axios.post(API_HOST + "/posts", post).then(res =>{
+        return res.data;
+     })
+
+}
+//Get all posts API call
+async function getPosts(){
+    return await axios.get(API_HOST + "/posts").then(res =>{
+        return res.data;
+    })
+}
+
+//Delete post by post_id API call
+async function deletePostById(id){
+    return await axios.get(API_HOST + "/posts/delete",{params: {id}}).then(res =>{
+        return res.data;
+    })
+}
+
+//Add comment API call
+async function addNewComment(comment) {
+    return await axios.post(API_HOST + "/posts/comment", comment).then(res =>{
+        return res.data;
+    })
+
+}
+
+//Add sub comment API call
+async function addNewSubComment(comment) {
+    return await axios.post(API_HOST + "/posts/sub_comment", comment).then(res =>{
+        return res.data;
+    })
+
+}
+
+// Verifies User's email address and password matches what is stored in local storage
 async function verifyUser(email, password) {
     console.log(API_HOST + "/users/login", email, " ", password);
 
@@ -316,7 +251,6 @@ export {
     getUserDetails,
     registerUser,
     updateUser,
-    initPosts,
     getPostDetails,
     setPostDetails,
     getNameByEmail,
@@ -326,6 +260,10 @@ export {
     removeAuthentificationRequestData,
     setUserId,
     getUserByEmail,
-    getUserById
-
+    getUserById,
+    createPost,
+    getPosts,
+    deletePostById,
+    addNewComment,
+    addNewSubComment
 }

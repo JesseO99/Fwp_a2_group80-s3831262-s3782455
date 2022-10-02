@@ -1,7 +1,6 @@
 import "./Header.css";
 import {Button, Stack} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import {getNameByEmail} from "../data/repository";
 import React, {useContext} from "react";
 import {UserContext} from "../App";
 

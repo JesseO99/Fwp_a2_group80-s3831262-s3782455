@@ -8,7 +8,6 @@ function Footer() {
             <div className="bg-light" id={"footer-row"}></div>
             <div id={"footer-title"}>Loop Agile Now &copy; 2022</div>
         </footer>
-
     );
 }
 

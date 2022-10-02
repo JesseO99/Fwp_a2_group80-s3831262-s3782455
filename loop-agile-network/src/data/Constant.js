@@ -3,6 +3,16 @@ const USERS_KEY = "users";
 const USER_KEY = "user";
 const POSTS_KEY = "posts";
 const AUTH_DATA_KEY = 'MFA';
+const Interaction = {
+    POST: "p",
+    COMMENT: "c",
+    SUB_COMMENT: "sc"
+}
+
+const Result = {
+    SUCCESS: "100",
+    FAILED: "200"
+}
 
 
 
@@ -11,5 +21,7 @@ export {
     USER_KEY,
     USERS_KEY,
     POSTS_KEY,
-    AUTH_DATA_KEY
+    AUTH_DATA_KEY,
+    Interaction,
+    Result
 }
