@@ -1,4 +1,3 @@
-import {getDateToday} from "../util/Util";
 import axios from "axios";
 import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
@@ -169,19 +168,11 @@ async function getUserDetails(email)
 // }
 
 // Updates the users details
-function updateUser(previousEmail, email, firstName, lastName, src) {
-    const users = getUsers();
-    for (const user of users) {
-        if (user.email === previousEmail) {
-            user.firstName = firstName;
-            user.lastName = lastName;
-            user.email = email;
-            user.img = src;
-            setUser(email);
-        }
-    }
+async function updateUser(user_id, email, first_name, last_name) {
+    
+    const response = await axios.put(API_HOST + "/users/user/update", {params: {user_id, email, first_name, last_name}});
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    return response.data;
 }
 
 
@@ -208,21 +199,17 @@ function getNameByEmail(email) {
 
 
 // Deletes the user from local storage
-function deleteUser(email) {
-    localStorage.removeItem(USER_KEY);
-    const users = getUsers();
-    const newUsers = [];
-    let count = 0;
-    for (const user of users) {
-        if (user.email !== email) {
-            newUsers[count] = user;
-            count += 1;
-        }
-    }
+async function deleteUser(user_id) {
+    
+    const response1 = await axios.delete(API_HOST + "/posts/user_id", {params: {user_id}});
+    const response3 = await axios.delete(API_HOST + "/users/user", {params: {user_id}});
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(newUsers));
-
+    console.log(response1, response3);
+    return {};
 }
+
+
+
 
 function setAuthentificationRequestData(email) {
     const code = parseInt(Math.random() * 899999) + 100000;

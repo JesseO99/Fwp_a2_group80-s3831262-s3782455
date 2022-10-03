@@ -42,7 +42,6 @@ function App() {
         addComment,
         addSubComment,
         removeUserPosts,
-        updateAllUserEntryEmails,
         getAllPosts
     } = usePost();
 
@@ -56,7 +55,7 @@ function App() {
         setUser(null);
     }
 
-
+    
     return (
         <UserContext.Provider value={user}>
             <ToastContext.Provider value={toastMessage}>
