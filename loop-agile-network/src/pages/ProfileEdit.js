@@ -63,12 +63,17 @@ function ProfileEdit(props) {
     async function onSubmit() {
 
         // Update user details
-        user.first_name = firstName;
-        user.last_name = lastName;
-        user.email = email;
-        
-        loginUser(user);
-        setUser(user);
+        const updated_user = 
+        {
+            user_id: user.user_id,
+            email: email,
+            first_name: firstName,
+            last_name: lastName,
+            password: user.password,
+            date_joined: user.date_joined
+        }
+        loginUser(updated_user);
+        setUser(updated_user);
         // props.loginUser(user);
 
         const response = await updateUser(user.user_id, email, firstName, lastName);
