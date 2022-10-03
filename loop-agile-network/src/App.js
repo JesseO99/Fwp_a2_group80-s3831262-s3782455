@@ -71,8 +71,7 @@ function App() {
                                        element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
                                 <Route path="/Signup" element={<Signup/>}/>
                                 <Route path="Profile-Edit"
-                                       element={<ProfileEdit
-                                           updateAllUserEntryEmails={updateAllUserEntryEmails}/>}></Route>
+                                       element={<ProfileEdit/>}></Route>
                                 <Route path="/Feed"
                                        element={<Feed posts={posts} removePost={removePost} addComment={addComment}
                                                       addSubComment={addSubComment}
