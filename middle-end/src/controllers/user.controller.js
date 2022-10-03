@@ -109,6 +109,7 @@ exports.one_email = async (req, res) => {
     res.json(user[0])
 };
 
+// Returns a user foubd by the Primary Key
 exports.one_key = async (req, res) => {
     const user = await db.user.findByPk(req.query.user_id);
 
@@ -143,7 +144,7 @@ exports.login = async (req, res) => {
 };
 
 
-
+// Deletes a user with a matching user_id
 exports.delete = async (req, res) => {
     console.log("Deleting User by user_id: ", req.query.user_id);
     const user = await db.user.findAll({where: {user_id: req.query.user_id}} );
@@ -154,10 +155,8 @@ exports.delete = async (req, res) => {
     res.json(null);
 }
 
+// Updates the current User
 exports.update = async (req, res) => {
-
-    // console.log("user_id: ", req.body.params.user_id, "\nfirst_name: ", req.query.first_name, "\nlast_name: ", req.query.last_name, "\nemail: ", req.query.email);
-    // console.log("Request: ", req);
     const updated_user = await db.user.update({
         first_name: req.body.params.first_name,
         last_name: req.body.params.last_name,
@@ -165,5 +164,4 @@ exports.update = async (req, res) => {
     }, {where: {user_id: req.body.params.user_id}});
 
     res.json(updated_user)
-    // console.log(res);
 }

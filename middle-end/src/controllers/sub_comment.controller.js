@@ -2,7 +2,7 @@ const db = require("../database");
 
 
 
-
+// Deletes all subcomments
 exports.delete = async (req, res) => {
     const count = await db.sub_comment.destroy({where: {user_id: req.query.user_id}});
 
@@ -11,7 +11,7 @@ exports.delete = async (req, res) => {
     res.json(null);
 }
 
-
+// Returns all sub_comments fromt he database
 exports.all = async (req, res) => {
     const sub_comments = await db.sub_comments.findAll();
 
