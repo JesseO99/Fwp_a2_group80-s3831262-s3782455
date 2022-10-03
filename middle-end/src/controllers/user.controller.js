@@ -157,11 +157,28 @@ exports.delete = async (req, res) => {
 
 // Updates the current User
 exports.update = async (req, res) => {
-    const updated_user = await db.user.update({
+    const params_to_update = {
         first_name: req.body.params.first_name,
         last_name: req.body.params.last_name,
         email: req.body.params.email
-    }, {where: {user_id: req.body.params.user_id}});
+    }
+    let response
+    try{
+        
+        response = {
+            "status": "100",
+            "message": "Success",
+            "data": await db.user.update(params_to_update, {where: {user_id: req.body.params.user_id}})
+            }
 
-    res.json(updated_user)
+    }catch(err){
+        response = {
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        }
+
+    }
+
+    res.json(response)
 }

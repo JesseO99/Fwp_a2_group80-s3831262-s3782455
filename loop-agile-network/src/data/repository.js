@@ -172,7 +172,14 @@ async function updateUser(user_id, email, first_name, last_name) {
     
     const response = await axios.put(API_HOST + "/users/user/update", {params: {user_id, email, first_name, last_name}});
 
-    return response.data;
+    if( response.data.status === "100")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 

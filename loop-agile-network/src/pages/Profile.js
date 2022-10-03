@@ -38,7 +38,7 @@ function Profile(props) {
 
 
     return (
-        <div class="container">
+        <div className="container">
             <p id="profile-heading">Profile</p>
 
             <div className="profile-body">

@@ -11,13 +11,14 @@ import {LoginUserContext, UserContext} from "../App";
 function ProfileEdit(props) {
     const user = useContext(UserContext);
     const loginUser = useContext(LoginUserContext);
+
     // const user = getUserDetails(username);
     const [isOpen, setIsOpen] = useState(false);
     const [firstName, setFirstName] = useState(user.first_name);
     const [email, setEmail] = useState(user.email);
     const [lastName, setLastName] = useState(user.last_name);
     const [image, setImage] = useState(user.img); // Redundant code for now will prove necesarry if image upload is implemented for Profile Picture
-
+    const [email_error, set_email_error] = useState(false);
 
     const navigate = useNavigate();
 
@@ -72,12 +73,19 @@ function ProfileEdit(props) {
             password: user.password,
             date_joined: user.date_joined
         }
-        loginUser(updated_user);
-        setUser(updated_user);
-        // props.loginUser(user);
-
-        const response = await updateUser(user.user_id, email, firstName, lastName);
-        navigate("/Profile");
+        const update_success = await updateUser(user.user_id, email, firstName, lastName);
+        if(update_success)
+        {
+            loginUser(updated_user);
+            setUser(updated_user);
+            navigate("/Profile");
+        }
+        else
+        {
+            togglePopup();
+            set_email_error(true);
+        }
+        
     }
 
     return (
@@ -101,6 +109,7 @@ function ProfileEdit(props) {
                         <Form.Label>Last Name</Form.Label> <br></br>
                         <Form.Control type="text" placeholder="Enter FirstName" value={lastName}/>
                     </Form.Group>
+                    {email_error && <p className="Error-Message"> That Email is taken one email can only be linked to one account</p>}
                     <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
                         <Form.Label>Email Address</Form.Label> <br></br>
                         <Form.Control type="email" placeholder="Enter email" value={email}/>
