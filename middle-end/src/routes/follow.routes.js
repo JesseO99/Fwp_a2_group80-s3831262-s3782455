@@ -5,8 +5,9 @@ module.exports = (express, app) => {
     // Select all follow.
     router.get("/", controller.all);
 
-    router.get("/user/all", controller.all)
+    router.get("/user/all", controller.following_all);
 
+    router.put("/follow", controller.follow);
     // Add routes to server.
     app.use("/api/follows", router);
 };

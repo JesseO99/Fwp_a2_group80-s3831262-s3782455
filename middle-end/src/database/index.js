@@ -138,6 +138,16 @@ async function seedData() {
 
     });
 
+    // const follows = await db.follow.create({
+    //     follower_id: 1,
+    //     followed_id: 2
+    // });
+
+    // const follows2 = await db.follow.create({
+    //     follower_id: 2,
+    //     followed_id: 1
+    // });
+
 }
 
 
