@@ -32,10 +32,11 @@ function initUsers() {
 }
 
 
-// Returns a list of users stored in local storage
-function getUsers() {
-    const data = localStorage.getItem(USERS_KEY);
-    return JSON.parse(data);
+// Returns a list of users stored in server DBMS
+async function getUsers() {
+    const response = await axios.get(API_HOST + "/users/");
+    console.log(response.data.data);
+    return response.data.data;
 }
 
 //Register user API call
@@ -195,8 +196,8 @@ function setPostDetails(posts) {
 }
 
 //Get name from given email
-function getNameByEmail(email) {
-    const users = getUsers();
+async function getNameByEmail(email) {
+    const users = await getUsers();
     for (const user of users) {
         if (user.email === email) {
             return user.firstName + " " + user.lastName;
@@ -259,5 +260,6 @@ export {
     getPosts,
     deletePostById,
     addNewComment,
-    addNewSubComment
+    addNewSubComment,
+    getUsers
 }

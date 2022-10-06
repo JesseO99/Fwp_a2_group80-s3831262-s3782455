@@ -10,9 +10,12 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import CreatePost from './pages/CreatePost';
+import People from './pages/People';
+import Following from './pages/Following';
 import {getUser, removeUser} from "./data/repository";
 import ProfileEdit from './pages/ProfileEdit';
 import usePost from "./hooks/usePost";
+import useUsers from "./hooks/useUsers";
 import {ToastContainer} from "react-bootstrap";
 import Toast from "react-bootstrap/Toast";
 import useToast from "./hooks/useToast";
@@ -21,6 +24,7 @@ import useToast from "./hooks/useToast";
 export const UserContext = createContext();
 export const LoginUserContext = createContext();
 export const ToastContext = createContext();
+
 
 function App() {
     const [user, setUser] = useState(getUser); //We save current user locally instead of username now to avoid
@@ -45,6 +49,10 @@ function App() {
         getAllPosts
     } = usePost();
 
+    const {
+        users, 
+        getAllUsers
+    } = useUsers();
 
     const loginUser = (user) => {
         setUser(user);
@@ -77,6 +85,8 @@ function App() {
                                                       addSubComment={addSubComment}
                                                       getAllPosts={getAllPosts}/>}></Route>
                                 <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
+                                <Route path="/People" element={<People users={users} getAllUsers={getAllUsers}/>}/>
+                                <Route path="/Following" element={<Following/>}/>
                             </Routes>
                             {/*Toast Message for Success/Error Post Creation*/}
                             <ToastContainer className="p-3" position="top-end">

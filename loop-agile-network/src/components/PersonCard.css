@@ -1,0 +1,15 @@
+.person-card-container {
+    border-style: dashed;
+    margin: 1em;
+    padding: 0.5em 1em;
+    flex:0 0 100%;
+}
+
+
+
+.person-card-container img {
+    width: 64px;
+    height: 64px;
+    /* flex: 1; */
+}
+
