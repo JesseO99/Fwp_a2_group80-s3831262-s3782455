@@ -182,3 +182,17 @@ exports.update = async (req, res) => {
 
     res.json(response)
 }
+
+exports.all_following = async (req,res) => {
+    const user_id = req.query.user_id;
+    let response;
+    try {
+        response = await db.query('SELECT *, case WHEN EXISTS(SELECT * FROM follows WHERE follower_id = '+ user_id + ' and followed_id = u1.user_id) THEN true ELSE false END from users as u1 where user_id')
+    }
+    catch (err)
+    {
+        return;
+    }
+    console.log(response);
+    res.json(response);
+} 

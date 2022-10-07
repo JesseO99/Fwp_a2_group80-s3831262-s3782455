@@ -35,8 +35,14 @@ function initUsers() {
 // Returns a list of users stored in server DBMS
 async function getUsers() {
     const response = await axios.get(API_HOST + "/users/");
-    console.log(response.data.data);
     return response.data.data;
+}
+
+async function getUsersFollowing(user_id) {
+    console.log("Request: Get Users Following");
+    const response = await axios.get(API_HOST + "/users/following", user_id);
+    console.log("Response: ", response);
+    return response.data;
 }
 
 //Register user API call
@@ -261,5 +267,6 @@ export {
     deletePostById,
     addNewComment,
     addNewSubComment,
-    getUsers
+    getUsers,
+    getUsersFollowing
 }

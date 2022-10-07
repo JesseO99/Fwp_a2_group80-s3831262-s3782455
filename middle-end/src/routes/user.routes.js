@@ -33,6 +33,8 @@ module.exports = (express, app) => {
   // Calls the update method which updates the first_name, last_name and email
   router.put("/user/update", controller.update);
 
+  router.get("/following", controller.all_following);
+
   // Add routes to server.
   app.use("/api/users", router);
   

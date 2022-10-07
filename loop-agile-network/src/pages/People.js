@@ -1,13 +1,14 @@
 import "./People.css";
-import {useState, useEffect} from "react"
+import {useContext, useEffect} from "react"
 import {getUsers} from "../data/repository"
 import PersonCard from "../components/PersonCard";
+import { UserContext } from "../App";
 
 
 
 function People(props) {
-
-    useEffect(() => { props.getAllUsers();}, []);
+    const user = useContext(UserContext);
+    useEffect(() => { props.getAllUsers(user.user_id);}, []);
 
 
     return (
