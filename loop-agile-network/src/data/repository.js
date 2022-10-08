@@ -40,7 +40,7 @@ async function getUsers() {
 
 async function getUsersFollowing(user_id) {
     console.log("Request: Get Users Following");
-    const response = await axios.get(API_HOST + "/users/following", user_id);
+    const response = await axios.get(API_HOST + "/users/following", {params: {user_id}});
     console.log("Response: ", response);
     return response.data;
 }
@@ -101,6 +101,12 @@ async function verifyUser(email, password) {
     }
 
     return false;
+}
+
+async function getAllFollowingUsers(user_id) {
+    let users = await axios.get(API_HOST+"/follows/user/all", {params: {user_id}})
+    console.log("Repository: ", users.data.data);
+    return users.data.data;
 }
 
 // Sets the logged in user by saving the user's email in local storage
@@ -211,6 +217,15 @@ async function getNameByEmail(email) {
     }
 }
 
+async function followUser(follower_id, followed_id)
+{
+    const response = await axios.put(API_HOST + '/follows/follow'  , {params: {follower_id, followed_id}})
+}
+
+async function unfollowUser(follower_id, followed_id)
+{
+    const response = await axios.delete(API_HOST + '/follows/unfollow'  , {params: {follower_id, followed_id}})
+}
 
 // Deletes the user from local storage
 async function deleteUser(user_id) {
@@ -268,5 +283,8 @@ export {
     addNewComment,
     addNewSubComment,
     getUsers,
-    getUsersFollowing
+    getUsersFollowing,
+    followUser,
+    unfollowUser,
+    getAllFollowingUsers
 }

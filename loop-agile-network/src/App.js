@@ -51,7 +51,8 @@ function App() {
 
     const {
         users, 
-        getAllUsers
+        getAllUsers,
+        getAllFollowing
     } = useUsers();
 
     const loginUser = (user) => {
@@ -86,7 +87,7 @@ function App() {
                                                       getAllPosts={getAllPosts}/>}></Route>
                                 <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
                                 <Route path="/People" element={<People users={users} getAllUsers={getAllUsers}/>}/>
-                                <Route path="/Following" element={<Following/>}/>
+                                <Route path="/Following" element={<Following users={users} getAllFollowing={getAllFollowing}/> }/>
                             </Routes>
                             {/*Toast Message for Success/Error Post Creation*/}
                             <ToastContainer className="p-3" position="top-end">

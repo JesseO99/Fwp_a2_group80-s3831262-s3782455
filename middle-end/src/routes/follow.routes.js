@@ -5,9 +5,11 @@ module.exports = (express, app) => {
     // Select all follow.
     router.get("/", controller.all);
 
-    router.get("/user/all", controller.following_all);
+    router.get("/user/all", controller.all_users_follow);
 
     router.put("/follow", controller.follow);
+
+    router.delete("/unfollow", controller.unfollow);
     // Add routes to server.
     app.use("/api/follows", router);
 };

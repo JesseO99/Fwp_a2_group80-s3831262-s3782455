@@ -101,6 +101,9 @@ async function seedData() {
     let hash2 = await argon2.hash("abc123", { type: argon2.argon2id });
     await db.user.create({ email: "kat.kemi@gmail.com", password: hash, first_name: "Kemila", last_name : "Illankoon" });
 
+    let hash3 = await argon2.hash("abc123", { type: argon2.argon2id });
+    await db.user.create({ email: "darren@gmail.com", password: hash, first_name: "Darren", last_name : "Eashay" });
+
     //Example of Post and Reaction (Polymorphic Association - manually)
     const post = await db.post.create({ user_id: 1, post_content:"Hello" });
     const post2 = await db.post.create({ user_id: 2, post_content:"Goodbye" });

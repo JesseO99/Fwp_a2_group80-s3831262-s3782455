@@ -1,5 +1,5 @@
 const db = require("../database");
-// const {Sequilize} = require("sequelize");
+const {Sequelize} = require("sequelize");
 const argon2 = require("argon2");
 const { user } = require("../database");
 
@@ -189,7 +189,7 @@ exports.all_following = async (req,res) => {
     console.log("Allfollowing")
     let response;
     try {
-        response = await db.sequelize.query('SELECT *, case WHEN EXISTS(SELECT * FROM follows WHERE follower_id = '+ 1 + ' and followed_id = u1.user_id) THEN true ELSE false END from users as u1 where user_id')
+        response = await db.sequelize.query('SELECT first_name, last_name, email, user_id, date_joined, case WHEN EXISTS(SELECT * FROM follows WHERE follower_id = '+ user_id + ' and followed_id = u1.user_id) THEN true ELSE false END as following from users as u1 where u1.user_id != ' + user_id, { type: Sequelize.QueryTypes.SELECT })
     }
     catch (err)
     {
@@ -197,6 +197,6 @@ exports.all_following = async (req,res) => {
         return;
     }
     
-    console.log(response);
+    // console.log(response);
     res.json(response);
 } 

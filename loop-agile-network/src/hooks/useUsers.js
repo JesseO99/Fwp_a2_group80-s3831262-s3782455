@@ -1,5 +1,5 @@
 import {useState} from "react"
-import {getUsersFollowing} from "../data/repository"
+import {getUsersFollowing, getAllFollowingUsers} from "../data/repository"
 
 function useUsers() {
     const [users, setUsers] = useState([]);
@@ -8,8 +8,14 @@ function useUsers() {
         setUsers(await getUsersFollowing(user_id));
     }
 
-    return {getAllUsers, users}
+    
 
+    async function getAllFollowing(user_id) {
+        let users = await getAllFollowingUsers(user_id)
+        setUsers(users);
+    }
+
+    return {getAllUsers, users, getAllFollowing}
     
 }
 
