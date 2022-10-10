@@ -1,14 +1,17 @@
 import "./PersonCard.css"
 import avatar from "../img/avatar.png"
-import {useContext, useEffect} from "react"
+import {useContext} from "react"
 import {UserContext} from "../App";
 import {Button} from "react-bootstrap"
 import {followUser, unfollowUser} from "../data/repository"
+import {Navigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+
 function PersonCard (props) {
     const user = useContext(UserContext);
+
     async function onClickFollow()
     {
-        console.log("Follower: ", user.user_id, "Follows: ", props.user.user_id);
         // Create New Follow
         await followUser(user.user_id, props.user.user_id)
         props.followButtonClicked();
@@ -17,11 +20,11 @@ function PersonCard (props) {
 
     async function onClickUnfollow()
     {
-        console.log("Follower: ", user.user_id, "Unfollows: ", props.user.user_id);
-        // Create New Follow
+        // Unfollows User
         await unfollowUser(user.user_id, props.user.user_id)
         props.followButtonClicked();
     }
+
     return(
         <div className="person-card-container">
             <img className="Profile-Pic" src={avatar} alt="Profile-Pic"></img>
@@ -29,9 +32,13 @@ function PersonCard (props) {
                 {props.user.first_name} {props.user.last_name}
             </h1>
             <div className = "link-container">
+                <Link  to={'/User_Profile/' + props.user.user_id } >
+                    <Button variant="light"> View Profile </Button>
+                </Link>
+
                 { props.user.following !== 1 ? 
-                <Button value="Follow" onClick={onClickFollow}>Follow</Button> : 
-                <Button value="Follow" onClick={onClickUnfollow}>Unfollow</Button> }
+                <Button onClick={onClickFollow}>Follow</Button> : 
+                <Button onClick={onClickUnfollow}>Unfollow</Button> }
                 
             </div>
 

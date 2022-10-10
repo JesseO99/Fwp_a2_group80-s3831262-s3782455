@@ -19,7 +19,7 @@ import useUsers from "./hooks/useUsers";
 import {ToastContainer} from "react-bootstrap";
 import Toast from "react-bootstrap/Toast";
 import useToast from "./hooks/useToast";
-
+import UserProfile from './pages/UserProfile';
 //Create and pass contexts for multiple usage instances
 export const UserContext = createContext();
 export const LoginUserContext = createContext();
@@ -46,9 +46,11 @@ function App() {
         addComment,
         addSubComment,
         removeUserPosts,
-        getAllPosts
+        getAllPosts,
+        getPostsFromUserId
     } = usePost();
 
+    // Call useUsers Custom hook
     const {
         users, 
         getAllUsers,
@@ -88,6 +90,12 @@ function App() {
                                 <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
                                 <Route path="/People" element={<People users={users} getAllUsers={getAllUsers}/>}/>
                                 <Route path="/Following" element={<Following users={users} getAllFollowing={getAllFollowing}/> }/>
+                                <Route path="/User_Profile/:profile_id" element={<UserProfile getAllPosts={getPostsFromUserId} 
+                                posts={posts}
+                                removePost={removePost} addComment={addComment}
+                                addSubComment={addSubComment}
+                                
+                                />}/>
                             </Routes>
                             {/*Toast Message for Success/Error Post Creation*/}
                             <ToastContainer className="p-3" position="top-end">

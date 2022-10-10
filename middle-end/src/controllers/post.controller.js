@@ -218,3 +218,53 @@ exports.delete = async (req, res) => {
         "data": deleteStatus
     });
 };
+
+
+// Select all posts from the database with a matching user_id
+exports.user_posts = async (req, res) => {
+    let posts;
+    console.log("user_Posts", req.params.user_id);
+    try{
+        posts = await db.post.findAll({ where: {user_id: req.params.user_id}, 
+            include:[{
+                model:db.user,
+                attributes:['user_id','email','first_name','last_name'],
+            },{
+                model:db.comment,
+                include:[{
+                    model:db.sub_comment,
+                    include:{
+                        model:db.user,
+                        attributes:['email','first_name','last_name'],
+                    }
+                },{
+                    model:db.user,
+                    attributes:['email','first_name','last_name'],
+                }]
+            }
+            ]});
+    }
+    catch (err){
+        //Api request validation
+        res.json({
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        });
+        return;
+    }
+
+
+    // Can use eager loading to join tables if needed, for example:
+    // const posts = await db.post.findAll({ include: db.user });
+
+    // Learn more about eager loading here: https://sequelize.org/master/manual/eager-loading.html
+
+    const response ={
+        "status": "100",
+        "message": "Success",
+        "data": posts
+    }
+
+    res.json(response);
+};

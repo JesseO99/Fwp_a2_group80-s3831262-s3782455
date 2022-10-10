@@ -6,7 +6,9 @@ import {
     getAllPosts,
     deletePostById,
     getPosts,
-    addNewComment, addNewSubComment
+    addNewComment, 
+    addNewSubComment,
+    getUserPosts
 } from "../data/repository";
 import {Result} from "../data/Constant";
 import check from "../img/check.png";
@@ -17,6 +19,12 @@ import {ToastContext} from "../App";
 const usePost = () => {
 
     const [posts, setPosts] = useState([]);
+
+    const getPostsFromUserId = (user_id) => {
+        getUserPosts(user_id).then((response)=>{
+            setPosts(response);
+        })
+    }
 
 
     //Add New post to the list
@@ -159,7 +167,8 @@ const usePost = () => {
         addSubComment,
         removeUserPosts,
         updateAllUserEntryEmails,
-        getAllPosts
+        getAllPosts,
+        getPostsFromUserId
     }
 };
 

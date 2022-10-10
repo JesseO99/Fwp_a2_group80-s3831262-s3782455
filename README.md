@@ -62,6 +62,9 @@ Week8 - Activty1 for creating the middle-end
 
 Week9 - many to many relationships
 
+Use Params Hook
+https://reactrouter.com/en/main/hooks/use-params
+
 Sequelize ORM
 <https://sequelize.org/>
 

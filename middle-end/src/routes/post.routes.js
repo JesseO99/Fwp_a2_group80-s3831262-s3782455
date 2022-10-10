@@ -18,6 +18,10 @@ module.exports = (express, app) => {
     // Delete a post.
     router.get("/delete", controller.delete);
 
+    router.get("/user_posts/:user_id", controller.user_posts);
+    
     // Add routes to server.
     app.use("/api/posts", router);
+
+
 };

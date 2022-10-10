@@ -6,13 +6,16 @@ import {Stack, ToastContainer} from "react-bootstrap";
 import {UserContext} from "../App";
 import Toast from "react-bootstrap/Toast";
 
-
-function Feed({posts, removePost, addComment, addSubComment, getAllPosts}) {
-
+function Feed(props) {
+    const posts = props.posts;
+    const removePost = props.removePost;
+    const addComment = props.addComment;
+    const getAllPosts = props.getAllPosts;
+    const addSubComment = props.addSubComment;
     const username = useContext(UserContext);
 
     useEffect(() => {
-        getAllPosts();
+        getAllPosts(props.user_id);
     }, []);
 
     //Authenticate and Redirect if not Logged in

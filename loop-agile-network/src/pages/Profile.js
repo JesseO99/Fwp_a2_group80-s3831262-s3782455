@@ -1,12 +1,11 @@
 import "./Profile.css";
-import {getUserDetails, deleteUser} from "../data/repository"
+import { deleteUser} from "../data/repository"
 import {Navigate} from "react-router-dom";
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import avatar from "../img/avatar.png";
 import Popup from "../components/Popup";
-import {Button, Container, Row, Stack} from "react-bootstrap";
-import Col from "react-bootstrap/Col";
+import {Button, Stack} from "react-bootstrap";
 import {UserContext} from "../App";
 
 

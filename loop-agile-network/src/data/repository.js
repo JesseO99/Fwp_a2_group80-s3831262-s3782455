@@ -139,6 +139,7 @@ async function getUserById(user_id)
 {
     const response = await axios.get(API_HOST + "/users/user", {params: {user_id}});
     const user = response.data
+    console.log("Repository: ", user);
     return user;
 }
 
@@ -162,7 +163,7 @@ function removeUser() {
 async function getUserDetails(email)
 {
     const response = await axios.get(API_HOST + `/users/search/${email}`);
-    console.dir(response.data);
+    console.log("repository ", response.data);
     //Returns as an array
     return response.data;
 
@@ -195,6 +196,20 @@ async function updateUser(user_id, email, first_name, last_name) {
     }
 }
 
+async function check_following(user_id, profile_id)
+{
+    const response = await axios.get(API_HOST + "/follows/check", {params: {user_id, profile_id}});
+
+    return response.data;
+}
+
+// Returns the posts made by the provided user_id
+async function getUserPosts(user_id)
+{
+    const posts = await axios.get(API_HOST + "/posts/user_posts/" + user_id);
+    console.log("Repository: Posts: ", posts.data.data);
+    return posts.data.data
+}
 
 //get Posts from local storage
 function getPostDetails() {
@@ -286,5 +301,7 @@ export {
     getUsersFollowing,
     followUser,
     unfollowUser,
-    getAllFollowingUsers
+    getAllFollowingUsers,
+    getUserPosts,
+    check_following
 }

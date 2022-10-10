@@ -11,8 +11,8 @@ function useUsers() {
     
 
     async function getAllFollowing(user_id) {
-        let users = await getAllFollowingUsers(user_id)
-        setUsers(users);
+        let users_list = await getAllFollowingUsers(user_id)
+        setUsers(users_list);
     }
 
     return {getAllUsers, users, getAllFollowing}

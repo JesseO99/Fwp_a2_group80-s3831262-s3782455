@@ -10,6 +10,8 @@ module.exports = (express, app) => {
     router.put("/follow", controller.follow);
 
     router.delete("/unfollow", controller.unfollow);
+
+    router.get("/check", controller.check_following);
     // Add routes to server.
     app.use("/api/follows", router);
 };

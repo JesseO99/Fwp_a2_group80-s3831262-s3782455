@@ -2,7 +2,7 @@ const db = require("../database");
 const argon2 = require("argon2");
 const {Sequelize} = require("sequelize");
 
-// Select all users from the database.
+// Select all follows from the database where the user_id is following
 exports.following_all = async (req, res) => {
     let follows;
     const user_id = req.query.user_id;
@@ -26,6 +26,7 @@ exports.following_all = async (req, res) => {
     });
 };
 
+// Selects all users from the database that the given user is following
 exports.all_users_follow = async (req, res) => {
     let users;
 
@@ -49,6 +50,7 @@ exports.all_users_follow = async (req, res) => {
     });
 }
 
+// Selects all follows from the database
 exports.all = async (req, res) => {
     let follows;
 
@@ -70,6 +72,7 @@ exports.all = async (req, res) => {
 
 }
 
+// Creates a follows entry
 exports.follow = async (req, res) => {
     let follows;
 
@@ -93,6 +96,7 @@ exports.follow = async (req, res) => {
     });
 }
 
+// Deletes a follows entry
 exports.unfollow = async (req, res) => {
     let delete_follow;
 
@@ -117,4 +121,26 @@ exports.unfollow = async (req, res) => {
         "message": "Success",
         "data": delete_follow
     });
+}
+
+// Checks is provided user_id is following provided profile id returns a boolean value
+exports.check_following = async (req, res) => {
+    let following;
+    try {
+        following = await db.follow.findAll({where: {follower_id: req.query.user_id, followed_id: req.query.profile_id }});
+    } catch (err)
+    {
+        console.log(err);
+        res.json( false);
+        return;
+    }
+
+    if(following.length === 0 )
+    {
+        res.json(false);
+    }
+    else
+    {
+        res.json(true);
+    }
 }
