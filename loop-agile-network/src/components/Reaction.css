@@ -1,0 +1,31 @@
+/*Common style for normal Like and Dislike button*/
+#btn-normal {
+    height: 20px;
+    cursor: pointer;
+}
+/*Style for like button*/
+#btn-liked {
+    height: 20px;
+    cursor: pointer;
+}
+/*Style for Dislike button*/
+#btn-disliked {
+    cursor: pointer;
+    height: 20px;
+}
+/*Style for count text*/
+#like-dislike-count {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    margin-left: 8px;
+    font-size: 14px;font-weight: bold;
+}
+/*Style for bottom line*/
+#bottom-line {
+    margin-top: 5px;
+}
+/*Style for like stack*/
+#like-stack {
+    margin: -5px 5px 10px 10px;
+}
+

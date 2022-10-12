@@ -7,10 +7,11 @@ import {getNameByEmail, getPosts} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
 import {ToastContext, UserContext} from "../App";
-import {Result} from "../data/Constant";
+import {Interaction, Interaction as Ineraction, Result} from "../data/Constant";
 import check from "../img/check.png";
 import Toast from "react-bootstrap/Toast";
 import warning from "../img/warning.png";
+import Reaction from "./Reaction";
 
 
 // Post component for individual post
@@ -22,7 +23,7 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
 
     //Call the delete post method in usePost
     const deletePost = async (id) => {
-        let status = await removePost(id,toastMessage);
+        let status = await removePost(id,toastMessage,user.user_id);
     }
 
 
@@ -81,6 +82,13 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
 
                     <p id="post-text">{post.post_content}</p>
                     <hr data-content="AND" className="hr-text"/>
+                    <Reaction
+                        contentId={post.post_id}
+                        contentType={Interaction.POST}
+                        userId={user.user_id}
+                        currentReaction={post.user_reactions[0]? post.user_reactions[0].userReaction : undefined}
+                        likedCount={post.user_reactions[0]?post.user_reactions[0].likedCount:undefined}
+                        dislikedCount={post.user_reactions[0]?post.user_reactions[0].dislikedCount:undefined}/>
                     {post.comments.length > 0 && <p className="comment-heading">Comments</p>}
 
                     {/*Create a list of comments*/}

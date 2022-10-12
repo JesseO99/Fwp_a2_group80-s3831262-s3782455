@@ -6,14 +6,14 @@ import {
     getAllPosts,
     deletePostById,
     getPosts,
-    addNewComment, addNewSubComment
+    addNewComment, addNewSubComment,addReaction
 } from "../data/repository";
 import {Result} from "../data/Constant";
 import check from "../img/check.png";
 import warning from "../img/warning.png";
 import {ToastContext} from "../App";
 
-//Custom Hook for Posting and Commenting
+//Custom Hook for Posting, Commenting and Reaction
 const usePost = () => {
 
     const [posts, setPosts] = useState([]);
@@ -34,14 +34,14 @@ const usePost = () => {
         });
     };
 
-    const getAllPosts = () =>{
-      getPosts().then(data=>{
+    const getAllPosts = (id) =>{
+      getPosts(id).then(data=>{
           setPosts(data.data);
       })
     };
 
     //Remove post from the list
-    const removePost = (postToBeDeleted,toastMessage) => {
+    const removePost = (postToBeDeleted,toastMessage,userId) => {
         return deletePostById(postToBeDeleted).then(data =>{
             console.dir(postToBeDeleted);
             if(data.status == Result.SUCCESS){
@@ -54,7 +54,7 @@ const usePost = () => {
             }
             //Scroll Window to top
             window.scrollTo(0, 0);
-            getAllPosts();
+            getAllPosts(userId);
             return data.status;
         });
 
@@ -114,7 +114,7 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts();
+                getAllPosts(comment.userId);
             }
 
             return data.status;
@@ -131,7 +131,24 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts();
+                getAllPosts(subComment.userId);
+            }
+
+            return data.status;
+        });
+    };
+
+
+    //Add a reaction
+    const sendReaction = (reaction,toastMessage) => {
+         addReaction(reaction).then(data =>{
+            if(data.status !=Result.SUCCESS){
+                //Show error message
+                toastMessage("Reaction Error","There was an error of reacting the content. Please check your internet connection and try again later!",warning)
+                //Scroll Window to top
+                window.scrollTo(0, 0);
+            }else{
+                getAllPosts(reaction.userId);
             }
 
             return data.status;
@@ -159,7 +176,8 @@ const usePost = () => {
         addSubComment,
         removeUserPosts,
         updateAllUserEntryEmails,
-        getAllPosts
+        getAllPosts,
+        sendReaction
     }
 };
 

@@ -21,6 +21,7 @@ import useToast from "./hooks/useToast";
 export const UserContext = createContext();
 export const LoginUserContext = createContext();
 export const ToastContext = createContext();
+export const ReactionContext = createContext();
 
 function App() {
     const [user, setUser] = useState(getUser); //We save current user locally instead of username now to avoid
@@ -43,7 +44,8 @@ function App() {
         addSubComment,
         removeUserPosts,
         updateAllUserEntryEmails,
-        getAllPosts
+        getAllPosts,
+        sendReaction
     } = usePost();
 
 
@@ -61,6 +63,7 @@ function App() {
         <UserContext.Provider value={user}>
             <ToastContext.Provider value={toastMessage}>
                 <LoginUserContext.Provider value={loginUser}>
+                <ReactionContext.Provider value={sendReaction}>
                     <div className="App">
                         <BrowserRouter>
                             <Header logoutUser={logoutUser}/>
@@ -103,6 +106,7 @@ function App() {
                             <Footer/>
                         </BrowserRouter>
                     </div>
+                </ReactionContext.Provider>
                 </LoginUserContext.Provider>
             </ToastContext.Provider>
         </UserContext.Provider>

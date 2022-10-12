@@ -15,6 +15,9 @@ module.exports = (express, app) => {
     // Add a new sub comment.
     router.post("/sub_comment", controller.subComment);
 
+    // Add a reaction.
+    router.post("/reaction", controller.reaction);
+
     // Delete a post.
     router.get("/delete", controller.delete);
 

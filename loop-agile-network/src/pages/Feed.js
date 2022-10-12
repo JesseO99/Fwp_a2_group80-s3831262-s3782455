@@ -9,14 +9,14 @@ import Toast from "react-bootstrap/Toast";
 
 function Feed({posts, removePost, addComment, addSubComment, getAllPosts}) {
 
-    const username = useContext(UserContext);
+    const user = useContext(UserContext);
 
     useEffect(() => {
-        getAllPosts();
+        getAllPosts(user.user_id);
     }, []);
 
     //Authenticate and Redirect if not Logged in
-    if (!username) {
+    if (!user) {
         return <Navigate to="/"/>
     }
 

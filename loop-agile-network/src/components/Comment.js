@@ -6,6 +6,8 @@ import React, {useContext, useState} from "react";
 import Form from "react-bootstrap/Form";
 import SubComment from "./SubComment";
 import {ToastContext, UserContext} from "../App";
+import Reaction from "./Reaction";
+import {Interaction} from "../data/Constant";
 
 
 const Comment = ({comment, post, addSubComment}) => {
@@ -59,6 +61,14 @@ const Comment = ({comment, post, addSubComment}) => {
                     <p id="comment">{comment.comment_content}</p>
 
                 </Stack>
+                {/*Reaction Section*/}
+                <Reaction
+                    contentId={comment.comment_id}
+                    contentType={Interaction.COMMENT}
+                    userId={user.user_id}
+                    currentReaction={post.user_reactions[0]? post.user_reactions[0].userReaction : undefined}
+                    likedCount={post.user_reactions[0]?post.user_reactions[0].likedCount:undefined}
+                    dislikedCount={post.user_reactions[0]?post.user_reactions[0].dislikedCount:undefined}/>
 
                 {/*Create a list of SubComments*/}
                 {comment.sub_comments.map((subComment) => (

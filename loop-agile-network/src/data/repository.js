@@ -53,8 +53,8 @@ async function createPost(post) {
 
 }
 //Get all posts API call
-async function getPosts(){
-    return await axios.get(API_HOST + "/posts").then(res =>{
+async function getPosts(id){
+    return await axios.get(API_HOST + "/posts",{params: {id}}).then(res =>{
         return res.data;
     })
 }
@@ -81,6 +81,18 @@ async function addNewSubComment(comment) {
     })
 
 }
+
+
+//Add Reaction API call
+async function addReaction(reaction) {
+    return await axios.post(API_HOST + "/posts/reaction", reaction).then(res =>{
+        return res.data;
+    })
+
+}
+
+
+
 
 // Verifies User's email address and password matches what is stored in local storage
 async function verifyUser(email, password) {
@@ -265,5 +277,6 @@ export {
     getPosts,
     deletePostById,
     addNewComment,
-    addNewSubComment
+    addNewSubComment,
+    addReaction
 }
