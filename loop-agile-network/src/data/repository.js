@@ -139,7 +139,6 @@ async function getUserById(user_id)
 {
     const response = await axios.get(API_HOST + "/users/user", {params: {user_id}});
     const user = response.data
-    console.log("Repository: ", user);
     return user;
 }
 

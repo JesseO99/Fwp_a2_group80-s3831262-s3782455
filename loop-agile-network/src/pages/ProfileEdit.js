@@ -103,16 +103,16 @@ function ProfileEdit(props) {
 
                     <Form.Group className="mb-3" controlId="firstName" onChange={onChangeFirstName}>
                         <Form.Label>First Name</Form.Label> <br></br>
-                        <Form.Control type="text" placeholder="Enter FirstName" value={firstName}/>
+                        <Form.Control type="text" placeholder="Enter FirstName" data-testid="First-Name-Edit" defaultValue={firstName}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="lastName" onChange={onChangeLastName}>
                         <Form.Label>Last Name</Form.Label> <br></br>
-                        <Form.Control type="text" placeholder="Enter FirstName" value={lastName}/>
+                        <Form.Control type="text" placeholder="Enter LastName" data-testid="Last-Name-Edit" defaultValue={lastName}/>
                     </Form.Group>
-                    {email_error && <p className="Error-Message"> That Email is taken one email can only be linked to one account</p>}
+                    {email_error && <p className="Error-Message" data-testid="profile-edit-error"> That Email is taken one email can only be linked to one account</p>}
                     <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
                         <Form.Label>Email Address</Form.Label> <br></br>
-                        <Form.Control type="email" placeholder="Enter email" value={email}/>
+                        <Form.Control type="email" placeholder="Enter email" data-testid="Email-Edit" defaultValue={email}/>
                     </Form.Group>
 
                     {/* Code Bellow is to be used if image upload is implemented */}
@@ -121,7 +121,7 @@ function ProfileEdit(props) {
                             <Form.Control type="file"></Form.Control>
 
                         </Form.Group> */}
-                    <Button variant="primary" type="submit" onClick={togglePopup}>Submit</Button>
+                    <Button variant="primary" type="submit" onClick={togglePopup} data-testid="submit">Submit</Button>
 
                 </div>
 

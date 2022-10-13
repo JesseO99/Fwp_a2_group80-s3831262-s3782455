@@ -83,7 +83,7 @@ function Signin() {
             <div className="container">
                 <div className="signin-form">
                     <h1>Sign In</h1>
-                    {failedAttempt && <p className="Error-Message"> Email/Password was incorrect please try again</p>}
+                    {failedAttempt && <p className="Error-Message" data-testid="error-message-signin"> Email/Password was incorrect please try again</p>}
                     <Form onSubmit={onSubmit}>
                         <Form.Group className="mb-3" controlId="formBasicEmail" onChange={onChangeEmail}>
                             <Form.Label>Email Address</Form.Label>
@@ -93,7 +93,7 @@ function Signin() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder="Password"/>
                         </Form.Group>
-                        <Button variant="primary" type="submit">Submit</Button>
+                        <Button variant="primary" type="submit" data-testid="submit">Submit</Button>
                     </Form>
                 </div>
             </div>

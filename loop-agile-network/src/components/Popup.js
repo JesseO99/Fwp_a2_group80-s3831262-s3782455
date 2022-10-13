@@ -19,7 +19,7 @@ function Popup(props) {
                     <Button className="cancel" variant="light" type="button" value="cancel"
                             onClick={props.close}> Cancel</Button>
                     <Button className="confirm" variant="primary    " type="button" value="confirm"
-                            onClick={props.confirm}>Confirm</Button>
+                            onClick={props.confirm} data-testid="confirm-popup">Confirm</Button>
                 </div>
             </div>
         </div>
