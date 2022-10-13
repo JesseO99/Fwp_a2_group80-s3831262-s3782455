@@ -37,8 +37,8 @@ function PersonCard (props) {
                 </Link>
 
                 { props.user.following !== 1 ? 
-                <Button onClick={onClickFollow}>Follow</Button> : 
-                <Button onClick={onClickUnfollow}>Unfollow</Button> }
+                <Button onClick={onClickFollow} data-testid="follow-button">Follow</Button> : 
+                <Button onClick={onClickUnfollow} data-testid="unfollow-button">Unfollow</Button> }
                 
             </div>
 
