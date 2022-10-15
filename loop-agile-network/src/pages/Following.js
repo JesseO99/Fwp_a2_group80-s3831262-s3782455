@@ -25,6 +25,7 @@ function Following(props)
     return(
         <div className="Following-Container">
             <h1> Following </h1>
+            <div>
                 {props.users.map((user) => (
                     <ul>
                         <li>
@@ -32,6 +33,7 @@ function Following(props)
                         </li>
                     </ul>
                 ))}
+            </div>
         </div>
 
     )

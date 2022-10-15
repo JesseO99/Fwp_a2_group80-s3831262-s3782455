@@ -25,13 +25,15 @@ function People(props) {
     return (
         <div className="People-Container">
             <h1> People </h1>
+            <div>
                 {props.users.map((user) => (
-                            <ul>
-                                <li>
-                                    <PersonCard user={user} followButtonClicked={followButtonClicked}/>
-                                </li>
-                            </ul>
+                    <ul>
+                        <li>
+                            <PersonCard user={user} followButtonClicked={followButtonClicked}/>
+                        </li>
+                    </ul>
                 ))}
+            </div>
         </div>
     )
 }
