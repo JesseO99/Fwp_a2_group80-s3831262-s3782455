@@ -11,6 +11,7 @@ import {Result} from "../data/Constant";
 import check from "../img/check.png";
 import Toast from "react-bootstrap/Toast";
 import warning from "../img/warning.png";
+import sanitize from "sanitize-html";
 
 
 // Post component for individual post
@@ -79,7 +80,7 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
                     </>
                     }
 
-                    <p id="post-text">{post.post_content}</p>
+                    <p id="post-text"><span dangerouslySetInnerHTML={{ __html: sanitize(post.post_content) }} /></p>
                     <hr data-content="AND" className="hr-text"/>
                     {post.comments.length > 0 && <p className="comment-heading">Comments</p>}
 
