@@ -84,7 +84,12 @@ function App() {
                                 <Route path="/" element={<Home/>}/>
                                 <Route path="/Signin" element={<Signin/>}/>
                                 <Route path="/Profile"
-                                       element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
+                                       element={<Profile 
+                                        logoutUser={logoutUser} removeUserPosts={removeUserPosts} 
+                                        getAllPosts={getPostsFromUserId} 
+                                        posts={posts}
+                                        removePost={removePost} addComment={addComment}
+                                        addSubComment={addSubComment}/>}/>
                                 <Route path="/Signup" element={<Signup/>}/>
                                 <Route path="Profile-Edit"
                                        element={<ProfileEdit/>}></Route>

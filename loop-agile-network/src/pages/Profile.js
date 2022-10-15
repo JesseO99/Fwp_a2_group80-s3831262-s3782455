@@ -7,6 +7,7 @@ import avatar from "../img/avatar.png";
 import Popup from "../components/Popup";
 import {Button, Stack} from "react-bootstrap";
 import {UserContext} from "../App";
+import Feed from "./Feed";
 
 
 function Profile(props) {
@@ -38,7 +39,7 @@ function Profile(props) {
 
     return (
         <div className="container" data-testid="about">
-            <p id="profile-heading">Profile</p>
+            <p className="profile-heading">Profile</p>
 
             <div className="profile-body">
                 {/* <img className="Profile-Pic" src={user.img.length === 0 ? avatar : user.img} alt="Profile"></img> */}
@@ -73,11 +74,20 @@ function Profile(props) {
                         </div>
 
                     </div>
-
-
                 </div>
 
 
+
+            </div>
+            <p className="profile-heading">My Posts</p>
+            <div className="post-container">
+                        <Feed 
+                        posts={props.posts} 
+                        removePost={props.removePost} 
+                        addComment={props.addComment}
+                        addSubComment={props.addSubComment}
+                        getAllPosts={props.getAllPosts}
+                        user_id={user.user_id}/>
             </div>
             {/* HTML for Popup */}
             {isOpen && <Popup close={togglePopup} confirm={removeUser}

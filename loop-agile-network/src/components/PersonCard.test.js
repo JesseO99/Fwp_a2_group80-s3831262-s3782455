@@ -57,11 +57,11 @@ test ("Follow Button Exsits", async () => {
 });
 
 
-test("Test Follow Click", async () => {
-    buttonClicked = false;
-    const follow = screen.getByTestId("follow-button");
-    fireEvent.click(follow);
+// test("Test Follow Click", async () => {
+//     buttonClicked = false;
+//     const follow = screen.getByTestId("follow-button");
+//     fireEvent.click(follow);
 
-    // await waitFor(async () => { });   
-    expect( await screen.findByTestId("unfollow-button")).toBeInTheDocument()
-})
+//     // await waitFor(async () => { });   
+//     expect( await screen.findByTestId("unfollow-button")).toBeInTheDocument()
+// })
