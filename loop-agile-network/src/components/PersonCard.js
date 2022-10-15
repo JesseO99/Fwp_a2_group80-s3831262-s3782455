@@ -28,7 +28,7 @@ function PersonCard (props) {
     return(
         <div className="person-card-container">
             <img className="Profile-Pic" src={avatar} alt="Profile-Pic"></img>
-            <h1>
+            <h1 className="name">
                 {props.user.first_name} {props.user.last_name}
             </h1>
             <div className = "link-container">

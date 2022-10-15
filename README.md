@@ -71,6 +71,9 @@ RichText Editor
 Use Params Hook
 https://reactrouter.com/en/main/hooks/use-params
 
+Jest Testing
+<https://jestjs.io/>
+
 Sequelize ORM
 <https://sequelize.org/>
 
@@ -79,3 +82,5 @@ Testing Components that use useNavigate hook
 
 Testing Cheatsheat
 <https://testing-library.com/docs/react-testing-library/cheatsheet>
+
+React, Node, Express, MYSQL, Sequelize, Bootstrap, Testing : Week 1 - Week 12 Lectures & Tutorials

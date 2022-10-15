@@ -1,7 +1,7 @@
 import "./Following.css"
 import PersonCard from "../components/PersonCard";
 import { UserContext } from "../App";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 function Following(props)
 {
@@ -33,6 +33,9 @@ function Following(props)
                         </li>
                     </ul>
                 ))}
+
+                {props.users.length === 0 &&
+                    <p className="empty-following">Wow! It's Nothing Yet. <br/> Follow more people now!</p>}
             </div>
         </div>
 
