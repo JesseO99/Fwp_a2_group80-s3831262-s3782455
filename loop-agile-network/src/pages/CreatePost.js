@@ -125,9 +125,8 @@ function CreatePost({addPost}) {
                                         editorState={editorState}
                                         onEditorStateChange={setEditorState}
                                         onContentStateChange={formik.handleChange}
-                                        // onChange={formik.handleChange}
-                                        // value={formik.values.post}
                                         onChange={formik.values.post}
+                                        inputProps={{ "data-testid": "editor" }}
                                     />
                                 </div>
 
@@ -146,6 +145,7 @@ function CreatePost({addPost}) {
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Button id="publish-button"
+                                        data-testid="publish"
                                         variant='primary'
                                         type="submit">
                                     Publish </Button>

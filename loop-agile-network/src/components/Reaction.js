@@ -114,8 +114,8 @@ const Reaction = ({contentId,contentType,userId,currentReaction, likedCount,disl
 
             <Stack direction={contentType == Interaction.POST? "vertical" : "horizontal"}>
             <Stack direction="horizontal" gap="2" id="like-stack">
-                <img src={reaction == Reactions.LIKED? likeBlue : likeBlack} id={setLikeAppearance()} onClick={likeClicked}/>
-                <img src={reaction == Reactions.DISLIKED? dislikeRed : dislikeBlack} id={setDislikeAppearance()} onClick={dislikeClicked}/>
+                <img src={reaction == Reactions.LIKED? likeBlue : likeBlack} id={setLikeAppearance()} onClick={likeClicked} data-testid="like_button"/>
+                <img src={reaction == Reactions.DISLIKED? dislikeRed : dislikeBlack} id={setDislikeAppearance()} onClick={dislikeClicked} data-testid="dislike_button"/>
             </Stack>
             <p id="like-dislike-count">{numOfLikes+" Likes "+ numOfDislikes+" Dislikes"} </p>
             </Stack>
