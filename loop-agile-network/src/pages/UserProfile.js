@@ -67,7 +67,7 @@ function UserProfile(props)
                 addComment={props.addComment}
                 addSubComment={props.addSubComment}
                 getAllPosts={props.getAllPosts}
-                user_id={profile_id}/>
+                      userId={profile_id}/>
             </div>
         </div>
     );

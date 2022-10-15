@@ -14,6 +14,12 @@ const Result = {
     FAILED: "200"
 }
 
+const Reactions = {
+    NONE: 0,
+    LIKED: 1,
+    DISLIKED:2
+}
+
 
 
 export {
@@ -23,5 +29,6 @@ export {
     POSTS_KEY,
     AUTH_DATA_KEY,
     Interaction,
-    Result
+    Result,
+    Reactions
 }

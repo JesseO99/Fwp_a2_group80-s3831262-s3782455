@@ -59,9 +59,13 @@
     /*background: aquamarine;*/
     font-style: italic;
 }
-
+/*Subcomment field style*/
 #sub-comment-field {
     width: fit-content;
     min-width: 50%;
     max-width: 100%;
+}
+/*Reaction Section Styling*/
+#reaction-section{
+    margin-left: 12px;
 }

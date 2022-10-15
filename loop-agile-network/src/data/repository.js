@@ -59,8 +59,8 @@ async function createPost(post) {
 
 }
 //Get all posts API call
-async function getPosts(){
-    return await axios.get(API_HOST + "/posts").then(res =>{
+async function getPosts(id){
+    return await axios.get(API_HOST + "/posts",{params: {id}}).then(res =>{
         return res.data;
     })
 }
@@ -87,6 +87,18 @@ async function addNewSubComment(comment) {
     })
 
 }
+
+
+//Add Reaction API call
+async function addReaction(reaction) {
+    return await axios.post(API_HOST + "/posts/reaction", reaction).then(res =>{
+        return res.data;
+    })
+
+}
+
+
+
 
 // Verifies User's email address and password matches what is stored in local storage
 async function verifyUser(email, password) {
@@ -203,9 +215,9 @@ async function check_following(user_id, profile_id)
 }
 
 // Returns the posts made by the provided user_id
-async function getUserPosts(user_id)
+async function getUserPosts(userId,loggedId)
 {
-    const posts = await axios.get(API_HOST + "/posts/user_posts/" + user_id);
+    const posts = await axios.get(API_HOST + "/posts/user_posts/",{params: {loggedId,userId}});
     console.log("Repository: Posts: ", posts.data.data);
     return posts.data.data
 }
@@ -296,6 +308,7 @@ export {
     deletePostById,
     addNewComment,
     addNewSubComment,
+    addReaction,
     getUsers,
     getUsersFollowing,
     followUser,
