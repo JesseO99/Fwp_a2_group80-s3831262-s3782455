@@ -62,14 +62,15 @@ const Comment = ({comment, post, addSubComment}) => {
 
                 </Stack>
                 {/*Reaction Section*/}
+                <div id="reaction-section">
                 <Reaction
                     contentId={comment.comment_id}
                     contentType={Interaction.COMMENT}
                     userId={user.user_id}
-                    currentReaction={post.user_reactions[0]? post.user_reactions[0].userReaction : undefined}
-                    likedCount={post.user_reactions[0]?post.user_reactions[0].likedCount:undefined}
-                    dislikedCount={post.user_reactions[0]?post.user_reactions[0].dislikedCount:undefined}/>
-
+                    currentReaction={comment.user_reactions[0]? comment.user_reactions[0].userReaction : undefined}
+                    likedCount={comment.user_reactions[0]?comment.user_reactions[0].likedCount:undefined}
+                    dislikedCount={comment.user_reactions[0]?comment.user_reactions[0].dislikedCount:undefined}/>
+                </div>
                 {/*Create a list of SubComments*/}
                 {comment.sub_comments.map((subComment) => (
                     <>

@@ -3,7 +3,7 @@ const e = require("express");
 const {SUB_COMMENT, COMMENT, POST} = require("../Constant");
 
 
-// Select all posts from the database.
+// Select all posts and relate data from the database.
 exports.all = async (req, res) => {
     let user_id = req.query.id
     let posts;
@@ -53,7 +53,8 @@ exports.all = async (req, res) => {
                     AND reaction.content_id = sub_comment_id
                 )`),
                             'userReaction'
-                        ]]
+                        ]],
+
                     }]
                 },{
                     model: db.user_reaction,

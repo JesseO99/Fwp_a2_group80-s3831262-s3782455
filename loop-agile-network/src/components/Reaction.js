@@ -48,7 +48,6 @@ const Reaction = ({contentId,contentType,userId,currentReaction, likedCount,disl
 
     //Make reaction API call
     function addReaction(react){
-        console.log(react);
         const newReaction = {
             contentId:contentId,
             contentType:contentType,
