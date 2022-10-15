@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) =>
             allowNull: false
         },
 
-        // 0 - Like, 1 - Dislike
+        // 0 - None, 1 - Like, 2 - Dislike
         reaction_type: {
             type: DataTypes.INTEGER,
             allowNull: false

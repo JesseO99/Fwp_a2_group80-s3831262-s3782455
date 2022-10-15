@@ -41,7 +41,7 @@
 }
 
 /*Profile Heading Style*/
-#profile-heading {
+.profile-heading {
     font-size: 40px;
     font-weight: bold;
     margin: 1% 0% 0% 7%;

@@ -15,11 +15,14 @@ module.exports = (express, app) => {
     // Add a new sub comment.
     router.post("/sub_comment", controller.subComment);
 
+    // Add a reaction.
+    router.post("/reaction", controller.reaction);
+
     // Delete a post.
     router.get("/delete", controller.delete);
 
-    router.get("/user_posts/:user_id", controller.user_posts);
-    
+    router.get("/user_posts/", controller.user_posts);
+
     // Add routes to server.
     app.use("/api/posts", router);
 

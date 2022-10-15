@@ -24,6 +24,7 @@ import UserProfile from './pages/UserProfile';
 export const UserContext = createContext();
 export const LoginUserContext = createContext();
 export const ToastContext = createContext();
+export const ReactionContext = createContext();
 
 
 function App() {
@@ -46,8 +47,11 @@ function App() {
         addComment,
         addSubComment,
         removeUserPosts,
+        updateAllUserEntryEmails,
         getAllPosts,
+        sendReaction,
         getPostsFromUserId
+
     } = usePost();
 
     // Call useUsers Custom hook
@@ -71,6 +75,7 @@ function App() {
         <UserContext.Provider value={user}>
             <ToastContext.Provider value={toastMessage}>
                 <LoginUserContext.Provider value={loginUser}>
+                <ReactionContext.Provider value={sendReaction}>
                     <div className="App">
                         <BrowserRouter>
                             <Header logoutUser={logoutUser}/>
@@ -79,18 +84,23 @@ function App() {
                                 <Route path="/" element={<Home/>}/>
                                 <Route path="/Signin" element={<Signin/>}/>
                                 <Route path="/Profile"
-                                       element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
+                                       element={<Profile 
+                                        logoutUser={logoutUser} removeUserPosts={removeUserPosts} 
+                                        getAllPosts={getPostsFromUserId} 
+                                        posts={posts}
+                                        removePost={removePost} addComment={addComment}
+                                        addSubComment={addSubComment}/>}/>
                                 <Route path="/Signup" element={<Signup/>}/>
                                 <Route path="Profile-Edit"
                                        element={<ProfileEdit/>}></Route>
                                 <Route path="/Feed"
                                        element={<Feed posts={posts} removePost={removePost} addComment={addComment}
                                                       addSubComment={addSubComment}
-                                                      getAllPosts={getAllPosts}/>}></Route>
+                                                      getAllPosts={getAllPosts} userId={user?user.user_id:undefined}/>}></Route>
                                 <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
                                 <Route path="/People" element={<People users={users} getAllUsers={getAllUsers}/>}/>
                                 <Route path="/Following" element={<Following users={users} getAllFollowing={getAllFollowing}/> }/>
-                                <Route path="/User_Profile/:profile_id" element={<UserProfile getAllPosts={getPostsFromUserId} 
+                                <Route path="/User_Profile/:profile_id" element={<UserProfile getAllPosts={getPostsFromUserId}
                                 posts={posts}
                                 removePost={removePost} addComment={addComment}
                                 addSubComment={addSubComment}
@@ -120,6 +130,7 @@ function App() {
                             <Footer/>
                         </BrowserRouter>
                     </div>
+                </ReactionContext.Provider>
                 </LoginUserContext.Provider>
             </ToastContext.Provider>
         </UserContext.Provider>

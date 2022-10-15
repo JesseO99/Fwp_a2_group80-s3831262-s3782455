@@ -42,7 +42,7 @@ function UserProfile(props)
     
     return (
         <div className = "profile-contatainer">
-            <p id="profile-heading"> User Profile </p>
+            <p class="profile-heading"> User Profile </p>
             <div className="profile-body">
                 <img className="Profile-Pic" src={avatar} alt="Profile"></img>
                 <div className="text-container">
@@ -67,7 +67,7 @@ function UserProfile(props)
                 addComment={props.addComment}
                 addSubComment={props.addSubComment}
                 getAllPosts={props.getAllPosts}
-                user_id={profile_id}/>
+                      userId={profile_id}/>
             </div>
         </div>
     );

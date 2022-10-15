@@ -105,8 +105,11 @@ async function seedData() {
     await db.user.create({ email: "darren@gmail.com", password: hash, first_name: "Darren", last_name : "Eashay" });
 
     //Example of Post and Reaction (Polymorphic Association - manually)
-    const post = await db.post.create({ user_id: 1, post_content:"Hello" });
+
+    const post = await db.post.create({ user_id: 1, post_content:"Welcome to Loop Agile Now!" });
+    const post1 = await db.post.create({ user_id: 1, post_content:"Hello" });
     const post2 = await db.post.create({ user_id: 2, post_content:"Goodbye" });
+
     const reaction = await db.user_reaction.create({
         user_id:1,
         reaction_type:0, // 0 = Like, 1 = Dislike
@@ -117,26 +120,35 @@ async function seedData() {
     const comment = await db.comment.create({
         user_id:1,
         post_id:1,
-        comment_content:"Test comment"
+        comment_content:"You can comment like this :)"
 
     });
     const subcomment = await db.sub_comment.create({
         user_id:1,
         comment_id:1,
-        sub_comment_content:"Test sub comment"
+        sub_comment_content:"And you can reply and react like this!!"
 
     });
     const reaction2 = await db.user_reaction.create({
         user_id:1,
-        reaction_type:1, // 0 = Like, 1 = Dislike
-        content_id:comment.comment_id,
+        reaction_type:1, // 1 = Like, 2 = Dislike
+        content_id:1,
         content_type:COMMENT // p= post, c = comment, sc = sub comment
 
     });
     const reaction3 = await db.user_reaction.create({
         user_id:1,
-        reaction_type:0, // 0 = Like, 1 = Dislike
-        content_id:subcomment.sub_comment_id,
+        reaction_type:0, // 1 = Like, 2 = Dislike
+        content_id:1,
+        content_type:COMMENT
+        // p= post, c = comment, sc = sub comment
+
+    });
+
+    const reaction4 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:2, // 1 = Like, 2 = Dislike
+        content_id:1,
         content_type:SUB_COMMENT // p= post, c = comment, sc = sub comment
 
     });
