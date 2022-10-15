@@ -87,7 +87,7 @@ function Profile(props) {
                         addComment={props.addComment}
                         addSubComment={props.addSubComment}
                         getAllPosts={props.getAllPosts}
-                        user_id={user.user_id}/>
+                        userId={user.user_id}/>
             </div>
             {/* HTML for Popup */}
             {isOpen && <Popup close={togglePopup} confirm={removeUser}
