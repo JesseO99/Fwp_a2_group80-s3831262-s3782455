@@ -85,7 +85,7 @@ function Signup() {
                 </Row>
                 <Row className="mb-3">
                     <Col>
-                        <Form.Label>First Name</Form.Label>
+                        <Form.Label for="firstName">First Name</Form.Label>
                         <Form.Control placeholder="First name"
                                       id="firstName"
                                       onChange={formik.handleChange}
@@ -95,7 +95,7 @@ function Signup() {
                         />
                     </Col>
                     <Col>
-                        <Form.Label>Last Name</Form.Label>
+                        <Form.Label for="lastName">Last Name</Form.Label>
                         <Form.Control placeholder="Last name"
                                       id="lastName"
                                       onChange={formik.handleChange}
@@ -108,7 +108,7 @@ function Signup() {
                 <Row className="mb-3">
 
                     <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label for="password">Password</Form.Label>
                         <Form.Control type="password"
                                       id="password"
                                       placeholder="Password"
@@ -119,7 +119,7 @@ function Signup() {
                         {formik.errors.password ? <div>{formik.errors.password}</div> : null}
                     </Form.Group>
                     <Form.Group as={Col} controlId="formGridRetypePassword">
-                        <Form.Label>Retype Password</Form.Label>
+                        <Form.Label for="rePassword">Retype Password</Form.Label>
                         <Form.Control type="password"
                                       id="rePassword"
                                       placeholder="Password"
@@ -133,7 +133,7 @@ function Signup() {
                 <Row className="mb-3">
                     <Col>
                         <Form.Group as={Col} controlId="formGridEmail">
-                            <Form.Label>Email</Form.Label>
+                            <Form.Label for="email">Email</Form.Label>
                             <Form.Control type="email"
                                           placeholder="Enter email"
                                           id="email"
@@ -141,7 +141,7 @@ function Signup() {
                                           value={formik.values.email}
                                           required
                             />
-                            <div className="alert alert-danger" role="alert" style={{display: showExistEmailError ,marginTop:"5px"}}>
+                            <div className="alert alert-danger" role="alert" data-testid="email_error" style={{display: showExistEmailError ,marginTop:"5px"}}>
                                 Email you entered is already registered!
                             </div>
                         </Form.Group>
@@ -154,10 +154,11 @@ function Signup() {
                     <Form.Check type="checkbox"
                                 label=" Confirm that you agree to our Terms & Privacy Policy."
                                 required
+                                data-testid="terms"
                     />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
+                <Button variant="primary" type="submit" data-testid="submit">
                     Submit
                 </Button>
             </Form>
