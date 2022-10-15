@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Navigate} from 'react-router-dom'
 import {Button, Stack, ToastContainer} from "react-bootstrap";
 import "./CreatePost.css";
@@ -8,30 +8,39 @@ import useImageUpload from "../hooks/useImageUpload";
 import Toast from 'react-bootstrap/Toast';
 import check from '../img/check.png'
 import warning from '../img/warning.png'
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState,convertToRaw } from "draft-js";
 import camera from "../img/camera.png";
 import {ToastContext, UserContext} from "../App";
 import {Result} from "../data/Constant";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import draftToHtml from 'draftjs-to-html';
+
 
 
 //Field Validations Using Formik
 const validate = values => {
     const errors = {};
-
     //Validate post field
-    if (!values.post) {
+    if ((values.post.replace(/(<([^>]+)>)/gi, "")).trim().length===0) {
         errors.post = 'Post cannot be empty!';
-    } else if (values.post.length > 250) {
+    } else if ((values.post.replace(/(<([^>]+)>)/gi, "")).trim().length > 250) {
         errors.post = 'Post cannot be more than 250 characters!';
     }
     return errors;
 };
 
+
 function CreatePost({addPost}) {
 
     const user = useContext(UserContext);
     const toastMessage = useContext(ToastContext);
-
-    //Call useImageUpload custom hook
+    const [editorState, setEditorState] = useState(() =>
+        EditorState.createEmpty()
+    );
+    useEffect(() => {
+        console.log(editorState);
+    }, [editorState]);    //Call useImageUpload custom hook
     const {
         uploadImage,
         setImage,
@@ -53,6 +62,8 @@ function CreatePost({addPost}) {
     if (!user) {
         return <Navigate to="/"/>
     }
+    formik.values.post = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+
 
     //Common Submit function
     function submit(url) {
@@ -70,14 +81,19 @@ function CreatePost({addPost}) {
                formik.resetForm({
                    values: {post: ''},
                });
-
+               setEditorState(() =>
+                   EditorState.createEmpty());
                //Clear Images from the Form
                setImage("")
                document.getElementById('image-field').value = "";
            }
        });
 
+
+
     }
+
+
 
     return (
         <div>
@@ -102,14 +118,19 @@ function CreatePost({addPost}) {
                                     </div>
                                 </>
                                 }
-                                <Form.Control as="textarea"
-                                              size="lg"
-                                              id="post"
-                                              placeholder="What's on your mind?"
-                                              rows={3}
-                                              onChange={formik.handleChange}
-                                              value={formik.values.post}
-                                />
+                                <div style={{ border: "1px solid black", padding: '2px', minHeight: '200px' }}>
+                                    <Editor
+                                        id="post"
+                                        placeholder="What's on your mind?"
+                                        editorState={editorState}
+                                        onEditorStateChange={setEditorState}
+                                        onContentStateChange={formik.handleChange}
+                                        // onChange={formik.handleChange}
+                                        // value={formik.values.post}
+                                        onChange={formik.values.post}
+                                    />
+                                </div>
+
                                 {formik.errors.post ? <div>{formik.errors.post}</div> : null}
                             </Form.Group>
                             <Form.Group className="mb-3">

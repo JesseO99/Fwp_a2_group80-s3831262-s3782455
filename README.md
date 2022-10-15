@@ -58,9 +58,15 @@ How to Upload Images to Cloudinary With a React App
 Google Fonts - Bellota 
 <https://fonts.googleapis.com/css?family=Bellota>
 
-Week8 - Activty1 for creating the middle-end
+Week8 - for creating the middle-end, XSS protection
 
 Week9 - many to many relationships
+
+Sanitize HTML
+<https://www.npmjs.com/package/sanitize-html>
+
+RichText Editor
+<https://jpuri.github.io/react-draft-wysiwyg/#/>
 
 Use Params Hook
 https://reactrouter.com/en/main/hooks/use-params
