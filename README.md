@@ -59,3 +59,17 @@ Google Fonts - Bellota
 <https://fonts.googleapis.com/css?family=Bellota>
 
 Week8 - Activty1 for creating the middle-end
+
+Week9 - many to many relationships
+
+Use Params Hook
+https://reactrouter.com/en/main/hooks/use-params
+
+Sequelize ORM
+<https://sequelize.org/>
+
+Testing Components that use useNavigate hook
+<https://bobbyhadz.com/blog/react-jest-usenavigate-may-only-be-used-in-the-context-of-router#:~:text=The%20jest%20error%20%22useNavigate(),testing%20in%20a%20Router%20context.>
+
+Testing Cheatsheat
+<https://testing-library.com/docs/react-testing-library/cheatsheet>

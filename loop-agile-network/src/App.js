@@ -10,18 +10,22 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
 import Feed from "./pages/Feed";
 import CreatePost from './pages/CreatePost';
+import People from './pages/People';
+import Following from './pages/Following';
 import {getUser, removeUser} from "./data/repository";
 import ProfileEdit from './pages/ProfileEdit';
 import usePost from "./hooks/usePost";
+import useUsers from "./hooks/useUsers";
 import {ToastContainer} from "react-bootstrap";
 import Toast from "react-bootstrap/Toast";
 import useToast from "./hooks/useToast";
-
+import UserProfile from './pages/UserProfile';
 //Create and pass contexts for multiple usage instances
 export const UserContext = createContext();
 export const LoginUserContext = createContext();
 export const ToastContext = createContext();
 export const ReactionContext = createContext();
+
 
 function App() {
     const [user, setUser] = useState(getUser); //We save current user locally instead of username now to avoid
@@ -45,9 +49,17 @@ function App() {
         removeUserPosts,
         updateAllUserEntryEmails,
         getAllPosts,
-        sendReaction
+        sendReaction,
+        getPostsFromUserId
+
     } = usePost();
 
+    // Call useUsers Custom hook
+    const {
+        users, 
+        getAllUsers,
+        getAllFollowing
+    } = useUsers();
 
     const loginUser = (user) => {
         setUser(user);
@@ -58,7 +70,7 @@ function App() {
         setUser(null);
     }
 
-
+    
     return (
         <UserContext.Provider value={user}>
             <ToastContext.Provider value={toastMessage}>
@@ -75,13 +87,20 @@ function App() {
                                        element={<Profile logoutUser={logoutUser} removeUserPosts={removeUserPosts}/>}/>
                                 <Route path="/Signup" element={<Signup/>}/>
                                 <Route path="Profile-Edit"
-                                       element={<ProfileEdit
-                                           updateAllUserEntryEmails={updateAllUserEntryEmails}/>}></Route>
+                                       element={<ProfileEdit/>}></Route>
                                 <Route path="/Feed"
                                        element={<Feed posts={posts} removePost={removePost} addComment={addComment}
                                                       addSubComment={addSubComment}
-                                                      getAllPosts={getAllPosts}/>}></Route>
+                                                      getAllPosts={getAllPosts} userId={user?user.user_id:undefined}/>}></Route>
                                 <Route path="/CreatePost" element={<CreatePost addPost={addPost}/>}></Route>
+                                <Route path="/People" element={<People users={users} getAllUsers={getAllUsers}/>}/>
+                                <Route path="/Following" element={<Following users={users} getAllFollowing={getAllFollowing}/> }/>
+                                <Route path="/User_Profile/:profile_id" element={<UserProfile getAllPosts={getPostsFromUserId}
+                                posts={posts}
+                                removePost={removePost} addComment={addComment}
+                                addSubComment={addSubComment}
+                                
+                                />}/>
                             </Routes>
                             {/*Toast Message for Success/Error Post Creation*/}
                             <ToastContainer className="p-3" position="top-end">

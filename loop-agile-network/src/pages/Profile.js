@@ -1,12 +1,11 @@
 import "./Profile.css";
-import {getUserDetails, deleteUser} from "../data/repository"
+import { deleteUser} from "../data/repository"
 import {Navigate} from "react-router-dom";
 import React, {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import avatar from "../img/avatar.png";
 import Popup from "../components/Popup";
-import {Button, Container, Row, Stack} from "react-bootstrap";
-import Col from "react-bootstrap/Col";
+import {Button, Stack} from "react-bootstrap";
 import {UserContext} from "../App";
 
 
@@ -31,16 +30,14 @@ function Profile(props) {
         const email = user.email;
         // // Step 1 Logout User
         // // Step 2 Delete User
-
-        deleteUser(email);
-        props.removeUserPosts(email);
+        deleteUser(user.user_id);
         props.logoutUser();
 
     }
 
 
     return (
-        <div class="container">
+        <div className="container" data-testid="about">
             <p id="profile-heading">Profile</p>
 
             <div className="profile-body">

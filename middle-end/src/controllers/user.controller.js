@@ -1,5 +1,7 @@
 const db = require("../database");
+const {Sequelize} = require("sequelize");
 const argon2 = require("argon2");
+const { user } = require("../database");
 
 
 // Select all users from the database.
@@ -108,6 +110,7 @@ exports.one_email = async (req, res) => {
     res.json(user[0])
 };
 
+// Returns a user foubd by the Primary Key
 exports.one_key = async (req, res) => {
     const user = await db.user.findByPk(req.query.user_id);
 
@@ -140,5 +143,60 @@ exports.login = async (req, res) => {
     }
         
 };
-    
 
+
+// Deletes a user with a matching user_id
+exports.delete = async (req, res) => {
+    console.log("Deleting User by user_id: ", req.query.user_id);
+    const user = await db.user.findAll({where: {user_id: req.query.user_id}} );
+    const count = await db.user.destroy({where: {user_id: req.query.user_id},force: true});
+
+    console.log(count, " Rows were deleted from the USER table");
+
+    res.json(null);
+}
+
+// Updates the current User
+exports.update = async (req, res) => {
+    const params_to_update = {
+        first_name: req.body.params.first_name,
+        last_name: req.body.params.last_name,
+        email: req.body.params.email
+    }
+    let response
+    try{
+        
+        response = {
+            "status": "100",
+            "message": "Success",
+            "data": await db.user.update(params_to_update, {where: {user_id: req.body.params.user_id}})
+            }
+
+    }catch(err){
+        response = {
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        }
+
+    }
+
+    res.json(response)
+}
+
+exports.all_following = async (req,res) => {
+    const user_id = req.query.user_id;
+    console.log("Allfollowing")
+    let response;
+    try {
+        response = await db.sequelize.query('SELECT first_name, last_name, email, user_id, date_joined, case WHEN EXISTS(SELECT * FROM follows WHERE follower_id = '+ user_id + ' and followed_id = u1.user_id) THEN true ELSE false END as following from users as u1 where u1.user_id != ' + user_id, { type: Sequelize.QueryTypes.SELECT })
+    }
+    catch (err)
+    {
+        console.log("ERROR" + err);
+        return;
+    }
+    
+    // console.log(response);
+    res.json(response);
+} 

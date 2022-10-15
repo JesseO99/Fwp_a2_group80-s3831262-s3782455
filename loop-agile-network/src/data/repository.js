@@ -1,4 +1,3 @@
-import {getDateToday} from "../util/Util";
 import axios from "axios";
 import {API_HOST,USER_KEY,USERS_KEY,POSTS_KEY,AUTH_DATA_KEY}from "../data/Constant";
 
@@ -33,10 +32,17 @@ function initUsers() {
 }
 
 
-// Returns a list of users stored in local storage
-function getUsers() {
-    const data = localStorage.getItem(USERS_KEY);
-    return JSON.parse(data);
+// Returns a list of users stored in server DBMS
+async function getUsers() {
+    const response = await axios.get(API_HOST + "/users/");
+    return response.data.data;
+}
+
+async function getUsersFollowing(user_id) {
+    console.log("Request: Get Users Following");
+    const response = await axios.get(API_HOST + "/users/following", {params: {user_id}});
+    console.log("Response: ", response);
+    return response.data;
 }
 
 //Register user API call
@@ -109,6 +115,12 @@ async function verifyUser(email, password) {
     return false;
 }
 
+async function getAllFollowingUsers(user_id) {
+    let users = await axios.get(API_HOST+"/follows/user/all", {params: {user_id}})
+    console.log("Repository: ", users.data.data);
+    return users.data.data;
+}
+
 // Sets the logged in user by saving the user's email in local storage
 function setUser(user) {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
@@ -162,7 +174,7 @@ function removeUser() {
 async function getUserDetails(email)
 {
     const response = await axios.get(API_HOST + `/users/search/${email}`);
-    console.dir(response.data);
+    console.log("repository ", response.data);
     //Returns as an array
     return response.data;
 
@@ -181,21 +193,34 @@ async function getUserDetails(email)
 // }
 
 // Updates the users details
-function updateUser(previousEmail, email, firstName, lastName, src) {
-    const users = getUsers();
-    for (const user of users) {
-        if (user.email === previousEmail) {
-            user.firstName = firstName;
-            user.lastName = lastName;
-            user.email = email;
-            user.img = src;
-            setUser(email);
-        }
-    }
+async function updateUser(user_id, email, first_name, last_name) {
+    
+    const response = await axios.put(API_HOST + "/users/user/update", {params: {user_id, email, first_name, last_name}});
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+    if( response.data.status === "100")
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
+async function check_following(user_id, profile_id)
+{
+    const response = await axios.get(API_HOST + "/follows/check", {params: {user_id, profile_id}});
+
+    return response.data;
+}
+
+// Returns the posts made by the provided user_id
+async function getUserPosts(userId,loggedId)
+{
+    const posts = await axios.get(API_HOST + "/posts/user_posts/",{params: {loggedId,userId}});
+    console.log("Repository: Posts: ", posts.data.data);
+    return posts.data.data
+}
 
 //get Posts from local storage
 function getPostDetails() {
@@ -209,8 +234,8 @@ function setPostDetails(posts) {
 }
 
 //Get name from given email
-function getNameByEmail(email) {
-    const users = getUsers();
+async function getNameByEmail(email) {
+    const users = await getUsers();
     for (const user of users) {
         if (user.email === email) {
             return user.firstName + " " + user.lastName;
@@ -218,23 +243,28 @@ function getNameByEmail(email) {
     }
 }
 
+async function followUser(follower_id, followed_id)
+{
+    const response = await axios.put(API_HOST + '/follows/follow'  , {params: {follower_id, followed_id}})
+}
+
+async function unfollowUser(follower_id, followed_id)
+{
+    const response = await axios.delete(API_HOST + '/follows/unfollow'  , {params: {follower_id, followed_id}})
+}
 
 // Deletes the user from local storage
-function deleteUser(email) {
-    localStorage.removeItem(USER_KEY);
-    const users = getUsers();
-    const newUsers = [];
-    let count = 0;
-    for (const user of users) {
-        if (user.email !== email) {
-            newUsers[count] = user;
-            count += 1;
-        }
-    }
+async function deleteUser(user_id) {
+    
+    const response1 = await axios.delete(API_HOST + "/posts/user_id", {params: {user_id}});
+    const response3 = await axios.delete(API_HOST + "/users/user", {params: {user_id}});
 
-    localStorage.setItem(USERS_KEY, JSON.stringify(newUsers));
-
+    console.log(response1, response3);
+    return {};
 }
+
+
+
 
 function setAuthentificationRequestData(email) {
     const code = parseInt(Math.random() * 899999) + 100000;
@@ -278,5 +308,12 @@ export {
     deletePostById,
     addNewComment,
     addNewSubComment,
-    addReaction
+    addReaction,
+    getUsers,
+    getUsersFollowing,
+    followUser,
+    unfollowUser,
+    getAllFollowingUsers,
+    getUserPosts,
+    check_following
 }

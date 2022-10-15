@@ -6,13 +6,28 @@ import {Stack, ToastContainer} from "react-bootstrap";
 import {UserContext} from "../App";
 import Toast from "react-bootstrap/Toast";
 
+// <<<<<<< HEAD
 
-function Feed({posts, removePost, addComment, addSubComment, getAllPosts}) {
+// function Feed({posts, removePost, addComment, addSubComment, getAllPosts,userId}) {
 
+
+
+    // useEffect(() => {
+    //     getAllPosts(user.user_id);
+        // getAllPosts(userId);
+// =======
+function Feed(props) {
+    const posts = props.posts;
+    const removePost = props.removePost;
+    const addComment = props.addComment;
+    const getAllPosts = props.getAllPosts;
+    const addSubComment = props.addSubComment;
+    const userId = props.userId;
     const user = useContext(UserContext);
-
+//
     useEffect(() => {
-        getAllPosts(user.user_id);
+        getAllPosts(userId,user.user_id);
+        // getAllPosts(user.user_id);
     }, []);
 
     //Authenticate and Redirect if not Logged in
@@ -24,6 +39,7 @@ function Feed({posts, removePost, addComment, addSubComment, getAllPosts}) {
         <Stack gap={3}>
             <p id="feed-heading">Feed</p>
             <div className="posts-container">
+                {console.dir(posts)}
                 <ul className="reverse-list">
                     {/*Create a list of posts*/}
                     {posts.map((post) => (

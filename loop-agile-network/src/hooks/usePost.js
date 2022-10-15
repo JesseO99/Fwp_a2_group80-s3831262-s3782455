@@ -6,7 +6,11 @@ import {
     getAllPosts,
     deletePostById,
     getPosts,
-    addNewComment, addNewSubComment,addReaction
+    addReaction,
+    addNewComment, 
+    addNewSubComment,
+    getUserPosts
+
 } from "../data/repository";
 import {Result} from "../data/Constant";
 import check from "../img/check.png";
@@ -18,6 +22,11 @@ const usePost = () => {
 
     const [posts, setPosts] = useState([]);
 
+    const getPostsFromUserId = (user_id,loggedId) => {
+        getUserPosts(user_id,loggedId).then((response)=>{
+            setPosts(response);
+        })
+    }
 
     //Add New post to the list
     const  addPost =  (post,toastMessage) => {
@@ -34,8 +43,8 @@ const usePost = () => {
         });
     };
 
-    const getAllPosts = (id) =>{
-      getPosts(id).then(data=>{
+    const getAllPosts = (id,loggedId) =>{
+      getPosts(loggedId).then(data=>{
           setPosts(data.data);
       })
     };
@@ -54,10 +63,9 @@ const usePost = () => {
             }
             //Scroll Window to top
             window.scrollTo(0, 0);
-            getAllPosts(userId);
+            getAllPosts(0,userId);
             return data.status;
         });
-
 
     };
 
@@ -114,7 +122,7 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts(comment.userId);
+                getAllPosts(0,comment.userId);
             }
 
             return data.status;
@@ -131,7 +139,7 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts(subComment.userId);
+                getAllPosts(0,subComment.userId);
             }
 
             return data.status;
@@ -148,7 +156,7 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts(reaction.userId);
+                getAllPosts(0,reaction.userId);
             }
 
             return data.status;
@@ -177,7 +185,8 @@ const usePost = () => {
         removeUserPosts,
         updateAllUserEntryEmails,
         getAllPosts,
-        sendReaction
+        sendReaction,
+        getPostsFromUserId
     }
 };
 

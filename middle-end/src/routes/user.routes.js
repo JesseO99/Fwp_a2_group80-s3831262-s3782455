@@ -24,10 +24,18 @@ module.exports = (express, app) => {
   router.get("/user", controller.one_key);
 
 
-    // Select a user by email.
-    router.get("/search/:email", controller.findUser);
+  // Select a user by email.
+  router.get("/search/:email", controller.findUser);
 
-    // Add routes to server.
-    app.use("/api/users", router);
+  // Calls the delete method which will delete the user's specified by the user_id paramater.
+  router.delete("/user", controller.delete);
 
+  // Calls the update method which updates the first_name, last_name and email
+  router.put("/user/update", controller.update);
+
+  router.get("/following", controller.all_following);
+
+  // Add routes to server.
+  app.use("/api/users", router);
+  
 };

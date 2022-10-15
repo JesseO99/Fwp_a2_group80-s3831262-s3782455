@@ -28,6 +28,12 @@ function Navbar(props) {
                         <li className="nav-item">
                             <Link className="nav-link" to="/CreatePost">Create Post</Link>
                         </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/People">People</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/Following">Following</Link>
+                        </li>
                     </>}
                 </ul>
             </div>
