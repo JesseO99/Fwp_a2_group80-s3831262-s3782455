@@ -1,9 +1,6 @@
 import "./SubComment.css";
 import {Button, InputGroup, Stack} from "react-bootstrap";
-import avatar from "../img/avatar.png";
-import {getNameByEmail} from "../data/repository";
 import React, {useContext, useState} from "react";
-import Form from "react-bootstrap/Form";
 import Reaction from "./Reaction";
 import {Interaction} from "../data/Constant";
 import {UserContext} from "../App";

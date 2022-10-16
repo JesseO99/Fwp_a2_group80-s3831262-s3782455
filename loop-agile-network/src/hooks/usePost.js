@@ -156,25 +156,29 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts(0,reaction.userId);
+                // getAllPosts(0,reaction.userId);
             }
 
             return data.status;
         });
     };
 
-    //Get old posts from the local storage
-    useEffect(() => {
-        const posts = getPostDetails();
-        if (posts) {
-            setPosts(posts);
-        }
-    }, []);
+    const clearPosts = ()=>{
+        setPosts([]);
+    }
 
-    //Save posts to the local storage
-    useEffect(() => {
-        setPostDetails(posts);
-    }, [posts]);
+    // //Get old posts from the local storage
+    // useEffect(() => {
+    //     const posts = getPostDetails();
+    //     if (posts) {
+    //         setPosts(posts);
+    //     }
+    // }, []);
+    //
+    // //Save posts to the local storage
+    // useEffect(() => {
+    //     setPostDetails(posts);
+    // }, [posts]);
 
     return {
         addPost,
@@ -186,7 +190,8 @@ const usePost = () => {
         updateAllUserEntryEmails,
         getAllPosts,
         sendReaction,
-        getPostsFromUserId
+        getPostsFromUserId,
+        clearPosts
     }
 };
 

@@ -1,7 +1,6 @@
 import "./Comment.css";
 import {Accordion, Button, InputGroup, Stack} from "react-bootstrap";
 import avatar from "../img/avatar.png";
-import {getNameByEmail} from "../data/repository";
 import React, {useContext, useState} from "react";
 import Form from "react-bootstrap/Form";
 import SubComment from "./SubComment";
@@ -88,8 +87,8 @@ const Comment = ({comment, post, addSubComment}) => {
                         <Form onSubmit={sendSubComment}>
                             <InputGroup className="mb-3" id="sub-comment-field">
                                 <Form.Control
-                                    placeholder={"Reply " + getNameByEmail(comment.user)}
-                                    aria-label={"Reply " + getNameByEmail(comment.user)}
+                                    placeholder={"Reply " + comment.user.first_name}
+                                    aria-label={"Reply " + comment.user.first_name}
                                     aria-describedby="basic-addon2"
                                     value={subComment}
                                     onChange={(e) => setSubComment(e.target.value)}

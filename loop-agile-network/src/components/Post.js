@@ -2,15 +2,10 @@ import React, {useContext, useState} from 'react';
 import "./Post.css";
 import Form from "react-bootstrap/Form";
 import {Button, InputGroup, Row, Stack, ToastContainer} from "react-bootstrap";
-import Col from "react-bootstrap/Col";
-import {getNameByEmail, getPosts} from "../data/repository";
 import avatar from '../img/avatar.png';
 import Comment from "./Comment";
 import {ToastContext, UserContext} from "../App";
 import {Interaction, Interaction as Ineraction, Result} from "../data/Constant";
-import check from "../img/check.png";
-import Toast from "react-bootstrap/Toast";
-import warning from "../img/warning.png";
 import sanitize from "sanitize-html";
 import Reaction from "./Reaction";
 
@@ -84,11 +79,12 @@ const Post = ({post, removePost, addComment, addSubComment}) => {
 
                     <p id="post-text"><span dangerouslySetInnerHTML={{ __html: sanitize(post.post_content) }} /></p>
                     <hr data-content="AND" className="hr-text"/>
+                    {/*Reaction Section*/}
                     <Reaction
                         contentId={post.post_id}
                         contentType={Interaction.POST}
                         userId={user.user_id}
-                        currentReaction={post.user_reactions[0]? post.user_reactions[0].userReaction : undefined}
+                        currentReaction={post.user_reactions[0]? post.user_reactions[0].userReaction : 0}
                         likedCount={post.user_reactions[0]?post.user_reactions[0].likedCount:undefined}
                         dislikedCount={post.user_reactions[0]?post.user_reactions[0].dislikedCount:undefined}/>
                     {post.comments.length > 0 && <p className="comment-heading">Comments</p>}

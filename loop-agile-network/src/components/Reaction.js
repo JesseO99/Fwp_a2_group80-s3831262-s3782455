@@ -19,7 +19,10 @@ const Reaction = ({contentId,contentType,userId,currentReaction, likedCount,disl
         //Set initial values for the reactions
         if(likedCount) setNumOfLikes(likedCount);
         if(dislikedCount) setNumOfDislikes(dislikedCount);
-        if(currentReaction!=null) setReaction(currentReaction);
+        if(currentReaction!=null){ setReaction(currentReaction)}else{ setReaction(0)};
+        setAppearance();
+        console.dir(currentReaction)
+        console.dir("UserID "+userId)
     }, []);
 
     //Set Like button Appearance
