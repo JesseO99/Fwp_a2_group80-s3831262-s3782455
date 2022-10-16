@@ -25,6 +25,7 @@ export const UserContext = createContext();
 export const LoginUserContext = createContext();
 export const ToastContext = createContext();
 export const ReactionContext = createContext();
+export const ClearPostsContext = createContext();
 
 
 function App() {
@@ -46,11 +47,10 @@ function App() {
         posts,
         addComment,
         addSubComment,
-        removeUserPosts,
-        updateAllUserEntryEmails,
         getAllPosts,
         sendReaction,
-        getPostsFromUserId
+        getPostsFromUserId,
+        clearPosts
 
     } = usePost();
 
@@ -76,6 +76,7 @@ function App() {
             <ToastContext.Provider value={toastMessage}>
                 <LoginUserContext.Provider value={loginUser}>
                 <ReactionContext.Provider value={sendReaction}>
+                <ClearPostsContext.Provider value={clearPosts}>
                     <div className="App">
                         <BrowserRouter>
                             <Header logoutUser={logoutUser}/>
@@ -85,7 +86,7 @@ function App() {
                                 <Route path="/Signin" element={<Signin/>}/>
                                 <Route path="/Profile"
                                        element={<Profile 
-                                        logoutUser={logoutUser} removeUserPosts={removeUserPosts} 
+                                        logoutUser={logoutUser}
                                         getAllPosts={getPostsFromUserId} 
                                         posts={posts}
                                         removePost={removePost} addComment={addComment}
@@ -130,6 +131,7 @@ function App() {
                             <Footer/>
                         </BrowserRouter>
                     </div>
+                </ClearPostsContext.Provider>
                 </ReactionContext.Provider>
                 </LoginUserContext.Provider>
             </ToastContext.Provider>

@@ -15,15 +15,12 @@ db.sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
   });
   
 // Include models. (Models = Tables you are instansiating in the DB)
-// EG:
 db.user = require("./models/user.js")(db.sequelize, DataTypes);
 db.post = require("./models/post.js")(db.sequelize, DataTypes);
 db.comment = require("./models/comment.js")(db.sequelize, DataTypes);
 db.sub_comment = require("./models/sub_comment.js")(db.sequelize, DataTypes);
 db.follow = require("./models/follow.js")(db.sequelize, DataTypes);
 db.user_reaction = require("./models/user_reaction.js")(db.sequelize, DataTypes);
-// db.reaction_info = require("./models/reaction_info.js")(db.sequelize, DataTypes);
-// db.content_type_info = require("./models/content_type_info.js")(db.sequelize, DataTypes);
 
 // Relate post and user.
 db.post.belongsTo(db.user, { foreignKey: { name: "user_id"} });
@@ -33,9 +30,6 @@ db.comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
 db.sub_comment.belongsTo(db.comment, {foreignKey: {name:"comment_id"},onDelete:'CASCADE'});
 db.comment.hasMany(db.sub_comment,{foreignKey: {name: "comment_id"}, onDelete:'CASCADE'});
 db.sub_comment.belongsTo(db.user, { foreignKey: { name: "user_id"} });
-// db.user_reaction.belongsTo(db.reaction_info , {foreignKey: "reaction_type_id"});
-// db.user_reaction.belongsTo(db.content_type_info, {foreignKey: "content_type_id"});
-// Not Sure how to do the conent_id <-> user_reaction relationship as it is a collection of 3 different FK
 db.user_reaction.belongsTo(db.user, { foreignKey: { name: "user_id"} , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 db.follow.belongsTo(db.user, { foreignKey: { name: "follower_id"}, onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 db.follow.belongsTo(db.user, { foreignKey: { name: "followed_id"}, onDelete: 'CASCADE', onUpdate: 'CASCADE' });
@@ -65,12 +59,6 @@ db.sub_comment.hasMany(db.user_reaction, {
 db.user_reaction.belongsTo(db.post, { foreignKey: 'content_id', constraints: false, onDelete: 'CASCADE', onUpdate: 'CASCADE' });
 db.user_reaction.belongsTo(db.comment, { foreignKey: 'content_id', constraints: false , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 db.user_reaction.belongsTo(db.sub_comment, { foreignKey: 'content_id', constraints: false , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
-
-
-
-
-
-// Learn more about associations here: https://sequelize.org/master/manual/assocs.html
 
 
 // Include a sync option with seed data logic included.
@@ -110,13 +98,6 @@ async function seedData() {
     const post1 = await db.post.create({ user_id: 1, post_content:"Hello" });
     const post2 = await db.post.create({ user_id: 2, post_content:"Goodbye" });
 
-    const reaction = await db.user_reaction.create({
-        user_id:1,
-        reaction_type:0, // 0 = Like, 1 = Dislike
-        content_id:post.post_id,
-        content_type:POST // p= post, c = comment, sc = sub comment
-
-    });
     const comment = await db.comment.create({
         user_id:1,
         post_id:1,
@@ -129,27 +110,28 @@ async function seedData() {
         sub_comment_content:"And you can reply and react like this!!"
 
     });
-    const reaction2 = await db.user_reaction.create({
+
+    const reaction1 = await db.user_reaction.create({
         user_id:1,
         reaction_type:1, // 1 = Like, 2 = Dislike
         content_id:1,
         content_type:COMMENT // p= post, c = comment, sc = sub comment
 
     });
-    const reaction3 = await db.user_reaction.create({
-        user_id:1,
-        reaction_type:0, // 1 = Like, 2 = Dislike
-        content_id:1,
-        content_type:COMMENT
-        // p= post, c = comment, sc = sub comment
 
-    });
-
-    const reaction4 = await db.user_reaction.create({
+    const reaction2 = await db.user_reaction.create({
         user_id:1,
         reaction_type:2, // 1 = Like, 2 = Dislike
         content_id:1,
         content_type:SUB_COMMENT // p= post, c = comment, sc = sub comment
+
+    });
+
+    const reaction3 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:1, // 1 = Like, 2 = Dislike
+        content_id:1,
+        content_type:POST // p= post, c = comment, sc = sub comment
 
     });
 
@@ -164,8 +146,6 @@ async function seedData() {
     });
 
 }
-
-
 
 
 module.exports = db;

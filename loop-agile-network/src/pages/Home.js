@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import socialImage from '../img/social.jpg';
+import socialImage from '../img/social.png';
 
 
 function Home() {

@@ -61,16 +61,33 @@ exports.login = async (req, res) => {
 
 // Create a user in the database.
 exports.create = async (req, res) => {
-    const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
 
-    const user = await db.user.create({
-        email: req.body.email,
-        password: hash,
-        first_name: req.body.firstName,
-        last_name: req.body.lastName
+    let user;
+    try{
+        const hash = await argon2.hash(req.body.password, { type: argon2.argon2id });
+
+         user = await db.user.create({
+            email: req.body.email,
+            password: hash,
+            first_name: req.body.firstName,
+            last_name: req.body.lastName
+        });
+
+    }catch (err){
+        //Api request validation
+        res.json({
+            "status": "200",
+            "message": "Error - Invalid Data "+err,
+            "data": null
+        });
+        return;
+    }
+    res.json({
+        "status": "100",
+        "message": "Success",
+        "data": user
     });
 
-    res.json(user);
 };
 
 

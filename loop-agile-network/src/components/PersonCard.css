@@ -27,6 +27,11 @@
 
 .person-card-container .link-container {
     
-    width: 100%;
+    width: 80%;
+}
+
+.name{
+    margin-top: 10px;
+    margin-left: -20px;
 }
 

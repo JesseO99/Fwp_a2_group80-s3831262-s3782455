@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 
 function PersonCard (props) {
     const user = useContext(UserContext);
-
+    //Function for Follow Click
     async function onClickFollow()
     {
         // Create New Follow
@@ -17,7 +17,7 @@ function PersonCard (props) {
         props.followButtonClicked();
         
     }
-
+    //Function for Unfollow Click
     async function onClickUnfollow()
     {
         // Unfollows User
@@ -28,7 +28,7 @@ function PersonCard (props) {
     return(
         <div className="person-card-container">
             <img className="Profile-Pic" src={avatar} alt="Profile-Pic"></img>
-            <h1>
+            <h1 className="name">
                 {props.user.first_name} {props.user.last_name}
             </h1>
             <div className = "link-container">

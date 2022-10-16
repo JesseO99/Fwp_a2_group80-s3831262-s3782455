@@ -1,7 +1,7 @@
 import "./Following.css"
 import PersonCard from "../components/PersonCard";
 import { UserContext } from "../App";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 function Following(props)
 {
@@ -10,6 +10,7 @@ function Following(props)
 
     useEffect(() => { props.getAllFollowing(user.user_id);}, [updateStatus]);
 
+    //Function for Follow button click
     function followButtonClicked()
     {
         if(updateStatus === 0)
@@ -33,6 +34,9 @@ function Following(props)
                         </li>
                     </ul>
                 ))}
+
+                {props.users.length === 0 &&
+                    <p className="empty-following">Wow! It's Nothing Yet. <br/> Follow more people now!</p>}
             </div>
         </div>
 

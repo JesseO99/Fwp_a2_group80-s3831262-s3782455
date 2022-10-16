@@ -11,7 +11,7 @@ import warning from '../img/warning.png'
 import { Editor } from "react-draft-wysiwyg";
 import { EditorState,convertToRaw } from "draft-js";
 import camera from "../img/camera.png";
-import {ToastContext, UserContext} from "../App";
+import {ClearPostsContext, ToastContext, UserContext} from "../App";
 import {Result} from "../data/Constant";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import draftToHtml from 'draftjs-to-html';
@@ -34,6 +34,7 @@ const validate = values => {
 function CreatePost({addPost}) {
 
     const user = useContext(UserContext);
+    const clearPosts = useContext(ClearPostsContext);
     const toastMessage = useContext(ToastContext);
     const [editorState, setEditorState] = useState(() =>
         EditorState.createEmpty()
@@ -62,6 +63,7 @@ function CreatePost({addPost}) {
     if (!user) {
         return <Navigate to="/"/>
     }
+    //Get the Rich Text Editor Value
     formik.values.post = draftToHtml(convertToRaw(editorState.getCurrentContent()))
 
 
@@ -73,7 +75,7 @@ function CreatePost({addPost}) {
             img: url,
             comments: []
         }
-
+        clearPosts();
         //Submit post
        addPost(newPost,toastMessage).then(status=>{
            if(status ==Result.SUCCESS){

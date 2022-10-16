@@ -69,49 +69,7 @@ const usePost = () => {
 
     };
 
-    //Remove User's Posts
-    const removeUserPosts = (user) => {
-        removeComments(user);
-        setPosts(posts.filter((post) => user !== post.email));
-        
-    };
 
-    //Remove all Comments by User
-    const removeComments = (user) => {
-        const postList = posts.slice();
-        for (let i = 0; i < postList.length; i++) {
-            let newCommentList = [];
-            for (const comment of postList[i].comments) {
-                if (comment.user != user) {
-                    comment.subComments = (comment.subComments.filter((subComment) => user !== subComment.user));
-                    newCommentList.push(comment);
-                }
-            }
-            postList[i].comments = newCommentList;
-        }
-        setPosts(postList);
-    };
-
-    //Update the email of  All Comments and Posts with a new email
-    const updateAllUserEntryEmails = (previousEmail, newEmail) => {
-        const postList = posts.slice();
-        for (let i = 0; i < postList.length; i++) {
-            for (let k = 0; k < postList[i].comments.length; k++) {
-                for (let j = 0; j < postList[i].comments[k].subComments.length; j++) {
-                    if (postList[i].comments[k].subComments[j].user === previousEmail) {
-                        postList[i].comments[k].subComments[j].user = newEmail;
-                    }
-                }
-                if (postList[i].comments[k].user === previousEmail) {
-                    postList[i].comments[k].user = newEmail;
-                }
-            }
-            if (postList[i].email === previousEmail) {
-                postList[i].email = newEmail;
-            }
-        }
-        setPosts(postList);
-    }
 
     //Add New Comment to the post
     const addComment = (comment,toastMessage) => {
@@ -156,25 +114,16 @@ const usePost = () => {
                 //Scroll Window to top
                 window.scrollTo(0, 0);
             }else{
-                getAllPosts(0,reaction.userId);
+                // getAllPosts(0,reaction.userId);
             }
 
             return data.status;
         });
     };
 
-    //Get old posts from the local storage
-    useEffect(() => {
-        const posts = getPostDetails();
-        if (posts) {
-            setPosts(posts);
-        }
-    }, []);
-
-    //Save posts to the local storage
-    useEffect(() => {
-        setPostDetails(posts);
-    }, [posts]);
+    const clearPosts = ()=>{
+        setPosts([]);
+    }
 
     return {
         addPost,
@@ -182,11 +131,10 @@ const usePost = () => {
         posts,
         addComment,
         addSubComment,
-        removeUserPosts,
-        updateAllUserEntryEmails,
         getAllPosts,
         sendReaction,
-        getPostsFromUserId
+        getPostsFromUserId,
+        clearPosts
     }
 };
 

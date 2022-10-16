@@ -7,7 +7,7 @@ import {useFormik} from 'formik';
 import {useNavigate} from "react-router-dom";
 import {isFutureDate} from "../util/Util";
 import {getUserDetails, registerUser, setUser} from "../data/repository";
-import {LoginUserContext} from "../App";
+import {ClearPostsContext, LoginUserContext} from "../App";
 
 
 //Field Validations Using Formik
@@ -31,10 +31,12 @@ const validate =  async values => {
 function Signup() {
 
     const loginUser = useContext(LoginUserContext);
+    const clearPosts = useContext(ClearPostsContext);
     const navigate = useNavigate();
     //useState for DialogBox
     const [show, setShow] = useState(false);
     const [showExistEmailError, setShowExistEmailError] = useState('none');
+
 
 
     //Handle Open/Close DialogBox
@@ -62,6 +64,7 @@ function Signup() {
                 if (user != null) {
                     setUser(user);
                     loginUser(user);
+                    clearPosts();
                     handleShow();
                 } else {
                     alert("Connection Error!");
