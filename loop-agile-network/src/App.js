@@ -47,8 +47,6 @@ function App() {
         posts,
         addComment,
         addSubComment,
-        removeUserPosts,
-        updateAllUserEntryEmails,
         getAllPosts,
         sendReaction,
         getPostsFromUserId,
@@ -88,7 +86,7 @@ function App() {
                                 <Route path="/Signin" element={<Signin/>}/>
                                 <Route path="/Profile"
                                        element={<Profile 
-                                        logoutUser={logoutUser} removeUserPosts={removeUserPosts} 
+                                        logoutUser={logoutUser}
                                         getAllPosts={getPostsFromUserId} 
                                         posts={posts}
                                         removePost={removePost} addComment={addComment}

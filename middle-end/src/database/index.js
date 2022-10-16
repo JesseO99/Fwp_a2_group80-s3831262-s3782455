@@ -61,8 +61,6 @@ db.user_reaction.belongsTo(db.comment, { foreignKey: 'content_id', constraints: 
 db.user_reaction.belongsTo(db.sub_comment, { foreignKey: 'content_id', constraints: false , onDelete: 'CASCADE', onUpdate: 'CASCADE'});
 
 
-
-
 // Include a sync option with seed data logic included.
 db.sync = async () => {
     // Sync schema.
@@ -96,56 +94,56 @@ async function seedData() {
 
     //Example of Post and Reaction (Polymorphic Association - manually)
 
-    // const post = await db.post.create({ user_id: 1, post_content:"Welcome to Loop Agile Now!" });
-    // const post1 = await db.post.create({ user_id: 1, post_content:"Hello" });
-    // const post2 = await db.post.create({ user_id: 2, post_content:"Goodbye" });
-    //
-    // const comment = await db.comment.create({
-    //     user_id:1,
-    //     post_id:1,
-    //     comment_content:"You can comment like this :)"
-    //
-    // });
-    // const subcomment = await db.sub_comment.create({
-    //     user_id:1,
-    //     comment_id:1,
-    //     sub_comment_content:"And you can reply and react like this!!"
-    //
-    // });
-    //
-    // const reaction1 = await db.user_reaction.create({
-    //     user_id:1,
-    //     reaction_type:1, // 1 = Like, 2 = Dislike
-    //     content_id:1,
-    //     content_type:COMMENT // p= post, c = comment, sc = sub comment
-    //
-    // });
-    //
-    // const reaction2 = await db.user_reaction.create({
-    //     user_id:1,
-    //     reaction_type:2, // 1 = Like, 2 = Dislike
-    //     content_id:1,
-    //     content_type:SUB_COMMENT // p= post, c = comment, sc = sub comment
-    //
-    // });
-    //
-    // const reaction3 = await db.user_reaction.create({
-    //     user_id:1,
-    //     reaction_type:1, // 1 = Like, 2 = Dislike
-    //     content_id:1,
-    //     content_type:POST // p= post, c = comment, sc = sub comment
-    //
-    // });
-    //
-    // const follows = await db.follow.create({
-    //     follower_id: 1,
-    //     followed_id: 2
-    // });
-    //
-    // const follows2 = await db.follow.create({
-    //     follower_id: 2,
-    //     followed_id: 1
-    // });
+    const post = await db.post.create({ user_id: 1, post_content:"Welcome to Loop Agile Now!" });
+    const post1 = await db.post.create({ user_id: 1, post_content:"Hello" });
+    const post2 = await db.post.create({ user_id: 2, post_content:"Goodbye" });
+
+    const comment = await db.comment.create({
+        user_id:1,
+        post_id:1,
+        comment_content:"You can comment like this :)"
+
+    });
+    const subcomment = await db.sub_comment.create({
+        user_id:1,
+        comment_id:1,
+        sub_comment_content:"And you can reply and react like this!!"
+
+    });
+
+    const reaction1 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:1, // 1 = Like, 2 = Dislike
+        content_id:1,
+        content_type:COMMENT // p= post, c = comment, sc = sub comment
+
+    });
+
+    const reaction2 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:2, // 1 = Like, 2 = Dislike
+        content_id:1,
+        content_type:SUB_COMMENT // p= post, c = comment, sc = sub comment
+
+    });
+
+    const reaction3 = await db.user_reaction.create({
+        user_id:1,
+        reaction_type:1, // 1 = Like, 2 = Dislike
+        content_id:1,
+        content_type:POST // p= post, c = comment, sc = sub comment
+
+    });
+
+    const follows = await db.follow.create({
+        follower_id: 1,
+        followed_id: 2
+    });
+
+    const follows2 = await db.follow.create({
+        follower_id: 2,
+        followed_id: 1
+    });
 
 }
 

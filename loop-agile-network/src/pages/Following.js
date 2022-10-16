@@ -10,6 +10,7 @@ function Following(props)
 
     useEffect(() => { props.getAllFollowing(user.user_id);}, [updateStatus]);
 
+    //Function for Follow button click
     function followButtonClicked()
     {
         if(updateStatus === 0)

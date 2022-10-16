@@ -45,7 +45,8 @@ async function getUsersFollowing(user_id) {
 //Register user API call
 async function registerUser(user) {
     const response = await axios.post(API_HOST + "/users", user);
-    return response.data;
+    console.dir(response);
+    return response.data.data;
 }
 
 //Create post API call

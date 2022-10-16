@@ -55,13 +55,3 @@ test ("Follow Button Exsits", async () => {
     const unfollow = screen.getByTestId("follow-button");
     expect(unfollow).toBeInTheDocument();
 });
-
-
-// test("Test Follow Click", async () => {
-//     buttonClicked = false;
-//     const follow = screen.getByTestId("follow-button");
-//     fireEvent.click(follow);
-
-//     // await waitFor(async () => { });   
-//     expect( await screen.findByTestId("unfollow-button")).toBeInTheDocument()
-// })

@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 
 function PersonCard (props) {
     const user = useContext(UserContext);
-
+    //Function for Follow Click
     async function onClickFollow()
     {
         // Create New Follow
@@ -17,7 +17,7 @@ function PersonCard (props) {
         props.followButtonClicked();
         
     }
-
+    //Function for Unfollow Click
     async function onClickUnfollow()
     {
         // Unfollows User
