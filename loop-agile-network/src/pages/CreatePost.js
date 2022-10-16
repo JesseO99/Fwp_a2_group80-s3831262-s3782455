@@ -24,8 +24,8 @@ const validate = values => {
     //Validate post field
     if ((values.post.replace(/(<([^>]+)>)/gi, "")).trim().length===0) {
         errors.post = 'Post cannot be empty!';
-    } else if ((values.post.replace(/(<([^>]+)>)/gi, "")).trim().length > 250) {
-        errors.post = 'Post cannot be more than 250 characters!';
+    } else if ((values.post.replace(/(<([^>]+)>)/gi, "")).trim().length > 600) {
+        errors.post = 'Post cannot be more than 600 characters!';
     }
     return errors;
 };
