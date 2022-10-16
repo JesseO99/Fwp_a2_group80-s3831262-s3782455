@@ -81,9 +81,9 @@ test("Email Format", async  () => {
     userEvent.click(submit);
 
     await waitFor(() => {
-        expect(queryByText('Jane')).not.toBeInTheDocument()
-        expect(queryByText('Peterson')).not.toBeInTheDocument()
-        expect(queryByText('JanePeterson@gmail.com')).not.toBeInTheDocument()
+        expect(screen.queryByText('Jane')).not.toBeInTheDocument()
+        expect(screen.queryByText('Peterson')).not.toBeInTheDocument()
+        expect(screen.queryByText('JanePeterson@gmail.com')).not.toBeInTheDocument()
     })
 });
 
