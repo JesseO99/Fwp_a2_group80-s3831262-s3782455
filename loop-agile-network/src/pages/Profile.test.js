@@ -2,11 +2,12 @@ import { render, screen, fireEvent, waitFor, findByText, getByTestId } from "@te
 import Profile from "./Profile";
 import {BrowserRouter as Router} from 'react-router-dom';
 import {getUserById, updateUser} from "../data/repository"
-import { UserContext, Login, LoginUserContext } from "../App";
+import { UserContext, Login, ClearPostsContext } from "../App";
 
 // Global data for all tests
 let container;
 let user;
+let clearPosts;
 
 // Instansiation once for all tests in Profile Edit
 beforeAll(async () => {
@@ -16,10 +17,20 @@ beforeAll(async () => {
 // Instansiation Test
 beforeEach(async () => 
 {
+    function dummy(){};
 
-    const utils = render(<UserContext.Provider value={user}><Router>
-        <Profile/>
-        </Router></UserContext.Provider>);
+    const utils = render(<UserContext.Provider value={user}><ClearPostsContext.Provider value={dummy}><Router>
+        <Profile  
+        // logoutUser={logoutUser} 
+        // removeUserPosts={removeUserPosts} 
+        clearPosts={dummy}
+        getAllPosts={dummy} 
+        posts={[]}
+        // removePost={removePost} addComment={addComment}
+        // addSubComment={addSubComment} 
+        userId={user?user.user_id:undefined}/>
+        </Router></ClearPostsContext.Provider></UserContext.Provider>
+        );
     container = utils.container;
 });
 

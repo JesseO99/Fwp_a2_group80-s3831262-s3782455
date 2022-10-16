@@ -1,7 +1,7 @@
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import userEvent from "@testing-library/user-event";
 import {getUserById, updateUser} from "../data/repository";
-import {LoginUserContext, UserContext, ReactionContext} from "../App";
+import {LoginUserContext, UserContext, ReactionContext, ClearPostsContext} from "../App";
 import React from "react";
 import Feed from "./Feed";
 import {render, screen, waitFor} from "@testing-library/react";
@@ -41,6 +41,10 @@ beforeEach(async () => {
     function sendReaction(para1, para2) {
 
     }
+    function clearPosts() {
+
+
+    }
 
     let posts = [
         {
@@ -69,11 +73,13 @@ beforeEach(async () => {
         <UserContext.Provider value={user}>
             <LoginUserContext.Provider value={loginUser}>
                 <ReactionContext.Provider value={sendReaction}>
+                    <ClearPostsContext.Provider value={clearPosts}>
                     <Router>
                         <Feed posts={posts} removePost={mockRemovePost} addComment={mockAddComment}
                               addSubComment={mockAddSubComment}
                               getAllPosts={mockGetAllPosts} userId={user ? user.user_id : undefined}/>
                     </Router>
+                    </ClearPostsContext.Provider>
                 </ReactionContext.Provider>
             </LoginUserContext.Provider>
         </UserContext.Provider>);
